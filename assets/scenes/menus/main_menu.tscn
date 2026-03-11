@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cfecg4ehkgkbl"]
 
 [ext_resource type="Script" uid="uid://ck1jrbjfbqxp2" path="res://assets/scripts/main_menu.gd" id="1_uu6ob"]
+[ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="2_a1fdk"]
 
 [node name="MainMenu" type="Node2D" unique_id=753076020]
+script = ExtResource("1_uu6ob")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1873979293]
 offset_left = -119.0
@@ -16,7 +18,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 16.0
 offset_bottom = 16.0
-script = ExtResource("1_uu6ob")
 
 [node name="StartGame" type="Button" parent="Control" unique_id=425284179]
 layout_mode = 0
@@ -45,6 +46,12 @@ offset_bottom = 481.0
 text = "Quit
 "
 
-[connection signal="pressed" from="Control/StartGame" to="Control" method="_on_start_game_pressed"]
-[connection signal="pressed" from="Control/Settings" to="Control" method="_on_settings_pressed"]
-[connection signal="pressed" from="Control/QuitGame" to="Control" method="_on_quit_game_pressed"]
+[node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("2_a1fdk")]
+visible = false
+
+[node name="Timer" type="Timer" parent="FadeTransition" unique_id=2011672966]
+
+[connection signal="pressed" from="Control/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]

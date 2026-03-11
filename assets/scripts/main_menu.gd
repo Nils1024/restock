@@ -1,24 +1,43 @@
-extends Control
+extends Node2D
 
 enum ButtonType {
 	START,
+	SETTINGS,
 	QUIT
 }
 
 var current_button_type = null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
+func _ready() -> void:
+	$FadeTransition.show()
+	$FadeTransition/AnimationPlayer.play("Fade_out")
 	
 func _on_start_game_pressed() -> void:
-	pass # Replace with function body.
+	current_button_type = ButtonType.START
+	$FadeTransition.show()
+	$FadeTransition/Timer.start()
+	$FadeTransition/AnimationPlayer.play("Fade_in")
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	current_button_type = ButtonType.SETTINGS
+	$FadeTransition.show()
+	$FadeTransition/Timer.start()
+	$FadeTransition/AnimationPlayer.play("Fade_in")
 
 
 func _on_quit_game_pressed() -> void:
-	get_tree().quit()
+	current_button_type = ButtonType.QUIT
+	$FadeTransition.show()
+	$FadeTransition/Timer.start()
+	$FadeTransition/AnimationPlayer.play("Fade_in")
+
+
+func _on_timer_timeout() -> void:
+	match current_button_type:
+		ButtonType.START:
+			get_tree().change_scene_to_file("res://assets/scenes/game.tscn")
+		ButtonType.SETTINGS:
+			get_tree().change_scene_to_file("res://assets/scenes/menus/settings_menu.tscn")
+		ButtonType.QUIT:
+			get_tree().quit()
