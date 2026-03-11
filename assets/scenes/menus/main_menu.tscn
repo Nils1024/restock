@@ -4,6 +4,13 @@
 
 [node name="MainMenu" type="Node2D" unique_id=753076020]
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1873979293]
+offset_left = -119.0
+offset_top = -81.0
+offset_right = 1294.0
+offset_bottom = 759.0
+color = Color(0.4267365, 0.55399954, 0.84646714, 1)
+
 [node name="Control" type="Control" parent="." unique_id=255956901]
 layout_mode = 3
 anchors_preset = 0

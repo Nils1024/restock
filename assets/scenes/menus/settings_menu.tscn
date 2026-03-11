@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d8ccrqp64c4f"]
+
+[node name="SettingsMenu" type="Node2D" unique_id=1004708487]
+
+[node name="Control" type="Control" parent="." unique_id=1990739797]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=268646350]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 147.0
+offset_right = 549.0
+offset_bottom = 229.0
+
+[node name="Label" type="Label" parent="Control/HBoxContainer" unique_id=1974522194]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="Control/HBoxContainer" unique_id=1079014633]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+tick_count = 10
+ticks_on_borders = true
