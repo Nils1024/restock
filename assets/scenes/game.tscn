@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://c1orinwtla028"]
 
 [ext_resource type="Script" uid="uid://0crhiow25yyj" path="res://assets/scripts/game.gd" id="1_cb66b"]
+[ext_resource type="TileSet" uid="uid://dxrp1ohh6bq6u" path="res://assets/tilesets/Ground.tres" id="2_dis88"]
 
 [node name="Game" type="Node2D" unique_id=1198782607]
 script = ExtResource("1_cb66b")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=653317436]
+tile_set = ExtResource("2_dis88")
