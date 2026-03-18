@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bcj7gu0f5ydo3"]
+
+[node name="Control" type="Control" unique_id=1565931954]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=831967111]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 71.0
+alignment = 2
+
+[node name="TextureRect" type="ColorRect" parent="VBoxContainer" unique_id=926321419]
+layout_mode = 2
