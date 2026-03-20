@@ -1,6 +1,25 @@
 [gd_scene format=3 uid="uid://d8ccrqp64c4f"]
 
+[ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_0yaug"]
+[ext_resource type="Script" uid="uid://c16r0hv5ety7g" path="res://assets/scripts/settings_menu.gd" id="1_uh62s"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_uh62s"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_o540p"]
+color = Color(0.023529412, 0.5254902, 0.93333334, 1)
+thickness = 6
+
 [node name="SettingsMenu" type="Node2D" unique_id=1004708487]
+script = ExtResource("1_uh62s")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1474096538]
+offset_left = -119.0
+offset_top = -81.0
+offset_right = 1294.0
+offset_bottom = 759.0
+color = Color(0.4267365, 0.55399954, 0.84646714, 1)
 
 [node name="Control" type="Control" parent="." unique_id=1990739797]
 layout_mode = 3
@@ -12,17 +31,46 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 255.0
 offset_top = 147.0
-offset_right = 549.0
+offset_right = 595.0
 offset_bottom = 229.0
 
-[node name="Label" type="Label" parent="Control/HBoxContainer" unique_id=1974522194]
+[node name="Volume" type="Label" parent="Control/HBoxContainer" unique_id=1974522194]
 layout_mode = 2
 text = "Volume"
 
-[node name="HSlider" type="HSlider" parent="Control/HBoxContainer" unique_id=1079014633]
+[node name="VolumeSlider" type="HSlider" parent="Control/HBoxContainer" unique_id=1079014633]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_uh62s")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_o540p")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_o540p")
+value = 50.0
 rounded = true
 tick_count = 10
 ticks_on_borders = true
+
+[node name="VolumePercentage" type="Label" parent="Control/HBoxContainer" unique_id=428572182]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "50%"
+visible_characters = 4
+visible_ratio = 1.3333334
+
+[node name="Back" type="Button" parent="Control" unique_id=1791521653]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 12.0
+offset_right = 142.0
+offset_bottom = 64.0
+text = "Back"
+
+[node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("1_0yaug")]
+visible = false
+
+[node name="Timer" type="Timer" parent="FadeTransition" unique_id=530316023]
+
+[connection signal="value_changed" from="Control/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Control/Back" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]
