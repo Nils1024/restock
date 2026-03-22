@@ -15,10 +15,10 @@ thickness = 6
 script = ExtResource("1_uh62s")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1474096538]
-offset_left = -119.0
-offset_top = -81.0
-offset_right = 1294.0
-offset_bottom = 759.0
+offset_left = -129.0
+offset_top = -82.0
+offset_right = 1284.0
+offset_bottom = 758.0
 color = Color(0.4267365, 0.55399954, 0.84646714, 1)
 
 [node name="Control" type="Control" parent="." unique_id=1990739797]
@@ -66,6 +66,27 @@ offset_right = 142.0
 offset_bottom = 64.0
 text = "Back"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control" unique_id=1012926000]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 218.0
+offset_right = 431.0
+offset_bottom = 249.0
+theme_override_constants/separation = 10
+
+[node name="Language" type="Label" parent="Control/HBoxContainer2" unique_id=710004086]
+layout_mode = 2
+text = "Language"
+
+[node name="LanguageOptionButton" type="OptionButton" parent="Control/HBoxContainer2" unique_id=171493769]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Deutsch"
+popup/item_1/id = 1
+
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("1_0yaug")]
 visible = false
 
@@ -73,4 +94,5 @@ visible = false
 
 [connection signal="value_changed" from="Control/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="Control/Back" to="." method="_on_button_pressed"]
+[connection signal="item_selected" from="Control/HBoxContainer2/LanguageOptionButton" to="." method="_on_language_option_button_item_selected"]
 [connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]

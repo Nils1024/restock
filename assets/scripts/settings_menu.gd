@@ -23,3 +23,11 @@ func _on_timer_timeout() -> void:
 
 func _on_volume_slider_value_changed(value: float) -> void:
 	$Control/HBoxContainer/VolumePercentage.text = str(roundf(value)).replace(".0", "%")
+
+
+func _on_language_option_button_item_selected(index: int) -> void:
+	match index:
+		0:
+			LocalizationService.set_language("en")
+		1:
+			LocalizationService.set_language("de")

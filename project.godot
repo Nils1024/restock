@@ -15,6 +15,11 @@ run/main_scene="uid://cfecg4ehkgkbl"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LocalizationService="*uid://b6npd7cd5hqrq"
+Const="*uid://dxvugxni0x6mo"
+
 [display]
 
 window/stretch/mode="viewport"
@@ -22,6 +27,10 @@ window/stretch/mode="viewport"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/localization/game.de.translation", "res://assets/localization/game.en.translation")
 
 [physics]
 
