@@ -9,8 +9,13 @@ enum ButtonType {
 var current_button_type = null
 
 func _ready() -> void:
+	_set_text_to_language()
+	
 	$FadeTransition.show()
 	$FadeTransition/AnimationPlayer.play("Fade_out")
+	
+func _set_text_to_language() -> void:
+	$Control/StartGame.text = tr("PLAY")
 	
 func _on_start_game_pressed() -> void:
 	current_button_type = ButtonType.START

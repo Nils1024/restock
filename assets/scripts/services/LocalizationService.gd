@@ -2,23 +2,23 @@ extends Node
 
 signal language_changed
 
-var supported = ["en", "de"]
-var current_language = "en"
+const supported = [Const.Languages.ENGLISH, Const.Languages.GERMAN]
+var current_language = Const.Languages.ENGLISH
 
 func _ready() -> void:
 	load_language()
 	
 func load_language():
 	var config = ConfigFile.new()
-	config.load("user://settings.cfg")
+	config.load(Const.config.CONFIG_FILE)
 	
-	var lang = config.get_value("settings", "language", "")
+	var lang = config.get_value(Const.config.SETTINGS_SECTION_KEY, Const.config.LANGUAGE_KEY, "")
 	
 	if lang == "" or not lang in supported:
 		lang = OS.get_locale().substr(0, 2)
 		
 	if not lang in supported:
-		lang = "en"
+		lang = Const.Languages.ENGLISH
 		
 	set_language(lang)
 
@@ -31,6 +31,6 @@ func set_language(lang: String):
 	
 func save_language(lang: String):
 	var config = ConfigFile.new()
-	config.load("user://settings.cfg")
-	config.set_value("settings", "language", lang)
-	config.save("user://settings.cfg")
+	config.load(Const.config.CONFIG_FILE)
+	config.set_value(Const.config.SETTINGS_SECTION_KEY, Const.config.LANGUAGE_KEY, lang)
+	config.save(Const.config.CONFIG_FILE)

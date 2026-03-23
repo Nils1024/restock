@@ -1,11 +1,11 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+class config:
+	const CONFIG_FILE = "user://settings.cfg"
+	const SETTINGS_SECTION_KEY = "settings"
+	
+	const LANGUAGE_KEY = "language"
+	
+class Languages:
+	const ENGLISH = "en"
+	const GERMAN = "de"
