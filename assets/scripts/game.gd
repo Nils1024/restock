@@ -75,3 +75,15 @@ func _input(event: InputEvent) -> void:
 		
 		var cell = $TileMapLayer.local_to_map($TileMapLayer.to_local(mouse_pos))
 		print("Clicked:", cell)
+		
+	if Input.is_action_just_pressed("zoom_in"):
+		zoom_camera(1.5)
+	if Input.is_action_just_pressed("zoom_out"):
+		zoom_camera(1.0 / 1.5)
+		
+func zoom_camera(factor):
+	var cam = $Camera2D
+	var mouse_before = cam.get_global_mouse_position()
+	cam.zoom *= Vector2(factor, factor)
+	var mouse_after = cam.get_global_mouse_position()
+	cam.position += (mouse_before - mouse_after)

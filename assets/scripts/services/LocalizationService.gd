@@ -2,7 +2,7 @@ extends Node
 
 signal language_changed
 
-const supported = [Const.Languages.ENGLISH, Const.Languages.GERMAN]
+var supported = [Const.Languages.ENGLISH, Const.Languages.GERMAN]
 var current_language = Const.Languages.ENGLISH
 
 func _ready() -> void:
