@@ -3,6 +3,12 @@ extends Node2D
 @onready var tilemap = $TileMapLayer
 var noise = FastNoiseLite.new()
 
+var mouse_press_start = Vector2.ZERO
+var is_dragging = false
+var drag_threshold = 10
+
+var tile_radius_around_camera = 50
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	noise.seed = randi()
@@ -82,12 +88,30 @@ func _input(event: InputEvent) -> void:
 		var delta = event.delta
 		$Camera2D.position += delta * 10.0
 	
-	# Click
-	if Input.is_action_just_pressed("click"):
-		var mouse_pos = get_global_mouse_position()
-		
-		var cell = $TileMapLayer.local_to_map($TileMapLayer.to_local(mouse_pos))
-		print("Clicked:", cell)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			mouse_press_start = event.position
+			is_dragging = false
+		else:
+			var distance = mouse_press_start.distance_to(event.position)
+			
+			if distance < drag_threshold:
+				# Click
+				var mouse_pos = get_global_mouse_position()
+				var cell = $TileMapLayer.local_to_map($TileMapLayer.to_local(mouse_pos))
+				print("Clicked:", cell)
+			else:
+				is_dragging = false
+				
+	if event is InputEventMouseMotion:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			var distance = mouse_press_start.distance_to(event.position)
+			
+			if distance > drag_threshold:
+				is_dragging = true
+				
+			if is_dragging:
+				$Camera2D.position -= event.relative * 10
 		
 	# Zoom in and out
 	if Input.is_action_just_pressed("zoom_in"):
