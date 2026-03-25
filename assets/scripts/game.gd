@@ -70,6 +70,12 @@ func _process(delta: float) -> void:
 	
 # TODO: Look at the DDA/Bresenham algorithm
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("esc"):
+		$UI/IngameMenu.visible = not $UI/IngameMenu.visible
+		
+	if $UI/IngameMenu.visible:
+		return
+	
 	if Input.is_action_just_pressed("click"):
 		var mouse_pos = get_global_mouse_position()
 		
