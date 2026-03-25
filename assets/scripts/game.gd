@@ -15,7 +15,7 @@ func _ready() -> void:
 	generate_map()
 	
 func generate_map():
-	var width = 200
+	var width = 400
 	var height = 200
 	var scale = 0.08
 	
@@ -70,18 +70,26 @@ func _process(delta: float) -> void:
 	
 # TODO: Look at the DDA/Bresenham algorithm
 func _input(event: InputEvent) -> void:
+	# Ingame menu
 	if Input.is_action_just_pressed("esc"):
 		$UI/IngameMenu.visible = not $UI/IngameMenu.visible
 		
 	if $UI/IngameMenu.visible:
 		return
 	
+	# Camera move for the trackpad	
+	if event is InputEventPanGesture:
+		var delta = event.delta
+		$Camera2D.position += delta * 10.0
+	
+	# Click
 	if Input.is_action_just_pressed("click"):
 		var mouse_pos = get_global_mouse_position()
 		
 		var cell = $TileMapLayer.local_to_map($TileMapLayer.to_local(mouse_pos))
 		print("Clicked:", cell)
 		
+	# Zoom in and out
 	if Input.is_action_just_pressed("zoom_in"):
 		zoom_camera(1.5)
 	if Input.is_action_just_pressed("zoom_out"):
