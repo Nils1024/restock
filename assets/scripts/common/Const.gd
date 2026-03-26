@@ -9,3 +9,6 @@ class config:
 class Languages:
 	const ENGLISH = "en"
 	const GERMAN = "de"
+	
+class World:
+	const CHUNK_SIZE = 32

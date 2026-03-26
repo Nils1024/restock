@@ -28,21 +28,29 @@ offset_bottom = 255.0
 text = "Start
 "
 
+[node name="Help" type="Button" parent="Control" unique_id=1498675400]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 277.0
+offset_right = 644.0
+offset_bottom = 338.0
+text = "How to play?"
+
 [node name="Settings" type="Button" parent="Control" unique_id=1128183698]
 layout_mode = 0
-offset_left = 445.0
-offset_top = 301.0
-offset_right = 648.0
-offset_bottom = 362.0
+offset_left = 444.0
+offset_top = 361.0
+offset_right = 647.0
+offset_bottom = 422.0
 text = "Settings
 "
 
 [node name="QuitGame" type="Button" parent="Control" unique_id=1088761539]
 layout_mode = 0
-offset_left = 447.0
-offset_top = 420.0
-offset_right = 650.0
-offset_bottom = 481.0
+offset_left = 446.0
+offset_top = 457.0
+offset_right = 649.0
+offset_bottom = 518.0
 text = "Quit
 "
 
