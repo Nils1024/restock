@@ -7,10 +7,10 @@ var mouse_press_start = Vector2.ZERO
 var is_dragging = false
 var drag_threshold = 10
 
-var tile_radius_around_camera = 150
 var last_center = Vector2i.ZERO
-var generated = {}
+var last_zoom = 0.0
 var loaded_chunks = {}
+var chunk_cache = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,47 +20,61 @@ func _ready() -> void:
 	noise.fractal_gain = 0.5
 	noise.fractal_lacunarity = 2.0
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
-			
-func is_near_water(x,y):
-	for dx in [-1,0,1]:
-		for dy in [-1,0,1]:
-			if dx == 0 and dy == 0:
-				continue
-			
-			var n = noise.get_noise_2d((x+dx)*0.08, (y+dy)*0.08)
-			if n < -0.4:
-				return true
-			
-	return false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var cam = $Camera2D
 	var center = tilemap.local_to_map(cam.get_screen_center_position())
 	
-	if center != last_center:
-		update_map(center)
+	var zoom_changed = abs(cam.zoom.x - last_zoom) > 0.0001
+	
+	if center != last_center or zoom_changed:
+		update_chunks(center)
 		last_center = center
+		last_zoom = cam.zoom.x
 		
 	cleanup(center)
 		
-func update_map(center: Vector2i):
-	var radius = tile_radius_around_camera
+func update_chunks(center_tile: Vector2i):
+	var center_chunk = tile_to_chunk(center_tile)
+	var radius = get_chunk_radius()
 	
-	for x in range(center.x - radius, center.x + radius):
-		for y in range(center.y - radius, center.y + radius):
+	for cx in range(center_chunk.x - radius, center_chunk.x + radius):
+		for cy in range(center_chunk.y - radius, center_chunk.y + radius):
 			
-			var key = Vector2i(x,y)
+			var chunk_pos = Vector2i(cx, cy)
 			
-			if generated.has(key):
+			if loaded_chunks.has(chunk_pos):
 				continue
 			
-			var n = noise.get_noise_2d(x * 0.08, y * 0.08)
+			generate_chunk(chunk_pos)
 			
-			var atlas = get_tile(n, x, y)
+func generate_chunk(chunk_pos: Vector2i):
+	if chunk_cache.has(chunk_pos):
+		apply_chunk(chunk_cache[chunk_pos])
+		loaded_chunks[chunk_pos] = true
+		return
+	
+	var result = []
+	
+	for x in range(Const.World.CHUNK_SIZE):
+		for y in range(Const.World.CHUNK_SIZE):
 			
-			tilemap.set_cell(key, 0, atlas)
-			generated[key] = true
+			var wx = chunk_pos.x * Const.World.CHUNK_SIZE + x
+			var wy = chunk_pos.y * Const.World.CHUNK_SIZE + y
+			
+			var n = noise.get_noise_2d(wx * 0.08, wy * 0.08)
+			var atlas = get_tile(n, wx, wy)
+			
+			result.append([Vector2i(wx, wy), atlas])
+	
+	chunk_cache[chunk_pos] = result
+	apply_chunk(result)
+	loaded_chunks[chunk_pos] = true
+	
+func apply_chunk(data):
+	for cell in data:
+		tilemap.set_cell(cell[0], 0, cell[1])
 			
 func get_tile(n, x, y):
 	if n < -0.4:
@@ -72,13 +86,53 @@ func get_tile(n, x, y):
 	else:
 		return Vector2i(3,0)
 		
-func cleanup(center):
-	var radius = tile_radius_around_camera
+func is_near_water(x,y):
+	for dx in [-1,0,1]:
+		for dy in [-1,0,1]:
+			if dx == 0 and dy == 0:
+				continue
+			
+			var n = noise.get_noise_2d((x+dx)*0.08, (y+dy)*0.08)
+			if n < -0.4:
+				return true
+			
+	return false
+		
+func tile_to_chunk(tile: Vector2i):
+	return Vector2i(
+		floor(tile.x / Const.World.CHUNK_SIZE),
+		floor(tile.y / Const.World.CHUNK_SIZE))
+		
+func cleanup(center_tile):
+	var center_chunk = tile_to_chunk(center_tile)
+	var radius = get_chunk_radius()
 	
-	for key in generated.keys():
-		if key.distance_to(center) > radius * 1.5:
-			tilemap.erase_cell(key)
-			generated.erase(key)
+	for chunk in loaded_chunks.keys():
+		if chunk.distance_to(center_chunk) > radius:
+			unload_chunk(chunk)
+			
+func unload_chunk(chunk_pos):
+	if not chunk_cache.has(chunk_pos):
+		return
+	
+	for cell in chunk_cache[chunk_pos]:
+		tilemap.erase_cell(cell[0])
+	
+	loaded_chunks.erase(chunk_pos)
+	
+func get_chunk_radius() -> int:
+	var cam = $Camera2D
+	
+	var viewport_size = get_viewport_rect().size
+	var visible_world_size = viewport_size * cam.zoom
+	
+	var tile_size = tilemap.tile_set.tile_size
+	var chunk_world_size = tile_size * Const.World.CHUNK_SIZE
+
+	var chunks_x = visible_world_size.x / chunk_world_size.x
+	var chunks_y = visible_world_size.y / chunk_world_size.y
+
+	return int(ceil(max(chunks_x, chunks_y))) + 4
 	
 # TODO: Look at the DDA/Bresenham algorithm
 func _input(event: InputEvent) -> void:
@@ -127,7 +181,9 @@ func _input(event: InputEvent) -> void:
 		
 func zoom_camera(factor):
 	var cam = $Camera2D
+	var new_zoom = minf(maxf((cam.zoom.x * factor), 2.0/30.0), 0.3375)
+	
 	var mouse_before = cam.get_global_mouse_position()
-	cam.zoom *= Vector2(factor, factor)
+	cam.zoom = Vector2(new_zoom, new_zoom)
 	var mouse_after = cam.get_global_mouse_position()
 	cam.position += (mouse_before - mouse_after)
