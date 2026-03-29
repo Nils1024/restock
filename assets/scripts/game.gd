@@ -134,6 +134,14 @@ func get_chunk_radius() -> int:
 
 	return int(ceil(max(chunks_x, chunks_y))) + 4
 	
+func get_move_speed() -> float:
+	var speed = 30.0
+	var cam = $Camera2D
+	
+	speed = speed * (1.0 - cam.zoom.x)
+	
+	return speed
+	
 # TODO: Look at the DDA/Bresenham algorithm
 func _input(event: InputEvent) -> void:
 	# Ingame menu
@@ -146,7 +154,7 @@ func _input(event: InputEvent) -> void:
 	# Camera move for the trackpad	
 	if event is InputEventPanGesture:
 		var delta = event.delta
-		$Camera2D.position += delta * 10.0
+		$Camera2D.position += delta * get_move_speed()
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
@@ -171,7 +179,7 @@ func _input(event: InputEvent) -> void:
 				is_dragging = true
 				
 			if is_dragging:
-				$Camera2D.position -= event.relative * 10
+				$Camera2D.position -= event.relative * get_move_speed()
 		
 	# Zoom in and out
 	if Input.is_action_just_pressed("zoom_in"):
