@@ -6,6 +6,8 @@ var noise = FastNoiseLite.new()
 var mouse_press_start = Vector2.ZERO
 var is_dragging = false
 var drag_threshold = 10
+var is_magnifying = false
+var last_magnify_factor = 0.0
 
 var last_center = Vector2i.ZERO
 var last_zoom = 0.0
@@ -135,12 +137,10 @@ func get_chunk_radius() -> int:
 	return int(ceil(max(chunks_x, chunks_y))) + 4
 	
 func get_move_speed() -> float:
-	var speed = 30.0
+	var base_speed = 500.0
 	var cam = $Camera2D
 	
-	speed = speed * (1.0 - cam.zoom.x)
-	
-	return speed
+	return base_speed * pow(cam.zoom.x, 0.8)
 	
 # TODO: Look at the DDA/Bresenham algorithm
 func _input(event: InputEvent) -> void:
@@ -186,12 +186,30 @@ func _input(event: InputEvent) -> void:
 		zoom_camera(1.0 / 1.5)
 	if Input.is_action_just_pressed("zoom_out"):
 		zoom_camera(1.5)
+	if event is InputEventMagnifyGesture:
+		if not is_magnifying:
+			last_magnify_factor = event.factor
+			is_magnifying = true
+			return
+		
+		var delta = event.factor / last_magnify_factor
+		last_magnify_factor = event.factor
+		zoom_camera(1.0 / delta)
+	if event is InputEventMagnifyGesture and event.factor == 1.0:
+		is_magnifying = false
+		last_magnify_factor = 1.0
 		
 func zoom_camera(factor):
 	var cam = $Camera2D
-	var new_zoom = minf(maxf((cam.zoom.x * factor), 2.0/30.0), 0.3375)
+	
+	var old_zoom = cam.zoom.x
+	var new_zoom = clamp(old_zoom * factor, 2.0/30.0, 0.3375)
+	
+	if is_equal_approx(old_zoom, new_zoom):
+		return
 	
 	var mouse_before = cam.get_global_mouse_position()
 	cam.zoom = Vector2(new_zoom, new_zoom)
 	var mouse_after = cam.get_global_mouse_position()
+	
 	cam.position += (mouse_before - mouse_after)
