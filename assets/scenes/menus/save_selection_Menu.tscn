@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_qjqap"]
 [ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/save_selection_menu.gd" id="1_wc18j"]
+[ext_resource type="PackedScene" uid="uid://c51keuke5k5xc" path="res://assets/scenes/util/ui/save_card.tscn" id="2_mjmsl"]
 
 [node name="SaveSelectionMenu" type="Node2D" unique_id=260701952]
 script = ExtResource("1_wc18j")
@@ -19,29 +20,29 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Save1" type="Button" parent="Control" unique_id=1368766062]
-layout_mode = 0
-offset_left = 125.0
-offset_top = 116.0
-offset_right = 324.0
-offset_bottom = 452.0
-text = "Save 1"
+[node name="SaveCard" parent="Control" unique_id=798609909 instance=ExtResource("2_mjmsl")]
+layout_mode = 1
+offset_left = 447.0
+offset_top = 120.0
+offset_right = 608.0
+offset_bottom = 415.0
+metadata/Text = "Save 1"
 
-[node name="Save2" type="Button" parent="Control" unique_id=2073508244]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 119.0
-offset_right = 647.0
-offset_bottom = 455.0
-text = "Save 2"
+[node name="SaveCard2" parent="Control" unique_id=1297635563 instance=ExtResource("2_mjmsl")]
+layout_mode = 1
+offset_left = 894.0
+offset_top = 240.0
+offset_right = 1055.0
+offset_bottom = 535.0
+metadata/Text = "Save 2"
 
-[node name="Save3" type="Button" parent="Control" unique_id=26727402]
-layout_mode = 0
-offset_left = 787.0
-offset_top = 111.0
-offset_right = 986.0
-offset_bottom = 447.0
-text = "Save 3"
+[node name="SaveCard3" parent="Control" unique_id=876640434 instance=ExtResource("2_mjmsl")]
+layout_mode = 1
+offset_left = 1341.0
+offset_top = 360.0
+offset_right = 1502.0
+offset_bottom = 655.0
+metadata/Text = "Save 3"
 
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("1_qjqap")]
 visible = false
@@ -52,5 +53,7 @@ offset_bottom = 632.0
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=216372829]
 
-[connection signal="pressed" from="Control/Save1" to="." method="_on_save_1_pressed"]
+[connection signal="card_pressed" from="Control/SaveCard" to="." method="_on_save_card_card_pressed"]
+[connection signal="card_pressed" from="Control/SaveCard2" to="." method="_on_save_card_2_card_pressed"]
+[connection signal="card_pressed" from="Control/SaveCard3" to="." method="_on_save_card_3_card_pressed"]
 [connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]

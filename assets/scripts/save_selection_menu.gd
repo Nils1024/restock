@@ -13,13 +13,28 @@ func _ready() -> void:
 	$FadeTransition.show()
 	$FadeTransition/AnimationPlayer.play("Fade_out")
 
-func _on_save_1_pressed() -> void:
-	current_button_type = ButtonType.SAVE_1
-	$FadeTransition.show()
-	$FadeTransition/Timer.start()
-	$FadeTransition/AnimationPlayer.play("Fade_in")
 
 func _on_timer_timeout() -> void:
 	match current_button_type:
 		ButtonType.SAVE_1:
 			get_tree().change_scene_to_file("res://assets/scenes/game.tscn")
+
+
+func _on_save_card_card_pressed() -> void:
+	current_button_type = ButtonType.SAVE_1
+	start_fade_in_transition()
+
+
+func _on_save_card_2_card_pressed() -> void:
+	current_button_type = ButtonType.SAVE_2
+	start_fade_in_transition()
+
+
+func _on_save_card_3_card_pressed() -> void:
+	current_button_type = ButtonType.SAVE_3
+	start_fade_in_transition()
+	
+func start_fade_in_transition():
+	$FadeTransition.show()
+	$FadeTransition/Timer.start()
+	$FadeTransition/AnimationPlayer.play("Fade_in")

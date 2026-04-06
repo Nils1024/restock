@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c51keuke5k5xc"]
+
+[ext_resource type="Script" uid="uid://clmtrpt27i4f3" path="res://assets/scripts/save_card.gd" id="1_k0u2x"]
+
+[node name="SaveCard" type="Control" unique_id=798609909]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k0u2x")
+metadata/Text = ""
+
+[node name="SaveButton" type="Button" parent="." unique_id=1990547970]
+layout_mode = 0
+offset_right = 199.0
+offset_bottom = 336.0
+
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
