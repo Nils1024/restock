@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bdtulldwsqkq4"]
+
+[node name="Tutorial" type="Control" unique_id=1188621439]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=211954603]
+layout_mode = 0
+offset_right = 510.0
+offset_bottom = 244.0
+
+[node name="Button" type="Button" parent="." unique_id=955934360]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 160.0
+offset_right = 475.0
+offset_bottom = 223.0
+text = "Continue"
