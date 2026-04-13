@@ -17,12 +17,8 @@ var last_zoom: float = 0.0
 var loaded_chunks: Dictionary = {}
 var chunk_cache: Dictionary = {}
 
-var min_world_coord: int = -3000
-var max_world_coord: int = 3000
-
 var active_threads: Dictionary = {}
 var chunk_queue: Array[Vector2i] = []
-var MAX_THREADS := 4
 
 enum biomes {
 	SNOW,
@@ -79,12 +75,12 @@ func _process(delta: float) -> void:
 	collect_finished_threads()
 	cleanup(center)
 	
-func update_camera_bounds():
+func update_camera_bounds() -> void:
 	var cam = $Camera2D
 	var tile_size = tilemap.tile_set.tile_size
 	
-	var min_pos = tilemap.map_to_local(Vector2i(min_world_coord, min_world_coord))
-	var max_pos = tilemap.map_to_local(Vector2i(max_world_coord, max_world_coord))
+	var min_pos = tilemap.map_to_local(Vector2i(Const.World.MIN_WORLD_COORD, Const.World.MIN_WORLD_COORD))
+	var max_pos = tilemap.map_to_local(Vector2i(Const.World.MAX_WORLD_COORD, Const.World.MAX_WORLD_COORD))
 	
 	cam.limit_left = int(min_pos.x)
 	cam.limit_top = int(min_pos.y)
@@ -127,7 +123,7 @@ func _thread_generate(chunk_pos: Vector2i) -> Array:
 			var wx = chunk_pos.x * Const.World.CHUNK_SIZE + x
 			var wy = chunk_pos.y * Const.World.CHUNK_SIZE + y
 			
-			if wx < min_world_coord or wx > max_world_coord or wy < min_world_coord or wy > max_world_coord:
+			if wx < Const.World.MIN_WORLD_COORD or wx > Const.World.MAX_WORLD_COORD or wy < Const.World.MIN_WORLD_COORD or wy > Const.World.MAX_WORLD_COORD:
 				continue
 				
 			var elevation = elevation_noise.get_noise_2d(wx * 0.08, wy * 0.08)
@@ -139,8 +135,8 @@ func _thread_generate(chunk_pos: Vector2i) -> Array:
 	
 	return result
 	
-func process_thread_queue():
-	while active_threads.size() < MAX_THREADS and not chunk_queue.is_empty():
+func process_thread_queue() -> void:
+	while active_threads.size() < Const.config.MAX_THREADS and not chunk_queue.is_empty():
 		var chunk_pos = chunk_queue.pop_front()
 		
 		var thread: Thread = Thread.new()
@@ -191,7 +187,7 @@ func is_near_water(x,y):
 			var nx = x + dx
 			var ny = y + dy
 			
-			if nx < min_world_coord or nx > max_world_coord or ny < min_world_coord or ny > max_world_coord:
+			if nx < Const.World.MIN_WORLD_COORD or nx > Const.World.MAX_WORLD_COORD or ny < Const.World.MIN_WORLD_COORD or ny > Const.World.MAX_WORLD_COORD:
 				continue
 			
 			var n = elevation_noise.get_noise_2d((x+dx)*0.08, (y+dy)*0.08)

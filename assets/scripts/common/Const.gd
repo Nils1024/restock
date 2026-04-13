@@ -5,6 +5,7 @@ class config:
 	const SETTINGS_SECTION_KEY = "settings"
 	
 	const LANGUAGE_KEY = "language"
+	const MAX_THREADS = 4
 	
 class Languages:
 	const ENGLISH = "en"
@@ -12,3 +13,5 @@ class Languages:
 	
 class World:
 	const CHUNK_SIZE = 32
+	const MIN_WORLD_COORD: int = -3000
+	const MAX_WORLD_COORD: int = 3000
