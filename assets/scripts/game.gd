@@ -14,6 +14,9 @@ var last_zoom = 0.0
 var loaded_chunks = {}
 var chunk_cache = {}
 
+var min_world_coord = -3000
+var max_world_coord = 3000
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	noise.seed = randi()
@@ -22,6 +25,13 @@ func _ready() -> void:
 	noise.fractal_gain = 0.5
 	noise.fractal_lacunarity = 2.0
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	
+	update_camera_bounds()
+	
+	await UtilityService.wait(1)
+	
+	$UI/Tutorial.offset = Vector2(400, 200)
+	$UI/Tutorial.add_text_to_queue("Welcome to Restock")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,16 +44,30 @@ func _process(delta: float) -> void:
 		update_chunks(center)
 		last_center = center
 		last_zoom = cam.zoom.x
+		update_camera_bounds()
 		
 	cleanup(center)
+	
+func update_camera_bounds():
+	var cam = $Camera2D
+	var tile_size = tilemap.tile_set.tile_size
+	
+	var min_pos = tilemap.map_to_local(Vector2i(min_world_coord, min_world_coord))
+	var max_pos = tilemap.map_to_local(Vector2i(max_world_coord, max_world_coord))
+	
+	cam.limit_left = int(min_pos.x)
+	cam.limit_top = int(min_pos.y)
+	cam.limit_right = int(max_pos.x)
+	cam.limit_bottom = int(max_pos.y)
 		
 func update_chunks(center_tile: Vector2i):
 	var center_chunk = tile_to_chunk(center_tile)
 	var radius = get_chunk_radius()
 	
-	for cx in range(center_chunk.x - radius, center_chunk.x + radius):
-		for cy in range(center_chunk.y - radius, center_chunk.y + radius):
-			
+	var load_radius = radius + 2
+	
+	for cx in range(center_chunk.x - load_radius, center_chunk.x + load_radius + 1):
+		for cy in range(center_chunk.y - load_radius, center_chunk.y + load_radius + 1):
 			var chunk_pos = Vector2i(cx, cy)
 			
 			if loaded_chunks.has(chunk_pos):
@@ -64,6 +88,9 @@ func generate_chunk(chunk_pos: Vector2i):
 			
 			var wx = chunk_pos.x * Const.World.CHUNK_SIZE + x
 			var wy = chunk_pos.y * Const.World.CHUNK_SIZE + y
+			
+			if wx < min_world_coord or wx > max_world_coord or wy < min_world_coord or wy > max_world_coord:
+				continue
 			
 			var n = noise.get_noise_2d(wx * 0.08, wy * 0.08)
 			var atlas = get_tile(n, wx, wy)
@@ -89,9 +116,15 @@ func get_tile(n, x, y):
 		return Vector2i(3,0)
 		
 func is_near_water(x,y):
-	for dx in [-1,0,1]:
-		for dy in [-1,0,1]:
+	for dx in [-1, 0, 1]:
+		for dy in [-1, 0, 1]:
 			if dx == 0 and dy == 0:
+				continue
+				
+			var nx = x + dx
+			var ny = y + dy
+			
+			if nx < min_world_coord or nx > max_world_coord or ny < min_world_coord or ny > max_world_coord:
 				continue
 			
 			var n = noise.get_noise_2d((x+dx)*0.08, (y+dy)*0.08)
@@ -102,15 +135,17 @@ func is_near_water(x,y):
 		
 func tile_to_chunk(tile: Vector2i):
 	return Vector2i(
-		floor(tile.x / Const.World.CHUNK_SIZE),
-		floor(tile.y / Const.World.CHUNK_SIZE))
+		floor(float(tile.x) / Const.World.CHUNK_SIZE),
+		floor(float(tile.y) / Const.World.CHUNK_SIZE))
 		
 func cleanup(center_tile):
 	var center_chunk = tile_to_chunk(center_tile)
 	var radius = get_chunk_radius()
 	
+	var unload_radius = radius + 3
+	
 	for chunk in loaded_chunks.keys():
-		if chunk.distance_to(center_chunk) > radius:
+		if chunk.distance_to(center_chunk) > unload_radius:
 			unload_chunk(chunk)
 			
 func unload_chunk(chunk_pos):
@@ -134,7 +169,7 @@ func get_chunk_radius() -> int:
 	var chunks_x = visible_world_size.x / chunk_world_size.x
 	var chunks_y = visible_world_size.y / chunk_world_size.y
 
-	return int(ceil(max(chunks_x, chunks_y))) + 4
+	return int(ceil(max(chunks_x, chunks_y) / 2.0)) + 2
 	
 func get_move_speed() -> float:
 	var base_speed = 500.0

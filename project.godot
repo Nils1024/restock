@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 LocalizationService="*uid://b6npd7cd5hqrq"
 Const="*uid://dxvugxni0x6mo"
 DataService="*uid://k5p352sn08xl"
+UtilityService="*uid://bp03lykhm65jt"
 
 [display]
 

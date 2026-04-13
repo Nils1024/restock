@@ -1,22 +1,60 @@
 [gd_scene format=3 uid="uid://bdtulldwsqkq4"]
 
-[node name="Tutorial" type="Control" unique_id=1188621439]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Script" uid="uid://djyud2ustj6y2" path="res://assets/scripts/ui/tutorial_textbox.gd" id="1_vpp3o"]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=211954603]
-layout_mode = 0
-offset_right = 510.0
-offset_bottom = 244.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpp3o"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
-[node name="Button" type="Button" parent="." unique_id=955934360]
-layout_mode = 0
-offset_left = 316.0
-offset_top = 160.0
-offset_right = 475.0
-offset_bottom = 223.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4wvs"]
+bg_color = Color(0.16078432, 1, 1, 1)
+
+[node name="Tutorial" type="CanvasLayer" unique_id=2001957481]
+script = ExtResource("1_vpp3o")
+
+[node name="TextboxContainer" type="MarginContainer" parent="." unique_id=1374476232]
+offset_right = 245.0
+offset_bottom = 84.0
+
+[node name="Panel" type="Panel" parent="TextboxContainer" unique_id=732827718]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vpp3o")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextboxContainer" unique_id=1714440473]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="TextboxContainer/MarginContainer" unique_id=663534676]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o4wvs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextboxContainer/MarginContainer" unique_id=1706582555]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer/VBoxContainer" unique_id=472767013]
+layout_mode = 2
+
+[node name="Text" type="Label" parent="TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=751770146]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Example"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TextboxContainer/MarginContainer/VBoxContainer" unique_id=732484503]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ContinueButton" type="Button" parent="TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=523588703]
+layout_mode = 2
 text = "Continue"
+
+[connection signal="pressed" from="TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer2/ContinueButton" to="." method="_on_continue_button_pressed"]

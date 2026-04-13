@@ -20,21 +20,43 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=2001644134]
+[node name="SaveCard" parent="Control" unique_id=798609909 instance=ExtResource("2_mjmsl")]
 layout_mode = 0
-offset_right = 951.0
-offset_bottom = 459.0
-
-[node name="SaveCard" parent="Control/CenterContainer" unique_id=798609909 instance=ExtResource("2_mjmsl")]
-layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 77.0
+offset_top = 157.0
+offset_right = 77.0
+offset_bottom = 157.0
+grow_horizontal = 1
+grow_vertical = 1
 metadata/Text = "Save 1"
 
-[node name="SaveCard2" parent="Control/CenterContainer" unique_id=1297635563 instance=ExtResource("2_mjmsl")]
-layout_mode = 2
+[node name="SaveCard2" parent="Control" unique_id=1297635563 instance=ExtResource("2_mjmsl")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 445.0
+offset_top = 162.0
+offset_right = 445.0
+offset_bottom = 162.0
+grow_horizontal = 1
+grow_vertical = 1
 metadata/Text = "Save 2"
 
-[node name="SaveCard3" parent="Control/CenterContainer" unique_id=876640434 instance=ExtResource("2_mjmsl")]
-layout_mode = 2
+[node name="SaveCard3" parent="Control" unique_id=876640434 instance=ExtResource("2_mjmsl")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 801.0
+offset_top = 196.0
+offset_right = 801.0
+offset_bottom = 196.0
+grow_horizontal = 1
+grow_vertical = 1
 metadata/Text = "Save 3"
 
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("1_qjqap")]
@@ -46,7 +68,7 @@ offset_bottom = 632.0
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=216372829]
 
-[connection signal="card_pressed" from="Control/CenterContainer/SaveCard" to="." method="_on_save_card_card_pressed"]
-[connection signal="card_pressed" from="Control/CenterContainer/SaveCard2" to="." method="_on_save_card_2_card_pressed"]
-[connection signal="card_pressed" from="Control/CenterContainer/SaveCard3" to="." method="_on_save_card_3_card_pressed"]
+[connection signal="card_pressed" from="Control/SaveCard" to="." method="_on_save_card_card_pressed"]
+[connection signal="card_pressed" from="Control/SaveCard2" to="." method="_on_save_card_2_card_pressed"]
+[connection signal="card_pressed" from="Control/SaveCard3" to="." method="_on_save_card_3_card_pressed"]
 [connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]
