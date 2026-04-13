@@ -1,30 +1,59 @@
 extends Node2D
 
 @onready var tilemap = $TileMapLayer
-var noise = FastNoiseLite.new()
 
-var mouse_press_start = Vector2.ZERO
-var is_dragging = false
-var drag_threshold = 10
-var is_magnifying = false
-var last_magnify_factor = 0.0
+var elevation_noise: Noise = FastNoiseLite.new()
+var temp_noise: Noise = FastNoiseLite.new()
+var humidity_noise: Noise = FastNoiseLite.new()
 
-var last_center = Vector2i.ZERO
-var last_zoom = 0.0
-var loaded_chunks = {}
-var chunk_cache = {}
+var mouse_press_start: Vector2 = Vector2.ZERO
+var is_dragging: bool = false
+var drag_threshold: int = 10
+var is_magnifying: bool = false
+var last_magnify_factor: float = 0.0
 
-var min_world_coord = -3000
-var max_world_coord = 3000
+var last_center: Vector2i = Vector2i.ZERO
+var last_zoom: float = 0.0
+var loaded_chunks: Dictionary = {}
+var chunk_cache: Dictionary = {}
+
+var min_world_coord: int = -3000
+var max_world_coord: int = 3000
+
+var active_threads: Dictionary = {}
+var chunk_queue: Array[Vector2i] = []
+var MAX_THREADS := 4
+
+enum biomes {
+	SNOW,
+	TUNDRA,
+	DESERT,
+	FOREST,
+	GRASS
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	noise.seed = randi()
-	noise.frequency = 0.05
-	noise.fractal_octaves = 4
-	noise.fractal_gain = 0.5
-	noise.fractal_lacunarity = 2.0
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	elevation_noise.seed = randi()
+	elevation_noise.frequency = 0.05
+	elevation_noise.fractal_octaves = 4
+	elevation_noise.fractal_gain = 0.5
+	elevation_noise.fractal_lacunarity = 2.0
+	elevation_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	
+	temp_noise.seed = randi() + 1
+	temp_noise.frequency = 0.02
+	temp_noise.fractal_octaves = 3
+	temp_noise.fractal_gain = 0.5
+	temp_noise.fractal_lacunarity = 2.0
+	temp_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	
+	humidity_noise.seed = randi() + 2
+	humidity_noise.frequency = 0.025
+	humidity_noise.fractal_octaves = 3
+	humidity_noise.fractal_gain = 0.5
+	humidity_noise.fractal_lacunarity = 2.0
+	humidity_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	
 	update_camera_bounds()
 	
@@ -46,6 +75,8 @@ func _process(delta: float) -> void:
 		last_zoom = cam.zoom.x
 		update_camera_bounds()
 		
+	process_thread_queue()
+	collect_finished_threads()
 	cleanup(center)
 	
 func update_camera_bounds():
@@ -63,47 +94,83 @@ func update_camera_bounds():
 func update_chunks(center_tile: Vector2i):
 	var center_chunk = tile_to_chunk(center_tile)
 	var radius = get_chunk_radius()
-	
 	var load_radius = radius + 2
+	var needed_chunks: Array[Vector2i] = []
 	
 	for cx in range(center_chunk.x - load_radius, center_chunk.x + load_radius + 1):
 		for cy in range(center_chunk.y - load_radius, center_chunk.y + load_radius + 1):
 			var chunk_pos = Vector2i(cx, cy)
 			
-			if loaded_chunks.has(chunk_pos):
+			if loaded_chunks.has(chunk_pos) or active_threads.has(chunk_pos):
 				continue
-			
-			generate_chunk(chunk_pos)
-			
-func generate_chunk(chunk_pos: Vector2i):
-	if chunk_cache.has(chunk_pos):
-		apply_chunk(chunk_cache[chunk_pos])
-		loaded_chunks[chunk_pos] = true
-		return
+				
+			needed_chunks.append(chunk_pos)
 	
-	var result = []
+	needed_chunks.sort_custom(func(a, b):
+		return a.distance_to(center_chunk) < b.distance_to(center_chunk)
+	)
+	
+	for chunk in needed_chunks:
+		if not chunk_queue.has(chunk):
+			chunk_queue.append(chunk)
+			
+func generate_chunk_async(chunk_pos: Vector2i) -> void:
+	var thread: Thread = Thread.new()
+	active_threads[chunk_pos] = thread
+	thread.start(_thread_generate.bind(chunk_pos))
+
+func _thread_generate(chunk_pos: Vector2i) -> Array:
+	var result: Array = []
 	
 	for x in range(Const.World.CHUNK_SIZE):
 		for y in range(Const.World.CHUNK_SIZE):
-			
 			var wx = chunk_pos.x * Const.World.CHUNK_SIZE + x
 			var wy = chunk_pos.y * Const.World.CHUNK_SIZE + y
 			
 			if wx < min_world_coord or wx > max_world_coord or wy < min_world_coord or wy > max_world_coord:
 				continue
+				
+			var elevation = elevation_noise.get_noise_2d(wx * 0.08, wy * 0.08)
+			var temp = temp_noise.get_noise_2d(wx * 0.01, wy * 0.01)
+			var humidity = humidity_noise.get_noise_2d(wx * 0.01, wy * 0.01)
 			
-			var n = noise.get_noise_2d(wx * 0.08, wy * 0.08)
-			var atlas = get_tile(n, wx, wy)
-			
+			var atlas = get_tile(elevation, wx, wy)
 			result.append([Vector2i(wx, wy), atlas])
 	
-	chunk_cache[chunk_pos] = result
-	apply_chunk(result)
-	loaded_chunks[chunk_pos] = true
+	return result
+	
+func process_thread_queue():
+	while active_threads.size() < MAX_THREADS and not chunk_queue.is_empty():
+		var chunk_pos = chunk_queue.pop_front()
+		
+		var thread: Thread = Thread.new()
+		active_threads[chunk_pos] = thread
+		thread.start(_thread_generate.bind(chunk_pos))
+		
+func collect_finished_threads():
+	for chunk_pos in active_threads.keys().duplicate():
+		var thread: Thread = active_threads[chunk_pos]
+		
+		if not thread.is_alive():
+			var result: Array = thread.wait_to_finish()
+			active_threads.erase(chunk_pos)
+			
+			if result.is_empty():
+				continue
+			
+			chunk_cache[chunk_pos] = result
+			apply_chunk(result)
+			loaded_chunks[chunk_pos] = true
 	
 func apply_chunk(data):
 	for cell in data:
 		tilemap.set_cell(cell[0], 0, cell[1])
+		
+func get_biome(temperature: float, humidity: float) -> biomes:
+	if temperature < -0.3:
+		return biomes.SNOW
+	else:
+		return biomes.GRASS
 			
 func get_tile(n, x, y):
 	if n < -0.4:
@@ -127,7 +194,7 @@ func is_near_water(x,y):
 			if nx < min_world_coord or nx > max_world_coord or ny < min_world_coord or ny > max_world_coord:
 				continue
 			
-			var n = noise.get_noise_2d((x+dx)*0.08, (y+dy)*0.08)
+			var n = elevation_noise.get_noise_2d((x+dx)*0.08, (y+dy)*0.08)
 			if n < -0.4:
 				return true
 			
@@ -141,10 +208,9 @@ func tile_to_chunk(tile: Vector2i):
 func cleanup(center_tile):
 	var center_chunk = tile_to_chunk(center_tile)
 	var radius = get_chunk_radius()
-	
 	var unload_radius = radius + 3
 	
-	for chunk in loaded_chunks.keys():
+	for chunk in loaded_chunks.keys().duplicate():
 		if chunk.distance_to(center_chunk) > unload_radius:
 			unload_chunk(chunk)
 			
