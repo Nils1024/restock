@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c51keuke5k5xc"]
 
-[ext_resource type="Script" uid="uid://clmtrpt27i4f3" path="res://assets/scripts/save_card.gd" id="1_k0u2x"]
+[ext_resource type="Script" uid="uid://clmtrpt27i4f3" path="res://assets/scripts/ui/save_card.gd" id="1_k0u2x"]
 
 [node name="SaveCard" type="Control" unique_id=798609909]
 layout_mode = 3

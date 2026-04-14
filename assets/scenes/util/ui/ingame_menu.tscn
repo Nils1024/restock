@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhgwbjl2xl0g6"]
 
-[ext_resource type="Script" uid="uid://1ssalf2e05ju" path="res://assets/scripts/ingame_menu.gd" id="1_jg7hv"]
+[ext_resource type="Script" uid="uid://1ssalf2e05ju" path="res://assets/scripts/ui/ingame_menu.gd" id="1_jg7hv"]
 
 [node name="IngameMenu" type="Control" unique_id=1709871851]
 layout_mode = 3

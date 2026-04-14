@@ -1,17 +1,17 @@
 extends Node
 
 class config:
-	const CONFIG_FILE = "user://settings.cfg"
-	const SETTINGS_SECTION_KEY = "settings"
+	const CONFIG_FILE: String = "user://settings.cfg"
+	const SETTINGS_SECTION_KEY: String = "settings"
 	
-	const LANGUAGE_KEY = "language"
-	const MAX_THREADS = 4
+	const LANGUAGE_KEY: String = "language"
+	const MAX_THREADS: int = 4
 	
 class Languages:
-	const ENGLISH = "en"
-	const GERMAN = "de"
+	const ENGLISH: String = "en"
+	const GERMAN: String = "de"
 	
 class World:
-	const CHUNK_SIZE = 32
+	const CHUNK_SIZE: int = 32
 	const MIN_WORLD_COORD: int = -3000
 	const MAX_WORLD_COORD: int = 3000

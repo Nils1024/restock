@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ojq0lqeqfbes"]
 
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_qjqap"]
-[ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/save_selection_menu.gd" id="1_wc18j"]
+[ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/ui/save_selection_menu.gd" id="1_wc18j"]
 [ext_resource type="PackedScene" uid="uid://c51keuke5k5xc" path="res://assets/scenes/util/ui/save_card.tscn" id="2_mjmsl"]
 
 [node name="SaveSelectionMenu" type="Node2D" unique_id=260701952]
