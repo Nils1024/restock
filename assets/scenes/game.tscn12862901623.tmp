@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://0crhiow25yyj" path="res://assets/scripts/game/game.gd" id="1_cb66b"]
 [ext_resource type="Script" uid="uid://cwvcs8jm268mr" path="res://assets/scripts/game/WorldManager.gd" id="2_5aext"]
 [ext_resource type="TileSet" uid="uid://dxrp1ohh6bq6u" path="res://assets/tilesets/Ground.tres" id="2_dis88"]
-[ext_resource type="Script" uid="uid://cdd07xlnfacrl" path="res://assets/scripts/game/NoiseManager.gd" id="3_3w2km"]
 [ext_resource type="PackedScene" uid="uid://bcj7gu0f5ydo3" path="res://assets/scenes/util/ui/shop.tscn" id="3_5gf0t"]
 [ext_resource type="PackedScene" uid="uid://bhgwbjl2xl0g6" path="res://assets/scenes/util/ui/ingame_menu.tscn" id="3_cb5na"]
 [ext_resource type="PackedScene" uid="uid://bdtulldwsqkq4" path="res://assets/scenes/util/ui/tutorial.tscn" id="4_j62u1"]
@@ -11,13 +10,9 @@
 [node name="Game" type="Node2D" unique_id=1198782607]
 script = ExtResource("1_cb66b")
 
-[node name="WorldManager" type="Node" parent="." unique_id=1504556470 node_paths=PackedStringArray("tilemap", "noise")]
+[node name="WorldManager" type="Node" parent="." unique_id=1504556470 node_paths=PackedStringArray("tilemap")]
 script = ExtResource("2_5aext")
 tilemap = NodePath("../TileMapLayer")
-noise = NodePath("../NoiseManager")
-
-[node name="NoiseManager" type="Node" parent="." unique_id=1729893363]
-script = ExtResource("3_3w2km")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1684153973]
 anchor_mode = 0
