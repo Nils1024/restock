@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bcj7gu0f5ydo3" path="res://assets/scenes/util/ui/shop.tscn" id="3_5gf0t"]
 [ext_resource type="PackedScene" uid="uid://bhgwbjl2xl0g6" path="res://assets/scenes/util/ui/ingame_menu.tscn" id="3_cb5na"]
 [ext_resource type="PackedScene" uid="uid://bdtulldwsqkq4" path="res://assets/scenes/util/ui/tutorial.tscn" id="4_j62u1"]
+[ext_resource type="Script" uid="uid://x6hfucjeetrf" path="res://assets/scripts/game/CameraManager.gd" id="4_wfsp4"]
 
 [node name="Game" type="Node2D" unique_id=1198782607]
 script = ExtResource("1_cb66b")
@@ -19,9 +20,11 @@ noise = NodePath("../NoiseManager")
 [node name="NoiseManager" type="Node" parent="." unique_id=1729893363]
 script = ExtResource("3_3w2km")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1684153973]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1684153973 node_paths=PackedStringArray("tilemap")]
 anchor_mode = 0
 zoom = Vector2(0.1, 0.1)
+script = ExtResource("4_wfsp4")
+tilemap = NodePath("../TileMapLayer")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=778820462]
 

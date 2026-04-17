@@ -15,3 +15,6 @@ class World:
 	const CHUNK_SIZE: int = 32
 	const MIN_WORLD_COORD: int = -3000
 	const MAX_WORLD_COORD: int = 3000
+	
+class Camera:
+	const DRAG_THRESHOLD: int = 10
