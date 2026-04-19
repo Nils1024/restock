@@ -18,6 +18,13 @@ func update_bounds() -> void:
 	limit_right = int(max_pos.x)
 	limit_bottom = int(max_pos.y)
 	
+	_clamp_to_limits()
+	
+func _clamp_to_limits() -> void:
+	var half_view = get_viewport_rect().size / 2 / zoom
+	position.x = clamp(position.x, limit_left + half_view.x, limit_right - half_view.x)
+	position.y = clamp(position.y, limit_top + half_view.y, limit_bottom - half_view.y)
+	
 func get_chunk_radius() -> int:
 	var viewport_size = get_viewport_rect().size
 	var tile_size = tilemap.tile_set.tile_size
@@ -39,6 +46,7 @@ func handle_input(event: InputEvent) -> void:
 	# Camera move for trackpad	
 	if event is InputEventPanGesture:
 		position += event.delta * get_move_speed()
+		_clamp_to_limits()
 	
 	# Camera move and click for mouse
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -65,6 +73,7 @@ func handle_input(event: InputEvent) -> void:
 			
 		if _is_dragging:
 			position -= event.relative * get_move_speed()
+			_clamp_to_limits()
 		
 	if event is InputEventMagnifyGesture:
 		_handle_trackpad_zoom(event)
@@ -77,18 +86,18 @@ func _handle_trackpad_zoom(event: InputEvent) -> void:
 		_is_magnifying = true
 		return
 		
-		var delta = event.factor / _last_magnify_factor
-		_last_magnify_factor = event.factor
-		zoom_camera(1.0 / delta)
+	var delta = event.factor / _last_magnify_factor
+	_last_magnify_factor = event.factor
+	zoom_camera(1.0 / delta)
 		
 	if event.factor == 1.0:
 		_is_magnifying = false
 		_last_magnify_factor = 1.0
 		
 func _handle_zoom(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("zoom_in"):
+	if event.is_action_pressed("zoom_in"):
 		zoom_camera(1.0 / 1.5)
-	if Input.is_action_just_pressed("zoom_out"):
+	if event.is_action_pressed("zoom_out"):
 		zoom_camera(1.5)
 		
 func zoom_camera(factor) -> void:
@@ -103,3 +112,4 @@ func zoom_camera(factor) -> void:
 	var mouse_after = get_global_mouse_position()
 	
 	position += (mouse_before - mouse_after)
+	_clamp_to_limits()

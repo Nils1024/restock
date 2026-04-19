@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b1lb51bdxqlc4" path="res://assets/scripts/game/Tutorial.gd" id="4_pw37s"]
 [ext_resource type="Script" uid="uid://x6hfucjeetrf" path="res://assets/scripts/game/CameraManager.gd" id="4_wfsp4"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="10_k2t1h"]
+[ext_resource type="TileSet" uid="uid://t7ano3486mjl" path="res://assets/tilesets/Buildings.tres" id="11_phsto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2t1h"]
 bg_color = Color(1, 1, 1, 1)
@@ -39,14 +40,15 @@ script = ExtResource("4_pw37s")
 textbox = NodePath("../UI/Textbox")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1684153973 node_paths=PackedStringArray("tilemap")]
-anchor_mode = 0
 zoom = Vector2(0.1, 0.1)
 script = ExtResource("4_wfsp4")
 tilemap = NodePath("../Ground")
 
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("10_k2t1h")]
 
-[node name="UI" type="Node" parent="." unique_id=674459873]
+[node name="UI" type="Control" parent="." unique_id=1154497513]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Shop" parent="UI" unique_id=628358160 instance=ExtResource("3_5gf0t")]
 
@@ -88,3 +90,4 @@ visible = false
 tile_set = ExtResource("2_dis88")
 
 [node name="Buildings" type="TileMapLayer" parent="." unique_id=1047407720]
+tile_set = ExtResource("11_phsto")

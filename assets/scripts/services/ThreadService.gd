@@ -43,9 +43,9 @@ func schedule_task(task: Callable, on_complete: Callable) -> int:
 	return job.id
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_result_mutex.lock()
-	var ready= _results.duplicate()
+	var ready = _results.duplicate()
 	_results.clear()
 	_result_mutex.unlock()
 	

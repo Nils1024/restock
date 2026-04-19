@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var cam = $Camera2D
-@onready var tilemap = $TileMapLayer
+@onready var tilemap = $Ground
 @onready var world_manager: WorldManager = $WorldManager
 
 var _last_center: Vector2i = Vector2i.ZERO
@@ -13,7 +13,7 @@ func _ready() -> void:
 	$FadeTransition/AnimationPlayer.play("Fade_out")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var center = tilemap.local_to_map(cam.get_screen_center_position())
 	var zoom_changed = abs(cam.zoom.x - _last_zoom) > 0.0001
 	
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		_last_zoom = cam.zoom.x
 		cam.update_bounds()
 		
-func _input(event: InputEvent) -> void:
+func _unhandled_input (event: InputEvent) -> void:
 	# Ingame menu
 	if Input.is_action_just_pressed("esc"):
 		$UI/IngameMenu.visible = not $UI/IngameMenu.visible

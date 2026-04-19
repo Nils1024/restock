@@ -1,10 +1,10 @@
 class_name GameSaveData
 
-var seed: int = 123
+var generation_seed: int = 123
 
 func to_dict() -> Dictionary:
 	return {
-		"seed": seed
+		"seed": generation_seed
 	}
 
 static func from_dict(dict: Dictionary) -> GameSaveData:

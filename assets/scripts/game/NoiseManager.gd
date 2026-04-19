@@ -15,10 +15,10 @@ func _ready() -> void:
 	temperature = _create_noise(base_seed + 1, 0.02, 3)
 	humidity = _create_noise(base_seed + 2, 0.025, 3)
 
-func _create_noise(seed: int, frequency: float, octaves: int) -> Noise:
+func _create_noise(noise_seed: int, frequency: float, octaves: int) -> Noise:
 	var noise: Noise = FastNoiseLite.new() 
 	
-	noise.seed = seed
+	noise.seed = noise_seed
 	noise.frequency = frequency
 	noise.fractal_octaves = octaves
 	noise.fractal_gain = 0.5

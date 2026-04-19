@@ -21,7 +21,7 @@ func _ready() -> void:
 	hide_textbox()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match _current_state:
 		State.READING:
 			if Input.is_action_just_pressed("ui_accept"):
