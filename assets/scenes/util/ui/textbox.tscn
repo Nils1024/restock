@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdtulldwsqkq4"]
 
-[ext_resource type="Script" uid="uid://djyud2ustj6y2" path="res://assets/scripts/ui/tutorial_textbox.gd" id="1_vpp3o"]
+[ext_resource type="Script" uid="uid://djyud2ustj6y2" path="res://assets/scripts/ui/textbox.gd" id="1_vpp3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpp3o"]
 bg_color = Color(1, 1, 1, 1)
@@ -13,7 +13,7 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4wvs"]
 bg_color = Color(0.16078432, 1, 1, 1)
 
-[node name="Tutorial" type="CanvasLayer" unique_id=2001957481]
+[node name="Textbox" type="CanvasLayer" unique_id=2001957481]
 script = ExtResource("1_vpp3o")
 
 [node name="TextboxContainer" type="MarginContainer" parent="." unique_id=1374476232]

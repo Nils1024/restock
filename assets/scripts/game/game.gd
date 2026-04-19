@@ -12,8 +12,8 @@ func _ready() -> void:
 	cam.update_bounds()
 	
 	await UtilityService.wait(1)
-	$UI/Tutorial.offset = Vector2(400, 200)
-	$UI/Tutorial.add_text_to_queue("Welcome to Restock")
+	$UI/Textbox.offset = Vector2(400, 200)
+	$UI/Textbox.add_text_to_queue("Welcome to Restock")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
