@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bdtulldwsqkq4"]
 
 [ext_resource type="Script" uid="uid://djyud2ustj6y2" path="res://assets/scripts/ui/textbox.gd" id="1_vpp3o"]
+[ext_resource type="Texture2D" uid="uid://k2nx65op0uwm" path="res://assets/images/placeholder.jpg" id="2_ea0ms"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpp3o"]
 bg_color = Color(1, 1, 1, 1)
@@ -9,9 +10,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4wvs"]
-bg_color = Color(0.16078432, 1, 1, 1)
 
 [node name="Textbox" type="CanvasLayer" unique_id=2001957481]
 script = ExtResource("1_vpp3o")
@@ -31,30 +29,36 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="TextboxContainer/MarginContainer" unique_id=663534676]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer" unique_id=1141168344]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_o4wvs")
+theme_override_constants/separation = 9
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextboxContainer/MarginContainer" unique_id=1706582555]
+[node name="TextureRect" type="TextureRect" parent="TextboxContainer/MarginContainer/HBoxContainer" unique_id=2134171434]
+layout_mode = 2
+texture = ExtResource("2_ea0ms")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextboxContainer/MarginContainer/HBoxContainer" unique_id=1706582555]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=472767013]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer/VBoxContainer" unique_id=472767013]
-layout_mode = 2
-
-[node name="Text" type="Label" parent="TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=751770146]
+[node name="Text" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=751770146]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Example"
+autowrap_mode = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TextboxContainer/MarginContainer/VBoxContainer" unique_id=732484503]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=732484503]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="ContinueButton" type="Button" parent="TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=523588703]
+[node name="ContinueButton" type="Button" parent="TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=523588703]
 layout_mode = 2
 text = "Continue"
 
-[connection signal="pressed" from="TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer2/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="TextboxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ContinueButton" to="." method="_on_continue_button_pressed"]

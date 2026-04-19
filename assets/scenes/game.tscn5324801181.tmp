@@ -28,7 +28,7 @@ script = ExtResource("1_cb66b")
 
 [node name="WorldManager" type="Node" parent="." unique_id=1504556470 node_paths=PackedStringArray("tilemap", "noise")]
 script = ExtResource("2_5aext")
-tilemap = NodePath("../Ground")
+tilemap = NodePath("../TileMapLayer")
 noise = NodePath("../NoiseManager")
 
 [node name="NoiseManager" type="Node" parent="." unique_id=1729893363]
@@ -42,7 +42,7 @@ textbox = NodePath("../UI/Textbox")
 anchor_mode = 0
 zoom = Vector2(0.1, 0.1)
 script = ExtResource("4_wfsp4")
-tilemap = NodePath("../Ground")
+tilemap = NodePath("../TileMapLayer")
 
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("10_k2t1h")]
 
@@ -84,7 +84,5 @@ text = "$"
 [node name="IngameMenu" parent="UI" unique_id=1709871851 instance=ExtResource("3_cb5na")]
 visible = false
 
-[node name="Ground" type="TileMapLayer" parent="." unique_id=653317436]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=653317436]
 tile_set = ExtResource("2_dis88")
-
-[node name="Buildings" type="TileMapLayer" parent="." unique_id=1047407720]

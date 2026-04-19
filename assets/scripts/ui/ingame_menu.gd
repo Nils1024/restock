@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 func _on_close_pressed() -> void:
 	visible = not visible

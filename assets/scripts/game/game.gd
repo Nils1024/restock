@@ -10,10 +10,7 @@ var _last_zoom: float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cam.update_bounds()
-	
-	await UtilityService.wait(1)
-	$UI/Textbox.offset = Vector2(400, 200)
-	$UI/Textbox.add_text_to_queue("Welcome to Restock")
+	$FadeTransition/AnimationPlayer.play("Fade_out")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
