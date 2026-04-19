@@ -100,15 +100,25 @@ func _unload_chunk(chunk_pos: Vector2i) -> void:
 	
 func _get_tile_atlas(x, y) -> Vector2i:
 	var elevation = noise.get_elevation(x, y)
+	var temperature = noise.get_temperature(x, y)
+	var humidity = noise.get_humidity(x, y)
 	
-	if elevation < -0.4:
-		return Vector2i(2,0)
-	elif _is_near_water(x,y):
-		return Vector2i(1,0)
-	elif elevation < 0.5:
-		return Vector2i(0,0)
+	if elevation < -0.6:
+		return Vector2i(1, 1) # Deepwater
+	elif elevation < -0.4:
+		return Vector2i(0, 1) # Water
+	elif elevation >= 0.65:
+		return Vector2i(1, 2) # Snow (Mountain)
+	elif elevation >= 0.5:
+		return Vector2i(0, 2) # Stone (Mountain)
+	elif _is_near_water(x, y):
+		return Vector2i(0, 3) # Sand
+	elif temperature > 0.3 and humidity < -0.2:
+		return Vector2i(0, 3) # Sand (Desert)
+	elif temperature < -0.3:
+		return Vector2i(1, 2) # Snow
 	else:
-		return Vector2i(3,0)
+		return Vector2i(0, 0) # Grass
 	
 func _is_near_water(x,y) -> bool:
 	for dx in [-1, 0, 1]:
