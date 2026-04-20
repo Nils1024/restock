@@ -12,6 +12,8 @@ var current_button_type = null
 func _ready() -> void:
 	$FadeTransition.show()
 	$FadeTransition/AnimationPlayer.play("Fade_out")
+	
+	# TODO: Fetch save data and generate save cards
 
 
 func _on_timer_timeout() -> void:
@@ -38,3 +40,10 @@ func start_fade_in_transition():
 	$FadeTransition.show()
 	$FadeTransition/Timer.start()
 	$FadeTransition/AnimationPlayer.play("Fade_in")
+
+func _on_new_game_pressed() -> void:
+	$MarginContainer.visible = true
+	
+
+func _on_cancel_new_game_pressed() -> void:
+	$MarginContainer.visible = false

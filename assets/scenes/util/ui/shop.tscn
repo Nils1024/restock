@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bcj7gu0f5ydo3"]
 
 [ext_resource type="Texture2D" uid="uid://k2nx65op0uwm" path="res://assets/images/placeholder.jpg" id="1_2nivp"]
+[ext_resource type="Script" uid="uid://dobs4djjyb7us" path="res://assets/scripts/game/shop/Shop.gd" id="1_bhf7g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhb2s"]
 bg_color = Color(1, 1, 1, 1)
@@ -8,6 +9,7 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 
 [node name="Shop" type="CanvasLayer" unique_id=1641117209]
+script = ExtResource("1_bhf7g")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1117592552]
 offset_left = 278.0
@@ -35,19 +37,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="TextureRect3" type="TextureRect" parent="MarginContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=43182056]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1870139512]
 layout_mode = 2
 texture = ExtResource("1_2nivp")
 expand_mode = 3
 stretch_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=618797487]
-layout_mode = 2
-texture = ExtResource("1_2nivp")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1870139512]
 layout_mode = 2
 texture = ExtResource("1_2nivp")
 expand_mode = 3

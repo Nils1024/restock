@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c5cwx2s4t6kut"]
+
+[ext_resource type="Script" uid="uid://d0372e3j1fl6b" path="res://assets/scripts/game/shop/ShopItemCard.gd" id="1_wqduy"]
+
+[node name="ShopItemCard" type="PanelContainer" unique_id=527752103]
+script = ExtResource("1_wqduy")
