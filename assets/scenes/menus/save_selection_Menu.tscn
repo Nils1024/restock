@@ -6,6 +6,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjmsl"]
 bg_color = Color(0.33034465, 0.33588725, 0.3182867, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="SaveSelectionMenu" type="Node2D" unique_id=260701952]
 script = ExtResource("1_wc18j")
@@ -17,26 +21,17 @@ offset_right = 1171.0
 offset_bottom = 672.0
 color = Color(0.42745098, 0.5529412, 0.84705883, 1)
 
-[node name="SaveCards" type="Control" parent="." unique_id=779337484]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=272979126]
+offset_left = 216.0
+offset_top = 204.0
+offset_right = 787.0
+offset_bottom = 380.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SaveCards" unique_id=272979126]
-layout_mode = 0
-offset_left = 129.0
-offset_top = 153.0
-offset_right = 777.0
-offset_bottom = 504.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveCards/ScrollContainer" unique_id=590214802]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=590214802]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 216
+theme_override_constants/separation = 6
 
-[node name="SaveCard" parent="SaveCards/ScrollContainer/HBoxContainer" unique_id=798609909 instance=ExtResource("2_mjmsl")]
+[node name="SaveCard" parent="ScrollContainer/HBoxContainer" unique_id=798609909 instance=ExtResource("2_mjmsl")]
 layout_mode = 2
 metadata/Text = "Save 1"
 
@@ -51,8 +46,8 @@ text = "+ New Game"
 visible = false
 offset_left = 277.0
 offset_top = 106.0
-offset_right = 845.0
-offset_bottom = 514.0
+offset_right = 856.0
+offset_bottom = 477.0
 
 [node name="Panel" type="Panel" parent="MarginContainer" unique_id=1811798304]
 layout_mode = 2
@@ -67,31 +62,47 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer" unique_id=112178961]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1540889001]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=60270351]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "New Game"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=594659035]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=146717803]
 layout_mode = 2
+columns = 3
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=191714734]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=191714734]
 layout_mode = 2
 text = "Seed:"
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1448674343]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=1448674343]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/VBoxContainer" unique_id=159256552]
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=682339866]
 layout_mode = 2
+text = "Randomize"
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=167778720]
+[node name="Label2" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=167778720]
 layout_mode = 2
 text = "Name:"
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=804677684]
+[node name="LineEdit2" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=804677684]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=766969735]
+layout_mode = 2
+text = "Randomize"
+
+[node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1685591348]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1364128682]
 layout_mode = 2
@@ -119,7 +130,7 @@ offset_bottom = 632.0
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=216372829]
 
-[connection signal="card_pressed" from="SaveCards/ScrollContainer/HBoxContainer/SaveCard" to="." method="_on_save_card_card_pressed"]
+[connection signal="card_pressed" from="ScrollContainer/HBoxContainer/SaveCard" to="." method="_on_save_card_card_pressed"]
 [connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer/CancelNewGame" to="." method="_on_cancel_new_game_pressed"]
 [connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]
