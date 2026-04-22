@@ -1,13 +1,12 @@
 extends Node
 
+var config = ConfigFile.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-func save(data: GameSaveData) -> void:
-	var config = ConfigFile.new()
 	config.load(Const.config.CONFIG_FILE)
-	
+
+func new(data: GameSaveData) -> void:
 	var dict = data.to_dict()
 	
 	for key in dict.keys():
@@ -19,7 +18,10 @@ func save(data: GameSaveData) -> void:
 	
 	config.save(Const.config.CONFIG_FILE)
 	
-func load() -> GameSaveData:
+func update(save_id: int, new_data: GameSaveData) -> void:
+	pass
+	
+func load(save_id: int) -> GameSaveData:
 	var config = ConfigFile.new()
 	
 	if config.load(Const.config.CONFIG_FILE) != OK:
@@ -38,3 +40,6 @@ func load() -> GameSaveData:
 		)
 	
 	return GameSaveData.from_dict(dict)
+	
+func delete(save_id: int) -> void:
+	pass

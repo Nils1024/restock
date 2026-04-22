@@ -21,7 +21,7 @@ var _next_id: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in Const.config.MAX_THREADS:
+	for i in Const.Config.MAX_THREADS:
 		var thread: Thread = Thread.new()
 		_threads.append(thread)
 		thread.start(_worker)

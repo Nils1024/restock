@@ -1,6 +1,6 @@
 extends Node
 
-class config:
+class Config:
 	const CONFIG_FILE: String = "user://settings.cfg"
 	const SETTINGS_SECTION_KEY: String = "settings"
 	
@@ -18,3 +18,15 @@ class World:
 	
 class Camera:
 	const DRAG_THRESHOLD: int = 10
+	
+class Generation:
+	const ADJECTIVES = [
+			"Industrial", "Automated", "Modular", "Efficient", "Advanced", "Intigrated",
+			"Dynamic", "Scalable", "Optimized", "Distributed"
+		]
+		
+	const NOUNS = [
+		"Factory", "Network", "Hub", "System", "Chain", "Complex", "Grid", "Plant", "Facility"
+	]
+
+	const SUFFIXES = ["", " Prime", " X"]

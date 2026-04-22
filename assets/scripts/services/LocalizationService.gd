@@ -10,9 +10,9 @@ func _ready() -> void:
 	
 func load_language():
 	var config = ConfigFile.new()
-	config.load(Const.config.CONFIG_FILE)
+	config.load(Const.Config.CONFIG_FILE)
 	
-	var lang = config.get_value(Const.config.SETTINGS_SECTION_KEY, Const.config.LANGUAGE_KEY, "")
+	var lang = config.get_value(Const.Config.SETTINGS_SECTION_KEY, Const.Config.LANGUAGE_KEY, "")
 	
 	if lang == "" or not lang in supported:
 		lang = OS.get_locale().substr(0, 2)
@@ -31,6 +31,6 @@ func set_language(lang: String):
 	
 func save_language(lang: String):
 	var config = ConfigFile.new()
-	config.load(Const.config.CONFIG_FILE)
-	config.set_value(Const.config.SETTINGS_SECTION_KEY, Const.config.LANGUAGE_KEY, lang)
-	config.save(Const.config.CONFIG_FILE)
+	config.load(Const.Config.CONFIG_FILE)
+	config.set_value(Const.Config.SETTINGS_SECTION_KEY, Const.Config.LANGUAGE_KEY, lang)
+	config.save(Const.Config.CONFIG_FILE)
