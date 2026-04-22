@@ -6,6 +6,8 @@ enum ButtonType {
 	QUIT
 }
 
+@onready var StartGameButton = $VBoxContainer/CenterContainer/VBoxContainer/StartGame
+
 var current_button_type = null
 
 func _ready() -> void:
@@ -15,13 +17,17 @@ func _ready() -> void:
 	$FadeTransition/AnimationPlayer.play("Fade_out")
 	
 func _set_text_to_language() -> void:
-	$Control/StartGame.text = tr("PLAY")
+	StartGameButton.text = tr("PLAY")
 	
 func _on_start_game_pressed() -> void:
 	current_button_type = ButtonType.START
 	$FadeTransition.show()
 	$FadeTransition/Timer.start()
 	$FadeTransition/AnimationPlayer.play("Fade_in")
+
+
+func _on_help_pressed() -> void:
+	pass # Replace with function body.
 
 
 func _on_settings_pressed() -> void:
