@@ -1,6 +1,9 @@
 class_name GameSaveData
 
-var generation_seed: int = 123
+var generation_seed: int = 0
+var name: String = ""
+var money: int = 1000
+var building_data: Dictionary
 
 func to_dict() -> Dictionary:
 	return {
