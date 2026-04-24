@@ -10,6 +10,7 @@ class Config:
 class Save:
 	const SAVE_FILE: String = "user://savegames.cfg"
 	const SECTION_PREFIX = "SaveSlot_"
+	const AUTO_SAVE_PERIOD_IN_SEC = 180
 	
 class Languages:
 	const ENGLISH: String = "en"
