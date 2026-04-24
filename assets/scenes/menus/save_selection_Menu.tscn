@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_qjqap"]
 [ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/ui/save_selection_menu.gd" id="1_wc18j"]
-[ext_resource type="PackedScene" uid="uid://c51keuke5k5xc" path="res://assets/scenes/util/ui/save_card.tscn" id="2_mjmsl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjmsl"]
 bg_color = Color(0.33034465, 0.33588725, 0.3182867, 1)
@@ -27,13 +26,9 @@ offset_top = 204.0
 offset_right = 787.0
 offset_bottom = 380.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=590214802]
+[node name="SaveCardContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=590214802]
 layout_mode = 2
 theme_override_constants/separation = 6
-
-[node name="SaveCard" parent="ScrollContainer/HBoxContainer" unique_id=798609909 instance=ExtResource("2_mjmsl")]
-layout_mode = 2
-metadata/Text = "Save 1"
 
 [node name="NewGame" type="Button" parent="." unique_id=1627351557]
 offset_left = 862.0
@@ -134,7 +129,6 @@ offset_bottom = 632.0
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=216372829]
 
-[connection signal="card_pressed" from="ScrollContainer/HBoxContainer/SaveCard" to="." method="_on_save_card_card_pressed"]
 [connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/SeedRandBtn" to="." method="_randomize_seed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/NameRandBtn" to="." method="_randomize_name"]

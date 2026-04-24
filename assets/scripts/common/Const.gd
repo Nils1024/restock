@@ -7,6 +7,10 @@ class Config:
 	const LANGUAGE_KEY: String = "language"
 	const MAX_THREADS: int = 4
 	
+class Save:
+	const SAVE_FILE: String = "user://savegames.cfg"
+	const SECTION_PREFIX = "SaveSlot_"
+	
 class Languages:
 	const ENGLISH: String = "en"
 	const GERMAN: String = "de"
