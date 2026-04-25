@@ -2,13 +2,15 @@ extends PanelContainer
 
 class_name ShopItemCard
 
-signal item_purchased(item: ShopItem)
+signal item_clicked(item: ShopItem)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var item: ShopItem
+
+func setup(item: ShopItem) -> void:
+	self.item = item
+	$VBoxContainer/PriceContainer/Price.text = str(item.price)
+	$NameContainer/Name.text = item.label
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_buy_button_pressed() -> void:
+	item_clicked.emit(item)

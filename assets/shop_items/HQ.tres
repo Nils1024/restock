@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://bu1lwjlmdwf7l"]
+
+[ext_resource type="Script" uid="uid://b3cbe3r04ijnp" path="res://assets/scripts/game/shop/ShopItem.gd" id="1_plp8i"]
+
+[resource]
+script = ExtResource("1_plp8i")
+id = "0"
+label = "HQ"
+price = 100
+metadata/_custom_type_script = "uid://b3cbe3r04ijnp"
