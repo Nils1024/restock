@@ -11,7 +11,7 @@ func _get_section(save_id: int) -> String:
 	return "%s%d" % [Const.Save.SECTION_PREFIX, save_id]
 
 
-func create(	save_id: int, data: GameSaveData) -> Error:
+func create(save_id: int, data: GameSaveData) -> Error:
 	var section: String = _get_section(save_id)
 	
 	if _saveFile.has_section(section):

@@ -13,6 +13,7 @@ const saveCard = preload("res://assets/scenes/util/ui/save_card.tscn")
 @onready var saveCardContainer = $ScrollContainer/SaveCardContainer
 
 var current_button_type = null
+var data: GameSaveData = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,11 +42,16 @@ func _on_load_button_pressed() -> void:
 func _on_timer_timeout() -> void:
 	match current_button_type:
 		ButtonType.SAVE_1:
-			get_tree().change_scene_to_file("res://assets/scenes/game.tscn")
-
+			var scene: PackedScene = load("res://assets/scenes/game.tscn")
+			var instance: Game = scene.instantiate()
+			instance.data = data
+			get_tree().root.add_child(instance)
+			get_tree().current_scene.queue_free()
+			get_tree().current_scene = instance
 
 func _on_save_card_card_pressed(save_id: int) -> void:
 	current_button_type = ButtonType.SAVE_1
+	data = DataService.load_save(save_id)
 	start_fade_in_transition()
 
 
@@ -92,20 +98,22 @@ func _on_cancel_new_game_pressed() -> void:
 
 func _on_create_new_game_pressed() -> void:
 	var save = GameSaveData.new()
+	save.id = 0
 	save.generation_seed = int(seedEdit.text)
 	save.name = nameEdit.text
-	DataService.create(0, save)
+	DataService.create(save.id, save)
 	_on_cancel_new_game_pressed()
 	_update_savecards()
-	
+
+
 func _update_savecards() -> void:
-	for 	child in saveCardContainer.get_children():
+	for child in saveCardContainer.get_children():
 		child.queue_free()
 		
 	for save in DataService.get_all():
-		print(save)
+		print(save.to_dict())
 		var card: SaveCard = saveCard.instantiate()
-		card.setup(0)
-		card.card_pressed.connect(_on_save_card_card_pressed)
+		card.setup(save.id, save.name)
+		card.load_pressed.connect(_on_save_card_card_pressed)
 		card.delete_pressed.connect(_on_save_card_delete_pressed)
 		saveCardContainer.add_child(card)
