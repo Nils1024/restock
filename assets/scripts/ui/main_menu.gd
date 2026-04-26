@@ -15,6 +15,7 @@ func _ready() -> void:
 	
 	$FadeTransition.show()
 	$FadeTransition/AnimationPlayer.play("Fade_out")
+	AudioService.create_audio(SoundEffect.SOUND_EFFECT_TYPE.IDLE_MUSIC_1)
 	
 func _set_text_to_language() -> void:
 	StartGameButton.text = tr("PLAY")

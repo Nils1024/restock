@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://n8sitqy0733p"]
 
 [ext_resource type="Script" uid="uid://bko61wpu3nd41" path="res://assets/scripts/services/AudioService/AudioService.gd" id="1_33ab7"]
+[ext_resource type="Script" uid="uid://3yxx7u6hrbq0" path="res://assets/scripts/services/AudioService/SoundEffect.gd" id="2_1io4a"]
+[ext_resource type="Resource" uid="uid://t2flxeqqdso7" path="res://assets/data/audio_data/MUSIC_1.tres" id="3_fs7sp"]
 
 [node name="AudioService" type="Node2D" unique_id=1343796163]
 script = ExtResource("1_33ab7")
+sound_effects = Array[ExtResource("2_1io4a")]([ExtResource("3_fs7sp")])
