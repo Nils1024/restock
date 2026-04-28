@@ -19,8 +19,7 @@ func _enter_tree() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(data.to_dict())
-	
+	AudioService.stop_audio(SoundEffect.SOUND_EFFECT_TYPE.IDLE_MUSIC_1, true, 3)
 	world_manager.noise.initialize(data.generation_seed)
 	_save_timer.wait_time = Const.Save.AUTO_SAVE_PERIOD_IN_SEC
 	_save_timer.one_shot = false
@@ -29,13 +28,15 @@ func _ready() -> void:
 	_save_timer.start()
 	cam.update_bounds()
 	
+	# Tutorial
 	if not data.tutorial_played:
 		$Tutorial.start()
-		$Tutorial.on_tutorial_complete.connect(func() -> void: 
+		$Tutorial.tutorial_completed.connect(func() -> void: 
 			data.tutorial_played = true	
 			_on_save_timer_timeout()
 		)
 	
+	# Transition
 	$FadeTransition/AnimationPlayer.play("Fade_out")
 
 
