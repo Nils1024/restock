@@ -20,6 +20,7 @@ func _load_items() -> void:
 		if item:
 			shop_items.append(item)
 
+
 func _fill_shop_with_items() -> void:
 	for child in h_box.get_children():
 		child.queue_free()
@@ -27,9 +28,9 @@ func _fill_shop_with_items() -> void:
 	for item in shop_items:
 		var card: ShopItemCard = ShopCard.instantiate()
 		card.setup(item)
-		card.item_clicked.connect(_on_item_purchased)
+		card.item_clicked.connect(_on_item_clicked)
 		h_box.add_child(card)
 
 
-func _on_item_purchased(item: ShopItem) -> void:
+func _on_item_clicked(item: ShopItem) -> void:
 	pass

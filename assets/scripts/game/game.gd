@@ -29,6 +29,13 @@ func _ready() -> void:
 	_save_timer.start()
 	cam.update_bounds()
 	
+	if not data.tutorial_played:
+		$Tutorial.start()
+		$Tutorial.on_tutorial_complete.connect(func() -> void: 
+			data.tutorial_played = true	
+			_on_save_timer_timeout()
+		)
+	
 	$FadeTransition/AnimationPlayer.play("Fade_out")
 
 

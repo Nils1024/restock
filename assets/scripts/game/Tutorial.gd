@@ -2,6 +2,8 @@ extends Node
 
 class_name Tutorial
 
+signal on_tutorial_complete
+
 @export var textbox: Node
 
 var tutorial_text = [
@@ -17,11 +19,13 @@ func _ready() -> void:
 	textbox.text_finished.connect(_on_text_finished)
 	
 	await UtilityService.wait(1)
+	
+func start() -> void:
 	_show_next_step()
 	
 func _show_next_step() -> void:
 	if current_step >= tutorial_text.size():
-		_on_tutorial_complete()
+		emit_signal("on_tutorial_complete")
 		return
 		
 	textbox.add_text_to_queue(tutorial_text[current_step]["text"])
@@ -31,7 +35,3 @@ func _show_next_step() -> void:
 func _on_text_finished() -> void:
 	await UtilityService.wait(0.5)
 	_show_next_step()
-	
-func _on_tutorial_complete() -> void:
-	pass
-	
