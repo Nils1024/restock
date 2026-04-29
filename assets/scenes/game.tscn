@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b1lb51bdxqlc4" path="res://assets/scripts/game/Tutorial.gd" id="4_pw37s"]
 [ext_resource type="Script" uid="uid://x6hfucjeetrf" path="res://assets/scripts/game/CameraManager.gd" id="4_wfsp4"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="10_k2t1h"]
+[ext_resource type="Texture2D" uid="uid://sfy6v4ppj1qt" path="res://assets/images/avatars/Avatar Placeholder.svg" id="10_pkhv0"]
 [ext_resource type="TileSet" uid="uid://t7ano3486mjl" path="res://assets/tilesets/Buildings.tres" id="11_phsto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2t1h"]
@@ -23,6 +24,16 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkhv0"]
+bg_color = Color(1, 1, 1, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i358u"]
+grow_end = 0.0
 
 [node name="Game" type="Node2D" unique_id=1198782607]
 script = ExtResource("1_cb66b")
@@ -88,9 +99,54 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "$"
 
 [node name="Textbox" parent="UI" unique_id=1188621439 instance=ExtResource("4_j62u1")]
+visible = false
 
 [node name="IngameMenu" parent="UI" unique_id=1709871851 instance=ExtResource("3_cb5na")]
 visible = false
+
+[node name="Profil" type="CanvasLayer" parent="UI" unique_id=415555636]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Profil" unique_id=1295134195]
+offset_right = 190.0
+offset_bottom = 62.0
+
+[node name="Panel" type="Panel" parent="UI/Profil/MarginContainer" unique_id=1912707797]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pkhv0")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Profil/MarginContainer" unique_id=1078847701]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Profil/MarginContainer/MarginContainer" unique_id=1330061902]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer" unique_id=1581433993]
+layout_mode = 2
+texture = ExtResource("10_pkhv0")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer" unique_id=1154171394]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=809501876]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Company Name"
+
+[node name="HSeparator" type="HSeparator" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1785364429]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_i358u")
+
+[node name="Label2" type="Label" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=199915320]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "1 / 100 XP"
+horizontal_alignment = 1
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=653317436]
 tile_set = ExtResource("2_dis88")

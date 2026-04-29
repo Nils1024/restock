@@ -6,15 +6,16 @@ signal tutorial_completed
 
 @export var textbox: Node
 
+var assistant_speaking: CompressedTexture2D = load("res://assets/images/tutorial/Tutor Placeholder.svg")
 var tutorial_text = [
-	{"text": "Hi, it looks like you are our new manager.", "image": null},
-	{"text": "I'm Anna, your Assistant. I try to help you as much as I can.", "image": null},
-	{"text": "We want to expand to new territory and we need you for this task.", "image": null},
-	{"text": "Firstly, we need a HQ where we operate everything from. Click on the Shop and place it.", "image": null},
-	{"text": "Great job! Now that we have a HQ we should start with our first factory!", "image": null},
-	{"text": "See how easy it is. Now we need a consumer.", "image": null},
-	{"text": "Lets connect them. For this click on the street symbol in the shop and choose a fitting street.", "image": null},
-	{"text": "Incredible! You are going to be a great manager. Continue to build more factories and consumers so your company makes more profit.", "image": null},
+	{"text": "Hi, it looks like you are our new manager.", "image": assistant_speaking},
+	{"text": "I'm Anna, your Assistant. I try to help you as much as I can.", "image": assistant_speaking},
+	{"text": "We want to expand to new territory and we need you for this task.", "image": assistant_speaking},
+	{"text": "Firstly, we need a HQ where we operate everything from. Click on the Shop and place it.", "image": assistant_speaking},
+	{"text": "Great job! Now that we have a HQ we should start with our first factory!", "image": assistant_speaking},
+	{"text": "See how easy it is. Now we need a consumer.", "image": assistant_speaking},
+	{"text": "Lets connect them. For this click on the street symbol in the shop and choose a fitting street.", "image": assistant_speaking},
+	{"text": "Incredible! You are going to be a great manager. Continue to build more factories and consumers so your company makes more profit.", "image": assistant_speaking},
 ]
 var current_step: int = 0
 
@@ -27,6 +28,7 @@ func _ready() -> void:
 	await UtilityService.wait(1)
 	
 func start() -> void:
+	textbox.visible = true
 	_show_next_step()
 	
 func _show_next_step() -> void:
