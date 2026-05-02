@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_qjqap"]
 [ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/ui/save_selection_menu.gd" id="1_wc18j"]
+[ext_resource type="Texture2D" uid="uid://sfy6v4ppj1qt" path="res://assets/images/avatars/Avatar Placeholder.svg" id="2_mjmsl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjmsl"]
 bg_color = Color(0.33034465, 0.33588725, 0.3182867, 1)
@@ -38,7 +39,6 @@ offset_bottom = 589.0
 text = "+ New Game"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=392042630]
-visible = false
 z_index = 2
 offset_left = 277.0
 offset_top = 106.0
@@ -96,6 +96,61 @@ placeholder_text = "Name"
 [node name="NameRandBtn" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=766969735]
 layout_mode = 2
 text = "Randomize"
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=828632997]
+layout_mode = 2
+text = "Avatar:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=1707734841]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer" unique_id=979373561]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/HBoxContainer" unique_id=2050791937]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mjmsl")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/HBoxContainer" unique_id=906648488]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mjmsl")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/HBoxContainer" unique_id=794863294]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mjmsl")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/HBoxContainer" unique_id=51701116]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mjmsl")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect5" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/HBoxContainer" unique_id=239218051]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mjmsl")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer" unique_id=421683165]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/HBoxContainer2" unique_id=99088809]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mjmsl")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1685591348]
 layout_mode = 2

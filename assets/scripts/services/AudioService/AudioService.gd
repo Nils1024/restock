@@ -9,7 +9,7 @@ func _ready() -> void:
 		sound_effect_dict[sound_effect.type] = sound_effect
 
 
-func create_2d_audio_at_location(location: Vector2i, type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+func create_2d_audio_at_location(location: Vector2i, type: SoundEffect.SOUND_EFFECT_TYPE, auto_restart: bool = false) -> void:
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		var new_2d_audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
@@ -18,8 +18,13 @@ func create_2d_audio_at_location(location: Vector2i, type: SoundEffect.SOUND_EFF
 		new_2d_audio.stream = sound_effect.sound_effect
 		new_2d_audio.volume_db = sound_effect.volume
 		new_2d_audio.set_meta("type", type)
-		new_2d_audio.finished.connect(new_2d_audio.queue_free)
+		
+		if auto_restart:
+			new_2d_audio.finished.connect(new_2d_audio.play)
+		else:
+			new_2d_audio.finished.connect(new_2d_audio.queue_free)
 		new_2d_audio.play()
+		
 	else:
 		push_warning("AudioService - Failed to find audio for: ", type)
 

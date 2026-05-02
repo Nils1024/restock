@@ -1,14 +1,19 @@
 [gd_scene format=3 uid="uid://c5cwx2s4t6kut"]
 
 [ext_resource type="Script" uid="uid://d0372e3j1fl6b" path="res://assets/scripts/game/shop/ShopItemCard.gd" id="1_wqduy"]
-[ext_resource type="Texture2D" uid="uid://b5d86uris7den" path="res://icon.svg" id="2_a6k5a"]
+[ext_resource type="Texture2D" uid="uid://df75xrj2bie8a" path="res://icon.svg" id="2_a6k5a"]
 
 [node name="ShopItemCard" type="PanelContainer" unique_id=527752103]
+custom_minimum_size = Vector2(88, 88)
+offset_right = 96.0
+offset_bottom = 96.0
 script = ExtResource("1_wqduy")
 
 [node name="BuyButton" type="TextureButton" parent="." unique_id=846959447]
 layout_mode = 2
 texture_normal = ExtResource("2_a6k5a")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="NameContainer" type="VBoxContainer" parent="." unique_id=2065110781]
 layout_mode = 2
