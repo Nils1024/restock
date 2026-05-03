@@ -10,6 +10,8 @@ var _save_id: int
 func setup(save_id: int, text: String):
 	_save_id = save_id
 	$MarginContainer/VBoxContainer/Control/Label.text = text
+	custom_minimum_size = Vector2i(128, 128)
+	size = Vector2i(128, 128)
 
 
 func _on_save_button_pressed() -> void:

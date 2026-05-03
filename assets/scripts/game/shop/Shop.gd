@@ -33,4 +33,4 @@ func _fill_shop_with_items() -> void:
 
 
 func _on_item_clicked(item: ShopItem) -> void:
-	pass
+	SimpleLogger.trace("Item clicked: %s" % item)

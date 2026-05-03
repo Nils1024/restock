@@ -64,6 +64,8 @@ size_flags_vertical = 3
 y_sort_enabled = true
 layout_mode = 2
 texture = ExtResource("2_gmij2")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=334888404]
 layout_mode = 2

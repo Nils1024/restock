@@ -15,9 +15,11 @@ offset_left = 278.0
 offset_top = 545.0
 offset_right = 897.0
 offset_bottom = 649.0
+mouse_force_pass_scroll_events = false
 
 [node name="Panel" type="Panel" parent="MarginContainer" unique_id=1843477600]
 layout_mode = 2
+mouse_force_pass_scroll_events = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhb2s")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1317229888]

@@ -66,6 +66,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Shop" parent="UI" unique_id=628358160 instance=ExtResource("3_5gf0t")]
 
