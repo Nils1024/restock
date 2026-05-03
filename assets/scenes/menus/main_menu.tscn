@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfecg4ehkgkbl"]
 
-[ext_resource type="Script" uid="uid://ck1jrbjfbqxp2" path="res://assets/scripts/main_menu.gd" id="1_uu6ob"]
+[ext_resource type="Script" uid="uid://ck1jrbjfbqxp2" path="res://assets/scripts/ui/main_menu.gd" id="1_uu6ob"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="2_a1fdk"]
 
 [node name="MainMenu" type="Node2D" unique_id=753076020]
@@ -13,44 +13,77 @@ offset_right = 1294.0
 offset_bottom = 759.0
 color = Color(0.4267365, 0.55399954, 0.84646714, 1)
 
-[node name="Control" type="Control" parent="." unique_id=255956901]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 16.0
-offset_bottom = 16.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=786750683]
+offset_left = 758.0
+offset_top = 146.0
+offset_right = 1335.0
+offset_bottom = 750.0
 
-[node name="StartGame" type="Button" parent="Control" unique_id=425284179]
-layout_mode = 0
-offset_left = 442.0
-offset_top = 194.0
-offset_right = 645.0
-offset_bottom = 255.0
+[node name="Control" type="SubViewport" parent="SubViewportContainer" unique_id=243580433]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="ColorRect3" type="ColorRect" parent="SubViewportContainer/Control" unique_id=246791419]
+offset_left = 230.0
+offset_top = 1.0000305
+offset_right = 710.82324
+offset_bottom = 263.00003
+rotation = 1.0594149
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="SubViewportContainer/Control" unique_id=1443786541]
+offset_left = 2.0
+offset_top = 129.0
+offset_right = 399.52106
+offset_bottom = 726.65765
+rotation = -0.13264503
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/Control" unique_id=1918638155]
+offset_left = 229.0
+offset_top = 1.0
+offset_right = 395.0
+offset_bottom = 263.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=876884071]
+offset_left = 814.0
+offset_top = 249.0
+offset_right = 1152.0
+offset_bottom = 650.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=359617710]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Restock"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1573565190]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer" unique_id=534509646]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="StartGame" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer" unique_id=425284179]
+layout_mode = 2
 text = "Start
 "
 
-[node name="Help" type="Button" parent="Control" unique_id=1498675400]
-layout_mode = 0
-offset_left = 441.0
-offset_top = 277.0
-offset_right = 644.0
-offset_bottom = 338.0
+[node name="Help" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer" unique_id=1498675400]
+layout_mode = 2
 text = "How to play?"
 
-[node name="Settings" type="Button" parent="Control" unique_id=1128183698]
-layout_mode = 0
-offset_left = 444.0
-offset_top = 361.0
-offset_right = 647.0
-offset_bottom = 422.0
+[node name="Settings" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer" unique_id=1128183698]
+layout_mode = 2
 text = "Settings
 "
 
-[node name="QuitGame" type="Button" parent="Control" unique_id=1088761539]
-layout_mode = 0
-offset_left = 446.0
-offset_top = 457.0
-offset_right = 649.0
-offset_bottom = 518.0
+[node name="QuitGame" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer" unique_id=1088761539]
+layout_mode = 2
 text = "Quit
 "
 
@@ -59,7 +92,8 @@ visible = false
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=2011672966]
 
-[connection signal="pressed" from="Control/StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Control/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/CenterContainer/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
 [connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]

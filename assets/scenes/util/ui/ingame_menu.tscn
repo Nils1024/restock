@@ -1,61 +1,43 @@
 [gd_scene format=3 uid="uid://bhgwbjl2xl0g6"]
 
-[ext_resource type="Script" uid="uid://1ssalf2e05ju" path="res://assets/scripts/ingame_menu.gd" id="1_jg7hv"]
+[ext_resource type="Script" uid="uid://1ssalf2e05ju" path="res://assets/scripts/ui/ingame_menu.gd" id="1_jg7hv"]
+[ext_resource type="Texture2D" uid="uid://eackjqaq4u67" path="res://assets/images/Clipboard.svg" id="2_u445c"]
 
-[node name="IngameMenu" type="Control" unique_id=1709871851]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = 2.0
-offset_right = 18.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="IngameMenu" type="CanvasLayer" unique_id=889833759]
 script = ExtResource("1_jg7hv")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1558000797]
-layout_mode = 0
-offset_left = 449.0
-offset_top = 136.0
-offset_right = 678.0
-offset_bottom = 481.0
-color = Color(0.7529412, 0.7529412, 0.7529412, 0.23137255)
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1382600212]
+offset_right = 1155.0
+offset_bottom = 649.0
 
-[node name="Close" type="Button" parent="." unique_id=950747340]
-layout_mode = 0
-offset_left = 643.0
-offset_top = 139.0
-offset_right = 674.0
-offset_bottom = 170.0
-text = "X"
+[node name="ColorRect" type="TextureRect" parent="CenterContainer" unique_id=1294630089]
+layout_mode = 2
+texture = ExtResource("2_u445c")
 
-[node name="Save" type="Button" parent="." unique_id=460511339]
-layout_mode = 0
-offset_left = 526.0
-offset_top = 406.0
-offset_right = 605.0
-offset_bottom = 437.0
-text = "Save"
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=112223293]
+offset_left = 521.0
+offset_top = 211.0
+offset_right = 642.0
+offset_bottom = 417.0
+theme_override_constants/separation = 48
 
-[node name="Settings" type="Button" parent="." unique_id=1852713278]
-layout_mode = 0
-offset_left = 522.0
-offset_top = 249.0
-offset_right = 601.0
-offset_bottom = 280.0
-text = "Settings"
+[node name="Close" type="Button" parent="VBoxContainer" unique_id=20811491]
+layout_mode = 2
+text = "Continue"
 
-[node name="Help" type="Button" parent="." unique_id=784847276]
-layout_mode = 0
-offset_left = 524.0
-offset_top = 321.0
-offset_right = 603.0
-offset_bottom = 352.0
+[node name="Help" type="Button" parent="VBoxContainer" unique_id=784847276]
+layout_mode = 2
 text = "Help"
 
-[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
-[connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Help" to="." method="_on_help_pressed"]
+[node name="Settings" type="Button" parent="VBoxContainer" unique_id=1852713278]
+layout_mode = 2
+text = "Settings"
+
+[node name="Save" type="Button" parent="VBoxContainer" unique_id=460511339]
+layout_mode = 2
+text = "Save"
+
+[connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="VBoxContainer/Help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Save" to="." method="_on_save_pressed"]

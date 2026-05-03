@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c1orinwtla028"]
+
+[ext_resource type="Script" uid="uid://0crhiow25yyj" path="res://assets/scripts/game/game.gd" id="1_cb66b"]
+[ext_resource type="Script" uid="uid://cwvcs8jm268mr" path="res://assets/scripts/game/WorldManager.gd" id="2_5aext"]
+[ext_resource type="TileSet" uid="uid://dxrp1ohh6bq6u" path="res://assets/tilesets/Ground.tres" id="2_dis88"]
+[ext_resource type="PackedScene" uid="uid://bcj7gu0f5ydo3" path="res://assets/scenes/util/ui/shop.tscn" id="3_5gf0t"]
+[ext_resource type="PackedScene" uid="uid://bhgwbjl2xl0g6" path="res://assets/scenes/util/ui/ingame_menu.tscn" id="3_cb5na"]
+[ext_resource type="PackedScene" uid="uid://bdtulldwsqkq4" path="res://assets/scenes/util/ui/tutorial.tscn" id="4_j62u1"]
+
+[node name="Game" type="Node2D" unique_id=1198782607]
+script = ExtResource("1_cb66b")
+
+[node name="WorldManager" type="Node" parent="." unique_id=1504556470 node_paths=PackedStringArray("tilemap")]
+script = ExtResource("2_5aext")
+tilemap = NodePath("../TileMapLayer")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1684153973]
+anchor_mode = 0
+zoom = Vector2(0.1, 0.1)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=778820462]
+
+[node name="Shop" parent="UI" unique_id=628358160 instance=ExtResource("3_5gf0t")]
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 3.0
+
+[node name="IngameMenu" parent="UI" unique_id=1709871851 instance=ExtResource("3_cb5na")]
+visible = false
+
+[node name="Tutorial" parent="UI" unique_id=1188621439 instance=ExtResource("4_j62u1")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=653317436]
+tile_set = ExtResource("2_dis88")

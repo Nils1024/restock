@@ -1,7 +1,14 @@
 [gd_scene format=3 uid="uid://ojq0lqeqfbes"]
 
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_qjqap"]
-[ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/save_selection_menu.gd" id="1_wc18j"]
+[ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/ui/save_selection_menu.gd" id="1_wc18j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjmsl"]
+bg_color = Color(0.33034465, 0.33588725, 0.3182867, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="SaveSelectionMenu" type="Node2D" unique_id=260701952]
 script = ExtResource("1_wc18j")
@@ -13,35 +20,115 @@ offset_right = 1171.0
 offset_bottom = 672.0
 color = Color(0.42745098, 0.5529412, 0.84705883, 1)
 
-[node name="Control" type="Control" parent="." unique_id=779337484]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=272979126]
+offset_left = 216.0
+offset_top = 204.0
+offset_right = 787.0
+offset_bottom = 380.0
 
-[node name="Save1" type="Button" parent="Control" unique_id=1368766062]
-layout_mode = 0
-offset_left = 125.0
-offset_top = 116.0
-offset_right = 324.0
-offset_bottom = 452.0
-text = "Save 1"
+[node name="SaveCardContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=590214802]
+layout_mode = 2
+theme_override_constants/separation = 6
 
-[node name="Save2" type="Button" parent="Control" unique_id=2073508244]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 119.0
-offset_right = 647.0
-offset_bottom = 455.0
-text = "Save 2"
+[node name="NewGame" type="Button" parent="." unique_id=1627351557]
+offset_left = 862.0
+offset_top = 550.0
+offset_right = 968.0
+offset_bottom = 589.0
+text = "+ New Game"
 
-[node name="Save3" type="Button" parent="Control" unique_id=26727402]
-layout_mode = 0
-offset_left = 787.0
-offset_top = 111.0
-offset_right = 986.0
-offset_bottom = 447.0
-text = "Save 3"
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=392042630]
+visible = false
+z_index = 2
+offset_left = 277.0
+offset_top = 106.0
+offset_right = 856.0
+offset_bottom = 477.0
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1811798304]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjmsl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1459374550]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer" unique_id=112178961]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=60270351]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "New Game"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=146717803]
+layout_mode = 2
+columns = 3
+
+[node name="SeedLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=191714734]
+layout_mode = 2
+text = "Seed:"
+
+[node name="SeedEdit" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=1448674343]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Seed"
+virtual_keyboard_type = 2
+
+[node name="SeedRandBtn" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=682339866]
+layout_mode = 2
+text = "Randomize"
+
+[node name="NameLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=167778720]
+layout_mode = 2
+text = "Name:"
+
+[node name="NameEdit" type="LineEdit" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=804677684]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="NameRandBtn" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=766969735]
+layout_mode = 2
+text = "Randomize"
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=828632997]
+layout_mode = 2
+text = "Avatar:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=1707734841]
+layout_mode = 2
+
+[node name="AvatarHBox" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer" unique_id=979373561]
+layout_mode = 2
+
+[node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1685591348]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1364128682]
+layout_mode = 2
+alignment = 1
+
+[node name="CancelNewGame" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer" unique_id=821379054]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer" unique_id=31897143]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 1
+
+[node name="CreateNewGame" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer" unique_id=620244875]
+layout_mode = 2
+text = "Create"
 
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("1_qjqap")]
 visible = false
@@ -52,5 +139,9 @@ offset_bottom = 632.0
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=216372829]
 
-[connection signal="pressed" from="Control/Save1" to="." method="_on_save_1_pressed"]
+[connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/SeedRandBtn" to="." method="_randomize_seed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/NameRandBtn" to="." method="_randomize_name"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer/CancelNewGame" to="." method="_on_cancel_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer/CreateNewGame" to="." method="_on_create_new_game_pressed"]
 [connection signal="timeout" from="FadeTransition/Timer" to="." method="_on_timer_timeout"]
