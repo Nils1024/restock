@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfecg4ehkgkbl"]
 
-[ext_resource type="Script" uid="uid://ck1jrbjfbqxp2" path="res://assets/scripts/ui/main_menu.gd" id="1_uu6ob"]
+[ext_resource type="Script" uid="uid://pa46gmrpq6pj" path="res://assets/scripts/ui/main_menu.gd" id="1_uu6ob"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="2_a1fdk"]
 
 [node name="MainMenu" type="Node2D" unique_id=753076020]

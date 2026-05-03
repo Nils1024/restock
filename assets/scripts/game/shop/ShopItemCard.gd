@@ -6,8 +6,8 @@ signal item_clicked(item: ShopItem)
 
 var item: ShopItem
 
-func setup(item: ShopItem) -> void:
-	self.item = item
+func setup(shopitem: ShopItem) -> void:
+	item = shopitem
 	$VBoxContainer/PriceContainer/Price.text = str(item.price)
 	$NameContainer/Name.text = item.label
 	$BuyButton.texture_normal = item.image

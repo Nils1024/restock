@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdtulldwsqkq4"]
 
-[ext_resource type="Script" uid="uid://djyud2ustj6y2" path="res://assets/scripts/ui/textbox.gd" id="1_vpp3o"]
+[ext_resource type="Script" uid="uid://digd7ise5saob" path="res://assets/scripts/ui/textbox.gd" id="1_vpp3o"]
 [ext_resource type="Texture2D" uid="uid://07l5oinqlvu7" path="res://assets/images/tutorial/Tutor Placeholder.svg" id="2_ea0ms"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpp3o"]

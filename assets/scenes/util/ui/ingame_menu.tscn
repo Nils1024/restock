@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bhgwbjl2xl0g6"]
 
-[ext_resource type="Script" uid="uid://1ssalf2e05ju" path="res://assets/scripts/ui/ingame_menu.gd" id="1_jg7hv"]
-[ext_resource type="Texture2D" uid="uid://eackjqaq4u67" path="res://assets/images/Clipboard.svg" id="2_u445c"]
+[ext_resource type="Script" uid="uid://bhyha4mx7e1xw" path="res://assets/scripts/ui/ingame_menu.gd" id="1_jg7hv"]
+[ext_resource type="Texture2D" uid="uid://de6eyc3uvq4yd" path="res://assets/images/Clipboard.svg" id="2_u445c"]
 
 [node name="IngameMenu" type="CanvasLayer" unique_id=889833759]
 script = ExtResource("1_jg7hv")

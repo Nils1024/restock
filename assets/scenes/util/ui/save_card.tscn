@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c51keuke5k5xc"]
 
-[ext_resource type="Script" uid="uid://clmtrpt27i4f3" path="res://assets/scripts/ui/save_card.gd" id="1_k0u2x"]
-[ext_resource type="Texture2D" uid="uid://b5d86uris7den" path="res://icon.svg" id="2_gmij2"]
+[ext_resource type="Script" uid="uid://51pemmcex37n" path="res://assets/scripts/ui/save_card.gd" id="1_k0u2x"]
+[ext_resource type="Texture2D" uid="uid://df75xrj2bie8a" path="res://icon.svg" id="2_gmij2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0u2x"]
 bg_color = Color(0.04303915, 0.043039158, 0.043039113, 1)

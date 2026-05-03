@@ -45,11 +45,11 @@ func schedule_task(task: Callable, on_complete: Callable) -> int:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_result_mutex.lock()
-	var ready = _results.duplicate()
+	var is_ready = _results.duplicate()
 	_results.clear()
 	_result_mutex.unlock()
 	
-	for entry in ready:
+	for entry in is_ready:
 		entry.on_complete.call(entry.result)
 	
 func _worker() -> void:
