@@ -28,6 +28,7 @@ func _ready() -> void:
 	_save_timer.start()
 	cam.update_bounds()
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Label.text = data.name
+	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/TextureRect.texture = load("res://assets/images/avatars/Avatar %d.svg" % (data.selected_avatar_index + 1))
 	
 	# Tutorial
 	if not data.tutorial_played:

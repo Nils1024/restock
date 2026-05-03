@@ -13,10 +13,10 @@ const saveCard = preload("res://assets/scenes/util/ui/save_card.tscn")
 @onready var avatarHBox = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/AvatarHBox
 
 var avatars: Array[Texture2D] = [
-	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
-	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
-	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
-	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
+	preload("res://assets/images/avatars/Avatar 1.svg"),
+	preload("res://assets/images/avatars/Avatar 2.svg"),
+	preload("res://assets/images/avatars/Avatar 3.svg"),
+	preload("res://assets/images/avatars/Avatar 4.svg"),
 ]
 var _selected_avatar_index: int = 0
 var current_button_type = null
@@ -49,7 +49,10 @@ func _load_avatars() -> void:
 		
 		var btn: TextureButton = TextureButton.new()
 		btn.texture_normal = avatars[i]
-		btn.custom_minimum_size = Vector2i(64, 64)
+		btn.ignore_texture_size = true
+		btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		btn.custom_minimum_size = Vector2i(96, 96)
+		btn.size = Vector2i(96, 96)
 		btn.pressed.connect(_on_avatar_selected.bind(i))
 		
 		panel.add_child(btn)
@@ -143,6 +146,7 @@ func _on_create_new_game_pressed() -> void:
 	save.id = 0
 	save.generation_seed = int(seedEdit.text)
 	save.name = nameEdit.text
+	save.selected_avatar_index = _selected_avatar_index
 	DataService.create(save.id, save)
 	_on_cancel_new_game_pressed()
 	_update_savecards()
