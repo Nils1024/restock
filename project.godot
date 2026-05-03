@@ -23,6 +23,7 @@ DataService="*uid://k5p352sn08xl"
 UtilityService="*uid://bp03lykhm65jt"
 ThreadService="*uid://wgigqliss5kc"
 AudioService="*uid://n8sitqy0733p"
+SimpleLogger="*uid://1uiny3txvaed"
 
 [display]
 

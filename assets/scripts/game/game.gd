@@ -27,6 +27,7 @@ func _ready() -> void:
 	add_child(_save_timer)
 	_save_timer.start()
 	cam.update_bounds()
+	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Label.text = data.name
 	
 	# Tutorial
 	if not data.tutorial_played:

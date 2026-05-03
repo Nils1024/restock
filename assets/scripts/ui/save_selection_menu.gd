@@ -1,9 +1,8 @@
 extends Node2D
 
 enum ButtonType {
-	SAVE_1,
-	SAVE_2,
-	SAVE_3,
+	LOAD_SAVE,
+	BACK
 }
 
 const saveCard = preload("res://assets/scenes/util/ui/save_card.tscn")
@@ -55,11 +54,10 @@ func _load_avatars() -> void:
 		
 		panel.add_child(btn)
 		avatarHBox.add_child(panel)
-		
-	_update_avatar_button_styles()
 
 
 func _on_avatar_selected(index: int):
+	SimpleLogger.debug("Avatar at index <%d> selected" % index)
 	_selected_avatar_index = index
 	_update_avatar_button_styles()
 
@@ -82,16 +80,19 @@ func _update_avatar_button_styles():
 
 func _on_timer_timeout() -> void:
 	match current_button_type:
-		ButtonType.SAVE_1:
+		ButtonType.LOAD_SAVE:
 			var scene: PackedScene = load("res://assets/scenes/game.tscn")
 			var instance: Game = scene.instantiate()
 			instance.data = data
 			get_tree().root.add_child(instance)
 			get_tree().current_scene.queue_free()
 			get_tree().current_scene = instance
+		ButtonType.BACK:
+			#TODO: Back to main menu
+			pass
 
 func _on_save_card_card_pressed(save_id: int) -> void:
-	current_button_type = ButtonType.SAVE_1
+	current_button_type = ButtonType.LOAD_SAVE
 	data = DataService.load_save(save_id)
 	start_fade_in_transition()
 
@@ -115,7 +116,7 @@ func _on_new_game_pressed() -> void:
 	
 	_randomize_seed()
 	_randomize_name()
-
+	_on_avatar_selected(0)
 
 func _randomize_seed():
 	seedEdit.text = str(randi())
@@ -152,7 +153,7 @@ func _update_savecards() -> void:
 		child.queue_free()
 		
 	for save in DataService.get_all():
-		print(save.to_dict())
+		SimpleLogger.trace("Save Found: %s" % save.to_dict())
 		var card: SaveCard = saveCard.instantiate()
 		card.setup(save.id, save.name)
 		card.load_pressed.connect(_on_save_card_card_pressed)
