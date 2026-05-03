@@ -1,7 +1,9 @@
 extends CanvasLayer
 
 const ShopCard = preload("res://assets/scenes/util/ui/ShopItemCard.tscn")
-const SHOP_ITEMS_PATH = "res://assets/data/shop_items/"
+const SHOP_ITEMS_PATHS = [
+	"res://assets/data/shop_items/HQ.tres"
+]
 
 @onready var h_box = $MarginContainer/MarginContainer/ScrollContainer/HBoxContainer
 
@@ -16,9 +18,8 @@ func _ready() -> void:
 
 
 func _load_items() -> void:
-	var files: Array = Array(DirAccess.get_files_at(SHOP_ITEMS_PATH))
-	for file in files.filter(func(f: String): return f.ends_with(".tres")):
-		var item = load(SHOP_ITEMS_PATH + file) as ShopItem
+	for path in SHOP_ITEMS_PATHS:
+		var item: ShopItem = load(path)
 		if item:
 			shop_items.append(item)
 
