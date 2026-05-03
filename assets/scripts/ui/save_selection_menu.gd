@@ -11,7 +11,15 @@ const saveCard = preload("res://assets/scenes/util/ui/save_card.tscn")
 @onready var seedEdit = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/SeedEdit
 @onready var nameEdit = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/NameEdit
 @onready var saveCardContainer = $ScrollContainer/SaveCardContainer
+@onready var avatarHBox = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/AvatarHBox
 
+var avatars: Array[Texture2D] = [
+	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
+	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
+	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
+	preload("res://assets/images/avatars/Avatar Placeholder.svg"),
+]
+var _selected_avatar_index: int = 0
 var current_button_type = null
 var data: GameSaveData = null
 
@@ -33,10 +41,43 @@ func _ready() -> void:
 	)
 	
 	_update_savecards()
+	_load_avatars()
 
 
-func _on_load_button_pressed() -> void:
-	pass
+func _load_avatars() -> void:
+	for i in range(avatars.size()):
+		var panel: PanelContainer = PanelContainer.new()
+		
+		var btn: TextureButton = TextureButton.new()
+		btn.texture_normal = avatars[i]
+		btn.custom_minimum_size = Vector2i(64, 64)
+		btn.pressed.connect(_on_avatar_selected.bind(i))
+		
+		panel.add_child(btn)
+		avatarHBox.add_child(panel)
+		
+	_update_avatar_button_styles()
+
+
+func _on_avatar_selected(index: int):
+	_selected_avatar_index = index
+	_update_avatar_button_styles()
+
+
+func _update_avatar_button_styles():
+	for i in range(avatarHBox.get_child_count()):
+		var panel: PanelContainer = avatarHBox.get_child(i)
+		
+		var style: StyleBoxFlat = StyleBoxFlat.new()
+		style.set_border_width_all(3)
+		style.bg_color = Color(0, 0, 0, 0)
+		
+		if i == _selected_avatar_index:
+			style.border_color = Color(1, 1, 0)
+		else:
+			style.border_color = Color(0, 0, 0, 0)
+			
+		panel.add_theme_stylebox_override("panel", style)
 
 
 func _on_timer_timeout() -> void:
