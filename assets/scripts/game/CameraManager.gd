@@ -37,15 +37,11 @@ func get_chunk_radius() -> int:
 
 	return int(ceil(max(chunks_x, chunks_y) / 2.0)) + 2
 	
-func get_move_speed() -> float:
-	var base_speed = 500.0
-	return base_speed * pow(zoom.x, 0.8)
-	
 # TODO: Look at the DDA/Bresenham algorithm
 func handle_input(event: InputEvent) -> void:
 	# Camera move for trackpad	
 	if event is InputEventPanGesture:
-		position += event.delta * get_move_speed()
+		position += event.delta / zoom.x
 		_clamp_to_limits()
 	
 	# Camera move and click for mouse
@@ -72,7 +68,7 @@ func handle_input(event: InputEvent) -> void:
 			_is_dragging = true
 			
 		if _is_dragging:
-			position -= event.relative * get_move_speed()
+			position -= event.relative / zoom.x
 			_clamp_to_limits()
 		
 	if event is InputEventMagnifyGesture:
