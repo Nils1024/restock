@@ -143,7 +143,13 @@ func _on_cancel_new_game_pressed() -> void:
 
 func _on_create_new_game_pressed() -> void:
 	var save = GameSaveData.new()
-	save.id = 0
+	
+	var all_saves = DataService.get_all()
+	if all_saves.is_empty():
+		save.id = 0
+	else:
+		save.id = all_saves.map(func(s): return s.id).max() + 1
+	
 	save.generation_seed = int(seedEdit.text)
 	save.name = nameEdit.text
 	save.selected_avatar_index = _selected_avatar_index
@@ -157,7 +163,7 @@ func _update_savecards() -> void:
 		child.queue_free()
 		
 	for save in DataService.get_all():
-		SimpleLogger.trace("Save Found: %s" % save.to_dict())
+		SimpleLogger.debug("Save Found: %s" % save.to_dict())
 		var card: SaveCard = saveCard.instantiate()
 		card.setup(save.id, save.name)
 		card.load_pressed.connect(_on_save_card_card_pressed)

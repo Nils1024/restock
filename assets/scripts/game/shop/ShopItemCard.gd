@@ -19,5 +19,4 @@ func setup(shopitem: ShopItem) -> void:
 
 
 func _on_buy_button_pressed() -> void:
-	print("emitted")
 	item_clicked.emit(item)

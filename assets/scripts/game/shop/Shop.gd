@@ -5,6 +5,8 @@ const SHOP_ITEMS_PATH = "res://assets/data/shop_items/"
 
 @onready var h_box = $MarginContainer/MarginContainer/ScrollContainer/HBoxContainer
 
+signal item_clicked(item: ShopItem)
+
 var shop_items: Array[ShopItem] = []
 
 # Called when the node enters the scene tree for the first time.
@@ -33,4 +35,5 @@ func _fill_shop_with_items() -> void:
 
 
 func _on_item_clicked(item: ShopItem) -> void:
-	SimpleLogger.trace("Item clicked: %s" % item)
+	SimpleLogger.trace("ShopItem clicked: %s" % item)
+	item_clicked.emit(item)

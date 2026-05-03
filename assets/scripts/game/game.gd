@@ -29,6 +29,7 @@ func _ready() -> void:
 	cam.update_bounds()
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Label.text = data.name
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/TextureRect.texture = load("res://assets/images/avatars/Avatar %d.svg" % (data.selected_avatar_index + 1))
+	$UI/Shop.item_clicked.connect($BuildingManager.on_item_clicked)
 	
 	# Tutorial
 	if not data.tutorial_played:
@@ -63,6 +64,8 @@ func _unhandled_input (event: InputEvent) -> void:
 		
 	if $UI/IngameMenu.visible:
 		return
+	
+	$BuildingManager.handle_input(event)
 	
 	cam.handle_input(event)
 

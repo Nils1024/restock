@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bdtulldwsqkq4" path="res://assets/scenes/util/ui/textbox.tscn" id="4_j62u1"]
 [ext_resource type="Script" uid="uid://bvxjh1bgy6h04" path="res://assets/scripts/game/Tutorial.gd" id="4_pw37s"]
 [ext_resource type="Script" uid="uid://cln7wbeouwfhr" path="res://assets/scripts/game/CameraManager.gd" id="4_wfsp4"]
+[ext_resource type="Script" uid="uid://dpsq23g1iasdp" path="res://assets/scripts/game/BuildingManager.gd" id="5_i358u"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="10_k2t1h"]
 [ext_resource type="Texture2D" uid="uid://sfy6v4ppj1qt" path="res://assets/images/avatars/Avatar Placeholder.svg" id="10_pkhv0"]
 [ext_resource type="TileSet" uid="uid://t7ano3486mjl" path="res://assets/tilesets/Buildings.tres" id="11_phsto"]
@@ -45,6 +46,11 @@ noise = NodePath("../NoiseManager")
 
 [node name="NoiseManager" type="Node" parent="." unique_id=1729893363]
 script = ExtResource("3_3w2km")
+
+[node name="BuildingManager" type="Node" parent="." unique_id=1393583680 node_paths=PackedStringArray("buildings_tilemap", "preview_tilemap")]
+script = ExtResource("5_i358u")
+buildings_tilemap = NodePath("../Buildings")
+preview_tilemap = NodePath("../Preview")
 
 [node name="Tutorial" type="Node" parent="." unique_id=2022923387 node_paths=PackedStringArray("textbox")]
 script = ExtResource("4_pw37s")
@@ -153,4 +159,8 @@ horizontal_alignment = 1
 tile_set = ExtResource("2_dis88")
 
 [node name="Buildings" type="TileMapLayer" parent="." unique_id=1047407720]
+tile_set = ExtResource("11_phsto")
+
+[node name="Preview" type="TileMapLayer" parent="." unique_id=309338988]
+modulate = Color(1, 1, 1, 0.49803922)
 tile_set = ExtResource("11_phsto")
