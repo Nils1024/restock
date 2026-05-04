@@ -1,10 +1,5 @@
 extends CanvasLayer
 
-const ShopCard = preload("res://assets/scenes/util/ui/ShopItemCard.tscn")
-const SHOP_ITEMS_PATHS = [
-	"res://assets/data/shop_items/HQ.tres"
-]
-
 @onready var h_box = $MarginContainer/MarginContainer/ScrollContainer/HBoxContainer
 
 signal item_clicked(item: ShopItem)
@@ -18,7 +13,7 @@ func _ready() -> void:
 
 
 func _load_items() -> void:
-	for path in SHOP_ITEMS_PATHS:
+	for path in Const.Shop.SHOP_ITEMS_PATHS:
 		var item: ShopItem = load(path)
 		if item:
 			shop_items.append(item)
@@ -29,7 +24,7 @@ func _fill_shop_with_items() -> void:
 		child.queue_free()
 		
 	for item in shop_items:
-		var card: ShopItemCard = ShopCard.instantiate()
+		var card: ShopItemCard = Const.Shop.ShopCard.instantiate()
 		card.setup(item)
 		card.item_clicked.connect(_on_item_clicked)
 		h_box.add_child(card)

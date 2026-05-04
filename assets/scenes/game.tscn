@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1orinwtla028"]
 
-[ext_resource type="Script" uid="uid://0crhiow25yyj" path="res://assets/scripts/game/Game.gd" id="1_cb66b"]
+[ext_resource type="Script" uid="uid://0crhiow25yyj" path="res://assets/scripts/game/game.gd" id="1_cb66b"]
 [ext_resource type="Script" uid="uid://c3vvnckroaa3o" path="res://assets/scripts/game/WorldManager.gd" id="2_5aext"]
 [ext_resource type="TileSet" uid="uid://dxrp1ohh6bq6u" path="res://assets/tilesets/Ground.tres" id="2_dis88"]
 [ext_resource type="Script" uid="uid://ba5ekuhrsicu4" path="res://assets/scripts/game/NoiseManager.gd" id="3_3w2km"]
@@ -15,6 +15,7 @@
 [ext_resource type="TileSet" uid="uid://t7ano3486mjl" path="res://assets/tilesets/Buildings.tres" id="11_phsto"]
 [ext_resource type="Texture2D" uid="uid://myutms78aqm6" path="res://assets/images/mouse-left-button.svg" id="12_fc420"]
 [ext_resource type="Texture2D" uid="uid://e3lexmkw5vmk" path="res://assets/images/mouse-right-button.svg" id="13_kc0sw"]
+[ext_resource type="Texture2D" uid="uid://djxtejqicte6l" path="res://assets/images/R Key.svg" id="14_kc0sw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2t1h"]
 bg_color = Color(1, 1, 1, 1)
@@ -162,6 +163,7 @@ horizontal_alignment = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=501391913]
 
 [node name="BuildControls" type="HBoxContainer" parent="UI/CanvasLayer" unique_id=1762577387]
+visible = false
 offset_left = 286.0
 offset_top = 488.0
 offset_right = 882.0
@@ -201,7 +203,7 @@ text = "/"
 [node name="RKey" type="TextureRect" parent="UI/CanvasLayer/BuildControls" unique_id=1971533527]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture = ExtResource("12_fc420")
+texture = ExtResource("14_kc0sw")
 expand_mode = 1
 stretch_mode = 5
 

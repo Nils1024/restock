@@ -6,7 +6,7 @@ var name: String = ""
 var selected_avatar_index: int = 0
 var money: int = 1000
 var tutorial_played: bool = false
-var building_data: Dictionary
+var building_data: Array[Dictionary] = []
 
 func to_dict() -> Dictionary:
 	return {
@@ -15,8 +15,10 @@ func to_dict() -> Dictionary:
 		"name": name,
 		"avatar": selected_avatar_index,
 		"money": money,
-		"tutorial_played": tutorial_played
+		"tutorial_played": tutorial_played,
+		"building_data": building_data
 	}
+
 
 static func from_dict(dict: Dictionary) -> GameSaveData:
 	var data = GameSaveData.new()
@@ -26,4 +28,8 @@ static func from_dict(dict: Dictionary) -> GameSaveData:
 	data.selected_avatar_index = dict.get("avatar", 0)
 	data.money = dict.get("money", 1000)
 	data.tutorial_played = dict.get("tutorial_played", false)
+	
+	for item in dict.get("building_data", []):
+		if item is Dictionary:
+			data.building_data.append(item)
 	return data

@@ -31,6 +31,7 @@ func _ready() -> void:
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Label.text = data.name
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/TextureRect.texture = load("res://assets/images/avatars/Avatar %d.svg" % (data.selected_avatar_index + 1))
 	$UI/Shop.item_clicked.connect($BuildingManager.on_item_clicked)
+	$BuildingManager.income_updated.connect(_update_money_label)
 	
 	# Tutorial
 	if not data.tutorial_played:
@@ -79,3 +80,6 @@ func _exit_tree() -> void:
 func _on_save_timer_timeout() -> void:
 	print("Game saved")
 	DataService.update(data.id, data)
+	
+func _update_money_label() -> void:
+	$UI/Money/MarginContainer/MarginContainer/HBoxContainer/Label.text = str(data.money)
