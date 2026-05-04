@@ -1,7 +1,9 @@
 extends Node
 
+@export var world_manager: WorldManager
 @export var buildings_tilemap: TileMapLayer
 @export var preview_tilemap: TileMapLayer
+@export var build_controls_box: HBoxContainer
 
 const building_dict: Dictionary = {
 	"HQ": [Vector2i(0, 0), Vector2i(0, 1), Vector2i(0, 2),
@@ -9,6 +11,7 @@ const building_dict: Dictionary = {
 }
 var _pending_item: ShopItem = null
 var _rotation: int = 0
+var data: GameSaveData
 
 func _process(_delta: float) -> void:
 	preview_tilemap.clear()
@@ -25,6 +28,7 @@ func _process(_delta: float) -> void:
 func on_item_clicked(item: ShopItem) -> void:
 	_pending_item = item
 	_rotation = 0
+	build_controls_box.show()
 
 
 func handle_input(event: InputEvent) -> void:
@@ -44,17 +48,33 @@ func handle_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_RIGHT:
 			_pending_item = null
+			build_controls_box.hide()
 
 
 func _get_mouse_tile_pos() -> Vector2i:
 	return buildings_tilemap.local_to_map(buildings_tilemap.get_local_mouse_position())
 
 
+func _is_place_free(building_offsets: Array[Vector2i]) -> bool:
+	var tile_pos = _get_mouse_tile_pos()
+	
+	for offset in building_offsets:
+		var final_pos = tile_pos + offset
+		if world_manager._get_tile_atlas(final_pos.x, final_pos.y) == Vector2i(0, 2):
+			return false
+	
+	return true
+
+
 func _place_building(item: ShopItem) -> void:
 	var tile_pos = _get_mouse_tile_pos()
 	
-	for offset in building_dict[item.label].map(func(o): return _rotate_offset(o)):
-		buildings_tilemap.set_cell(tile_pos + offset, 0, Vector2i(0, 0))
+	var building_offsets: Array[Vector2i] = []
+	building_offsets.assign(building_dict[item.label].map(func(o): return _rotate_offset(o)))
+	
+	if _is_place_free(building_offsets):
+		for offset in building_offsets:
+			buildings_tilemap.set_cell(tile_pos + offset, 0, Vector2i(0, 0))
 		
 	SimpleLogger.info("Placing <%s> at <%s>" % [item.label, tile_pos])
 
