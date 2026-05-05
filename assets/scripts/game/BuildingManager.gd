@@ -1,9 +1,12 @@
 extends Node
 
+class_name BuildingManager
+
 @export var world_manager: WorldManager
 @export var buildings_tilemap: TileMapLayer
 @export var preview_tilemap: TileMapLayer
 @export var build_controls_box: HBoxContainer
+@export var not_enough_money_label: Label
 
 signal shop_item_placed(item: ShopItem)
 signal income_updated()
@@ -19,6 +22,21 @@ var _income_timer: float = 0.0
 const INCOME_INTERVAL: float = 1.0
 
 var data: GameSaveData
+var _timer: Timer = null
+
+func place_saved_buildings() -> void:
+	for building in data.building_data:
+		var building_name: String = building.get("label")
+		var positions: Array = building.get("positions")
+		var item_data: Dictionary = Const.Building.BUILDING_DICT[building_name]
+		
+		for i in range(positions.size()):
+			var pos: Vector2i = positions[i]
+			var atlas: Vector2i = item_data["tiles"][i]["atlas"]
+			buildings_tilemap.set_cell(pos, 0, atlas)
+		
+		SimpleLogger.trace("Restored <%s> at <%s>" % [building_name, positions])
+
 
 func _process(delta: float) -> void:
 	_tick_income(delta)
@@ -81,7 +99,19 @@ func handle_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_LEFT \
 		and event.pressed:
-			_place_building(_pending_item)
+			if data.money >= _pending_item.price:
+				_place_building(_pending_item)
+			else:
+				not_enough_money_label.show()
+				
+				_timer = Timer.new()
+				_timer.wait_time = 2
+				_timer.one_shot = true
+				_timer.timeout.connect(not_enough_money_label.hide)
+				_timer.timeout.connect(_timer.queue_free)
+				add_child(_timer)
+				_timer.start()
+			
 			_cancel_placement()
 			
 	if event is InputEventMouseButton \
@@ -95,9 +125,16 @@ func _get_mouse_tile_pos() -> Vector2i:
 
 func _is_place_free(building_positions: Array[Vector2i]) -> bool:
 	for pos in building_positions:
-		if world_manager._get_tile_atlas(pos.x, pos.y) == Vector2i(0, 2):
-			SimpleLogger.info("Placing stopped - stone ground")
+		var world_atlas: Vector2i = world_manager._get_tile_atlas(pos.x, pos.y)
+		if world_atlas == Vector2i(0, 2) \
+			or world_atlas == Vector2i(0, 1):
+			SimpleLogger.info("Placing stopped - invalid underground")
 			return false
+		
+		for building in data.building_data:
+			if pos in building["positions"]:
+				SimpleLogger.info("Placing stopped - already occupied")
+				return false
 	
 	return true
 
@@ -122,6 +159,9 @@ func _place_building(item: ShopItem) -> void:
 		"label": item.label,
 		"positions": positions
 	})
+	
+	data.money -= _pending_item.price
+	income_updated.emit()
 	
 	SimpleLogger.info("Placing <%s> at <%s>" % [item.label, positions])
 	shop_item_placed.emit(item)

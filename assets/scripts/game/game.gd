@@ -2,9 +2,10 @@ extends Node2D
 
 class_name Game
 
-@onready var cam = $Camera2D
-@onready var tilemap = $Ground
+@onready var cam: Camera2D = $Camera2D
+@onready var tilemap: TileMapLayer = $Ground
 @onready var world_manager: WorldManager = $WorldManager
+@onready var building_manager: BuildingManager = $BuildingManager
 
 var data: GameSaveData
 var _last_center: Vector2i = Vector2i.ZERO
@@ -19,7 +20,8 @@ func _enter_tree() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$BuildingManager.data = data
+	building_manager.data = data
+	building_manager.place_saved_buildings()
 	AudioService.stop_audio(SoundEffect.SOUND_EFFECT_TYPE.IDLE_MUSIC_1, true, 3)
 	world_manager.noise.initialize(data.generation_seed)
 	_save_timer.wait_time = Const.Save.AUTO_SAVE_PERIOD_IN_SEC
@@ -32,6 +34,7 @@ func _ready() -> void:
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/TextureRect.texture = load("res://assets/images/avatars/Avatar %d.svg" % (data.selected_avatar_index + 1))
 	$UI/Shop.item_clicked.connect($BuildingManager.on_item_clicked)
 	$BuildingManager.income_updated.connect(_update_money_label)
+	_update_money_label()
 	
 	# Tutorial
 	if not data.tutorial_played:
