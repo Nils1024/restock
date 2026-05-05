@@ -9,7 +9,7 @@ const saveCard = preload("res://assets/scenes/util/ui/save_card.tscn")
 
 @onready var seedEdit = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/SeedEdit
 @onready var nameEdit = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/NameEdit
-@onready var saveCardContainer = $ScrollContainer/SaveCardContainer
+@onready var saveCardContainer = $MarginContainer2/ScrollContainer/SaveCardContainer
 @onready var avatarHBox = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer/AvatarHBox
 
 var avatars: Array[Texture2D] = [
@@ -91,8 +91,8 @@ func _on_timer_timeout() -> void:
 			get_tree().current_scene.queue_free()
 			get_tree().current_scene = instance
 		ButtonType.BACK:
-			#TODO: Back to main menu
-			pass
+			get_tree().change_scene_to_file("res://assets/scenes/menus/main_menu.tscn")
+
 
 func _on_save_card_card_pressed(save_id: int) -> void:
 	current_button_type = ButtonType.LOAD_SAVE
@@ -163,9 +163,15 @@ func _update_savecards() -> void:
 		child.queue_free()
 		
 	for save in DataService.get_all():
+		$MarginContainer2/Label.hide()
 		SimpleLogger.debug("Save Found: %s" % save.to_dict())
 		var card: SaveCard = saveCard.instantiate()
 		card.setup(save.id, save.name)
 		card.load_pressed.connect(_on_save_card_card_pressed)
 		card.delete_pressed.connect(_on_save_card_delete_pressed)
 		saveCardContainer.add_child(card)
+
+
+func _on_back_pressed() -> void:
+	current_button_type = ButtonType.BACK
+	start_fade_in_transition()

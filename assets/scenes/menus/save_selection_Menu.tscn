@@ -20,21 +20,43 @@ offset_right = 1171.0
 offset_bottom = 672.0
 color = Color(0.42745098, 0.5529412, 0.84705883, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=272979126]
-offset_left = 216.0
-offset_top = 204.0
-offset_right = 787.0
-offset_bottom = 380.0
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=557379083]
+offset_left = 76.0
+offset_top = 79.0
+offset_right = 1072.0
+offset_bottom = 537.0
 
-[node name="SaveCardContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=590214802]
+[node name="Panel" type="Panel" parent="MarginContainer2" unique_id=1065641547]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2" unique_id=272979126]
+layout_mode = 2
+
+[node name="SaveCardContainer" type="HBoxContainer" parent="MarginContainer2/ScrollContainer" unique_id=590214802]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="NewGame" type="Button" parent="." unique_id=1627351557]
-offset_left = 862.0
-offset_top = 550.0
-offset_right = 968.0
-offset_bottom = 589.0
+[node name="Label" type="Label" parent="MarginContainer2" unique_id=266185015]
+layout_mode = 2
+text = "You dont have any saves"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1443909977]
+offset_left = 76.0
+offset_top = 539.0
+offset_right = 1073.0
+offset_bottom = 584.0
+
+[node name="Back" type="Button" parent="HBoxContainer" unique_id=157956183]
+layout_mode = 2
+text = " ← Back"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer" unique_id=1789618262]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NewGame" type="Button" parent="HBoxContainer" unique_id=1627351557]
+layout_mode = 2
 text = "+ New Game"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=392042630]
@@ -134,12 +156,21 @@ text = "Create"
 visible = false
 offset_left = -21.0
 offset_top = -16.0
-offset_right = 1137.0
-offset_bottom = 632.0
+offset_right = 1157.0
+offset_bottom = 651.0
 
 [node name="Timer" type="Timer" parent="FadeTransition" unique_id=216372829]
 
-[connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
+[node name="Label" type="Label" parent="." unique_id=800425411]
+offset_right = 1150.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 28
+text = "Select a save"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="HBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/SeedRandBtn" to="." method="_randomize_seed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/NameRandBtn" to="." method="_randomize_name"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer/CancelNewGame" to="." method="_on_cancel_new_game_pressed"]

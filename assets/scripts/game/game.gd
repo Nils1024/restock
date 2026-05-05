@@ -31,7 +31,7 @@ func _ready() -> void:
 	_save_timer.start()
 	cam.update_bounds()
 	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Label.text = data.name
-	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/TextureRect.texture = load("res://assets/images/avatars/Avatar %d.svg" % (data.selected_avatar_index + 1))
+	$UI/Profil/MarginContainer/MarginContainer/HBoxContainer/PanelContainer/TextureRect.texture = load("res://assets/images/avatars/Avatar %d.svg" % (data.selected_avatar_index + 1))
 	$UI/Shop.item_clicked.connect($BuildingManager.on_item_clicked)
 	$BuildingManager.income_updated.connect(_update_money_label)
 	_update_money_label()

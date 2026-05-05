@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1orinwtla028"]
 
-[ext_resource type="Script" uid="uid://0crhiow25yyj" path="res://assets/scripts/game/game.gd" id="1_cb66b"]
+[ext_resource type="Script" uid="uid://bk07bh84bbsug" path="res://assets/scripts/game/game.gd" id="1_cb66b"]
 [ext_resource type="Script" uid="uid://c3vvnckroaa3o" path="res://assets/scripts/game/WorldManager.gd" id="2_5aext"]
 [ext_resource type="TileSet" uid="uid://dxrp1ohh6bq6u" path="res://assets/tilesets/Ground.tres" id="2_dis88"]
 [ext_resource type="Script" uid="uid://ba5ekuhrsicu4" path="res://assets/scripts/game/NoiseManager.gd" id="3_3w2km"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://myutms78aqm6" path="res://assets/images/mouse-left-button.svg" id="12_fc420"]
 [ext_resource type="Texture2D" uid="uid://e3lexmkw5vmk" path="res://assets/images/mouse-right-button.svg" id="13_kc0sw"]
 [ext_resource type="Texture2D" uid="uid://djxtejqicte6l" path="res://assets/images/R Key.svg" id="14_kc0sw"]
+[ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/cross.svg" id="15_fqk1v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2t1h"]
 bg_color = Color(1, 1, 1, 1)
@@ -36,8 +37,29 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 corner_radius_bottom_right = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cnnv"]
+bg_color = Color(0.8052403, 0.34198943, 0.29511467, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_i358u"]
 grow_end = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqk1v"]
+bg_color = Color(0.89492244, 0.89492244, 0.8949224, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jdip"]
+bg_color = Color(0.62352943, 0.043137256, 0.050980393, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Game" type="Node2D" unique_id=1198782607]
 script = ExtResource("1_cb66b")
@@ -137,7 +159,13 @@ theme_override_constants/margin_bottom = 5
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Profil/MarginContainer/MarginContainer" unique_id=1330061902]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer" unique_id=1581433993]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer" unique_id=1437243470]
+clip_children = 1
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3cnnv")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer/PanelContainer" unique_id=1581433993]
 layout_mode = 2
 texture = ExtResource("10_pkhv0")
 expand_mode = 3
@@ -220,6 +248,69 @@ offset_right = 638.0
 offset_bottom = 132.0
 theme_override_colors/font_color = Color(0.901771, 5.9922786e-06, 8.663535e-07, 1)
 text = "Not enough money"
+
+[node name="BuildingInfo" type="CanvasLayer" parent="UI" unique_id=1772418134]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/BuildingInfo" unique_id=1776760584]
+offset_left = 339.0
+offset_top = 167.0
+offset_right = 584.0
+offset_bottom = 411.0
+
+[node name="Panel" type="Panel" parent="UI/BuildingInfo/MarginContainer" unique_id=1574542523]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fqk1v")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/BuildingInfo/MarginContainer" unique_id=1732999430]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer" unique_id=840247872]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=235882273]
+layout_mode = 2
+
+[node name="Spacer" type="AspectRatioContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1521286427]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=265684766]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Building"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="AspectRatioContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=945924529]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureButton" type="TextureButton" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=52388102]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("15_fqk1v")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=1213279851]
+layout_mode = 2
+
+[node name="Spacer" type="AspectRatioContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=831211609]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=510468896]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1423512543]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_5jdip")
+text = "Destroy"
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=653317436]
 tile_set = ExtResource("2_dis88")
