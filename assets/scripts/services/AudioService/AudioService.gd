@@ -9,6 +9,29 @@ func _ready() -> void:
 		sound_effect_dict[sound_effect.type] = sound_effect
 
 
+func set_volume(volume_linear: float, bus_name: String = "Master") -> void:
+	var bus_index: int = AudioServer.get_bus_index(bus_name)
+	
+	if bus_index == -1:
+		SimpleLogger.warn("AudioService - Bus <%s> not found!" % bus_name)
+		return
+		
+	if volume_linear <= 0.001:
+		AudioServer.set_bus_mute(bus_index, true)
+	else:
+		AudioServer.set_bus_mute(bus_index, false)
+		AudioServer.set_bus_volume_db(bus_index, linear_to_db(volume_linear))
+
+
+func get_volume(bus_name: String = "Master") -> float:
+	var bus_index: int = AudioServer.get_bus_index(bus_name)
+	
+	if bus_index == -1 or AudioServer.is_bus_mute(bus_index):
+		return 0.0
+	
+	return db_to_linear(AudioServer.get_bus_volume_db(bus_index))
+
+
 func create_2d_audio_at_location(location: Vector2i, type: SoundEffect.SOUND_EFFECT_TYPE, auto_restart: bool = false) -> void:
 	if is_playing(type):
 		return

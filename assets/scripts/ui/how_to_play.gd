@@ -7,6 +7,7 @@ const content: Array[Dictionary] = [
 ]
 
 @onready var textbox = $MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/VBoxContainer/Text
+@onready var image_container: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/VBoxContainer/TextureRect
 @onready var circle_container: HBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer
 @onready var selected_style: StyleBoxFlat = $MarginContainer/VBoxContainer/HBoxContainer/Panel.get_theme_stylebox("panel")
 @onready var unselected_style: StyleBoxFlat = $MarginContainer/VBoxContainer/HBoxContainer/Panel2.get_theme_stylebox("panel")
@@ -34,6 +35,7 @@ func _on_arrow_right_pressed() -> void:
 
 func _update_content() -> void:
 	textbox.text = content[selected_page]["text"]
+	image_container.texture = content[selected_page]["image"]
 	
 	for i in range(circle_container.get_child_count()):
 		var panel: Panel = circle_container.get_child(i)

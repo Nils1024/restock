@@ -27,6 +27,7 @@ func set_language(lang: String):
 	TranslationServer.set_locale(current_language)
 	
 	save_language(lang)
+	SimpleLogger.info("Changed language to: <%s>" % lang)
 	emit_signal("language_changed")
 	
 func save_language(lang: String):

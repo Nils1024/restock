@@ -17,6 +17,11 @@ class Save:
 class Languages:
 	const ENGLISH: String = "en"
 	const GERMAN: String = "de"
+	
+	const LANGUAGE_DISPLAY_NAMES = {
+		ENGLISH: "English",
+		GERMAN: "Deutsch"
+	}
 
 
 class World:
