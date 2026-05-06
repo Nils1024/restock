@@ -28,9 +28,8 @@ Contributions are always welcome
 Song 1 by <a href="https://pixabay.com/users/delosound-46524562/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=298550">DELOSound</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=298550">Pixabay</a>
 
 ## AI Declaration
-I used AI to generate typical boilerplate code and for inspiration (because
-sometimes there are special Godot functions that I dont know about or when
-I have written something myself, the AI had a nice idea to make the code more
-readable or robust), so I could focus more on the game's architecture. In
+I used AI to generate typical boilerplate code (CRUD, Logging Facade, etc.) while also modifying it to my own needs and style and sometimes for inspiration (because
+sometimes there are special Godot functions that I dont know about (Like wrapi or db_to_linear) or the AI had a nice idea to make the code more
+readable or robust. Sometimes it also got worse). In
 addition, I didnt just copy-pasted the code, instead I typed it off while also reading
 the documentation (if it was a Godot function) to get a better understanding of it.
