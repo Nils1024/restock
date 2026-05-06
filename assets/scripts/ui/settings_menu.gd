@@ -20,7 +20,6 @@ func _ready() -> void:
 	
 	_on_language_changed()
 	
-	AudioService.set_volume(0.5)
 	var current_volume = AudioService.get_volume()
 	volume_slider.set_value_no_signal(current_volume * 100)
 	volume_label.text = str(roundf(current_volume * 100)).replace(".0", "%")

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://20ksw02c0oo0"]
 
-[ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/cross.svg" id="1_cvprq"]
+[ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/icons/cross.svg" id="1_cvprq"]
 [ext_resource type="Script" uid="uid://8e6hlpxo5gr3" path="res://assets/scripts/ui/how_to_play.gd" id="1_nradw"]
-[ext_resource type="Texture2D" uid="uid://70s0cac52ona" path="res://assets/images/arrow-left.svg" id="2_7uk0b"]
-[ext_resource type="Texture2D" uid="uid://oeg3vi1lfk3u" path="res://assets/images/arrow-right.svg" id="3_mho6t"]
+[ext_resource type="Texture2D" uid="uid://70s0cac52ona" path="res://assets/images/icons/arrow-left.svg" id="2_7uk0b"]
+[ext_resource type="Texture2D" uid="uid://oeg3vi1lfk3u" path="res://assets/images/icons/arrow-right.svg" id="3_mho6t"]
 [ext_resource type="Texture2D" uid="uid://07l5oinqlvu7" path="res://assets/images/tutorial/Tutor Placeholder.svg" id="3_nradw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nradw"]

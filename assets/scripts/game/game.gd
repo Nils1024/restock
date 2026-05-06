@@ -66,6 +66,8 @@ func _unhandled_input (event: InputEvent) -> void:
 	# Ingame menu
 	if Input.is_action_just_pressed("esc"):
 		$UI/IngameMenu.visible = not $UI/IngameMenu.visible
+		$UI/IngameMenu/HowToPlay.hide()
+		$UI/IngameMenu/SettingsMenu.hide()
 		
 	if $UI/IngameMenu.visible:
 		return

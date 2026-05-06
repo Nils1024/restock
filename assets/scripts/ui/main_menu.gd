@@ -31,10 +31,12 @@ func _on_start_game_pressed() -> void:
 
 func _on_help_pressed() -> void:
 	$HowToPlay.show()
+	$SettingsMenu.hide()
 
 
 func _on_settings_pressed() -> void:
 	$SettingsMenu.show()
+	$HowToPlay.hide()
 
 
 func _on_quit_game_pressed() -> void:

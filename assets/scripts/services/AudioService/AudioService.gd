@@ -5,6 +5,8 @@ var sound_effect_dict: Dictionary = {}
 @export var sound_effects: Array[SoundEffect]
 
 func _ready() -> void:
+	set_volume(0.5)
+	
 	for sound_effect: SoundEffect in sound_effects:
 		sound_effect_dict[sound_effect.type] = sound_effect
 

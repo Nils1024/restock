@@ -9,7 +9,7 @@ func _on_save_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	$SettingsMenu.show()
 
 
 func _on_help_pressed() -> void:
