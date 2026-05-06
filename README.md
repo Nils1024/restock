@@ -25,7 +25,8 @@ Contributions are always welcome
 5. Click "Export Project..."
 
 ## Music credits
-Song 1 by <a href="https://pixabay.com/users/delosound-46524562/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=298550">DELOSound</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=298550">Pixabay</a>
+Background music by <a href="https://pixabay.com/users/delosound-46524562/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=339939">DELOSound (Song 1 - 2)</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=339939">Pixabay</a>
+and by <a href="https://pixabay.com/users/quietphase-54498959/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=492359">Daria (Song 3 - 4)</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=492359">Pixabay</a>
 
 ## AI Declaration
 I used AI to generate typical boilerplate code (CRUD, Logging Facade, etc.) while also modifying it to my own needs and style and sometimes for inspiration (because
