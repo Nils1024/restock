@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bvxjh1bgy6h04" path="res://assets/scripts/game/Tutorial.gd" id="4_pw37s"]
 [ext_resource type="Script" uid="uid://cln7wbeouwfhr" path="res://assets/scripts/game/CameraManager.gd" id="4_wfsp4"]
 [ext_resource type="Script" uid="uid://dpsq23g1iasdp" path="res://assets/scripts/game/BuildingManager.gd" id="5_i358u"]
+[ext_resource type="Script" uid="uid://csvvc0a2avynm" path="res://assets/scripts/ui/task_button.gd" id="9_3cnnv"]
 [ext_resource type="Texture2D" uid="uid://cndsw261ul6q2" path="res://assets/images/icons/clipboard-icon.svg" id="9_5jdip"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="10_k2t1h"]
 [ext_resource type="Texture2D" uid="uid://sfy6v4ppj1qt" path="res://assets/images/avatars/Avatar Placeholder.svg" id="10_pkhv0"]
@@ -31,6 +32,13 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_au80e"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkhv0"]
 bg_color = Color(1, 1, 1, 1)
 border_width_right = 2
@@ -47,6 +55,13 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_i358u"]
 grow_end = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52jqy"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqk1v"]
 bg_color = Color(0.89492244, 0.89492244, 0.8949224, 1)
@@ -134,30 +149,76 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "$"
 
-[node name="Tasks" type="CanvasLayer" parent="UI" unique_id=2084303701]
+[node name="TaskButton" type="CanvasLayer" parent="UI" unique_id=2084303701]
+script = ExtResource("9_3cnnv")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Tasks" unique_id=1324952449]
+[node name="MarginContainer" type="MarginContainer" parent="UI/TaskButton" unique_id=1324952449]
 offset_left = 995.0
 offset_top = 6.0
 offset_right = 1034.0
 offset_bottom = 45.0
 
-[node name="Panel" type="Panel" parent="UI/Tasks/MarginContainer" unique_id=1262799872]
+[node name="Panel" type="Panel" parent="UI/TaskButton/MarginContainer" unique_id=1262799872]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k2t1h")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Tasks/MarginContainer" unique_id=2047570810]
+[node name="MarginContainer" type="MarginContainer" parent="UI/TaskButton/MarginContainer" unique_id=2047570810]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureButton" parent="UI/Tasks/MarginContainer/MarginContainer" unique_id=1387128257]
+[node name="TaskButton" type="TextureButton" parent="UI/TaskButton/MarginContainer/MarginContainer" unique_id=1387128257]
 layout_mode = 2
 texture_normal = ExtResource("9_5jdip")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="TaskWindow" type="MarginContainer" parent="UI/TaskButton" unique_id=1205011866]
+visible = false
+offset_left = 385.0
+offset_top = 138.0
+offset_right = 718.0
+offset_bottom = 501.0
+mouse_filter = 0
+
+[node name="Panel" type="Panel" parent="UI/TaskButton/TaskWindow" unique_id=1041580608]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_au80e")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/TaskButton/TaskWindow" unique_id=198131612]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="UI/TaskButton/TaskWindow/MarginContainer" unique_id=1418142164]
+custom_minimum_size = Vector2(23, 23)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("15_fqk1v")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TaskButton/TaskWindow/MarginContainer" unique_id=1870612300]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="UI/TaskButton/TaskWindow/MarginContainer/VBoxContainer" unique_id=1085470979]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Tasks"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/TaskButton/TaskWindow/MarginContainer/VBoxContainer" unique_id=686949449]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/TaskButton/TaskWindow/MarginContainer/VBoxContainer" unique_id=1374336166]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "There are currently no tasks available"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Textbox" parent="UI" unique_id=1188621439 instance=ExtResource("4_j62u1")]
 visible = false
@@ -191,11 +252,11 @@ custom_minimum_size = Vector2(58, 58)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3cnnv")
 
-[node name="TextureRect" type="TextureRect" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer/PanelContainer" unique_id=1581433993]
+[node name="TextureRect" type="TextureButton" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer/PanelContainer" unique_id=1488201509]
 layout_mode = 2
-texture = ExtResource("10_pkhv0")
-expand_mode = 3
-stretch_mode = 4
+texture_normal = ExtResource("10_pkhv0")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Profil/MarginContainer/MarginContainer/HBoxContainer" unique_id=1154171394]
 layout_mode = 2
@@ -214,6 +275,20 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1 / 100 XP"
 horizontal_alignment = 1
+
+[node name="ProfilWindow" type="MarginContainer" parent="UI/Profil" unique_id=68863077]
+visible = false
+offset_left = 276.0
+offset_top = 144.0
+offset_right = 898.0
+offset_bottom = 493.0
+
+[node name="Panel" type="Panel" parent="UI/Profil/ProfilWindow" unique_id=1294635230]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_52jqy")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Profil/ProfilWindow" unique_id=1926833094]
+layout_mode = 2
 
 [node name="Infos" type="CanvasLayer" parent="UI" unique_id=501391913]
 
@@ -338,3 +413,6 @@ tile_set = ExtResource("11_phsto")
 [node name="Preview" type="TileMapLayer" parent="." unique_id=309338988]
 modulate = Color(1, 1, 1, 0.49803922)
 tile_set = ExtResource("11_phsto")
+
+[connection signal="pressed" from="UI/TaskButton/MarginContainer/MarginContainer/TaskButton" to="UI/TaskButton" method="_on_task_button_pressed"]
+[connection signal="pressed" from="UI/TaskButton/TaskWindow/MarginContainer/TextureButton" to="UI/TaskButton" method="_on_texture_button_pressed"]
