@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhyha4mx7e1xw" path="res://assets/scripts/ui/ingame_menu.gd" id="1_jg7hv"]
 [ext_resource type="Texture2D" uid="uid://de6eyc3uvq4yd" path="res://assets/images/Clipboard.svg" id="2_u445c"]
+[ext_resource type="PackedScene" uid="uid://20ksw02c0oo0" path="res://assets/scenes/menus/how_to_play.tscn" id="3_pa57f"]
 
 [node name="IngameMenu" type="CanvasLayer" unique_id=889833759]
 script = ExtResource("1_jg7hv")
@@ -36,6 +37,9 @@ text = "Settings"
 [node name="Save" type="Button" parent="VBoxContainer" unique_id=460511339]
 layout_mode = 2
 text = "Save"
+
+[node name="HowToPlay" parent="." unique_id=1180727446 instance=ExtResource("3_pa57f")]
+visible = false
 
 [connection signal="pressed" from="VBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="VBoxContainer/Help" to="." method="_on_help_pressed"]

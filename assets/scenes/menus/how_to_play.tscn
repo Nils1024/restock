@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://20ksw02c0oo0"]
+
+[ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/cross.svg" id="1_cvprq"]
+[ext_resource type="Script" uid="uid://8e6hlpxo5gr3" path="res://assets/scripts/ui/how_to_play.gd" id="1_nradw"]
+[ext_resource type="Texture2D" uid="uid://70s0cac52ona" path="res://assets/images/arrow-left.svg" id="2_7uk0b"]
+[ext_resource type="Texture2D" uid="uid://oeg3vi1lfk3u" path="res://assets/images/arrow-right.svg" id="3_mho6t"]
+[ext_resource type="Texture2D" uid="uid://07l5oinqlvu7" path="res://assets/images/tutorial/Tutor Placeholder.svg" id="3_nradw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nradw"]
+bg_color = Color(0.13561696, 0.4310831, 0.6341148, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7uk0b"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+
+[node name="HowToPlay" type="MarginContainer" unique_id=1180727446]
+offset_left = 218.0
+offset_top = 116.0
+offset_right = 942.0
+offset_bottom = 500.0
+script = ExtResource("1_nradw")
+
+[node name="Panel" type="Panel" parent="." unique_id=461395804]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1287147081]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="CloseBtn" type="TextureButton" parent="MarginContainer" unique_id=1987166685]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("1_cvprq")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1631822471]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1281994186]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "How  to play?"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=13081757]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=528820020]
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=228401788]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nradw")
+
+[node name="Panel2" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1441710211]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7uk0b")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1907123427]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7uk0b")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=686825107]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ArrowLeft" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2036296364]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("2_7uk0b")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1240706360]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer" unique_id=97889323]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/VBoxContainer" unique_id=430911384]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+texture = ExtResource("3_nradw")
+expand_mode = 1
+
+[node name="Text" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/VBoxContainer" unique_id=587042395]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Test"
+horizontal_alignment = 1
+
+[node name="ArrowRight" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=72459970]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_mho6t")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/CloseBtn" to="." method="_on_close_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/ArrowLeft" to="." method="_on_arrow_left_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/ArrowRight" to="." method="_on_arrow_right_pressed"]

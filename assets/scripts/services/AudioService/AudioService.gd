@@ -10,6 +10,9 @@ func _ready() -> void:
 
 
 func create_2d_audio_at_location(location: Vector2i, type: SoundEffect.SOUND_EFFECT_TYPE, auto_restart: bool = false) -> void:
+	if is_playing(type):
+		return
+	
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		var new_2d_audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
@@ -24,12 +27,14 @@ func create_2d_audio_at_location(location: Vector2i, type: SoundEffect.SOUND_EFF
 		else:
 			new_2d_audio.finished.connect(new_2d_audio.queue_free)
 		new_2d_audio.play()
-		
 	else:
-		push_warning("AudioService - Failed to find audio for: ", type)
+		SimpleLogger.warn("AudioService - Failed to find audio for type ID <%s>" % type)
 
 
 func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
+	if is_playing(type):
+		return
+	
 	if sound_effect_dict.has(type):
 		var sound_effect: SoundEffect = sound_effect_dict[type]
 		var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
@@ -40,7 +45,7 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 		new_audio.finished.connect(new_audio.queue_free)
 		new_audio.play()
 	else:
-		push_warning("AudioService - Failed to find audio for: ", type)
+		SimpleLogger.warn("AudioService - Failed to find audio for type ID <%s>" % type)
 
 func stop_audio(type: SoundEffect.SOUND_EFFECT_TYPE, fade_out: bool = false, duration: float = 0.5) -> void:
 	for child in get_children():
@@ -51,3 +56,10 @@ func stop_audio(type: SoundEffect.SOUND_EFFECT_TYPE, fade_out: bool = false, dur
 				tween.tween_callback(child.queue_free)
 			else:
 				child.queue_free()
+
+
+func is_playing(type: SoundEffect.SOUND_EFFECT_TYPE) -> bool:
+	for child in get_children():
+		if (child is AudioStreamPlayer or child is AudioStreamPlayer2D) and child.get_meta("type") == type:
+			return true
+	return false

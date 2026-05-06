@@ -30,11 +30,15 @@ offset_bottom = 537.0
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2" unique_id=272979126]
+custom_minimum_size = Vector2(768, 128)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="SaveCardContainer" type="HBoxContainer" parent="MarginContainer2/ScrollContainer" unique_id=590214802]
 layout_mode = 2
 theme_override_constants/separation = 6
+alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer2" unique_id=266185015]
 layout_mode = 2

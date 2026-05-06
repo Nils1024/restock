@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pa46gmrpq6pj" path="res://assets/scripts/ui/main_menu.gd" id="1_uu6ob"]
 [ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="2_a1fdk"]
+[ext_resource type="PackedScene" uid="uid://20ksw02c0oo0" path="res://assets/scenes/menus/how_to_play.tscn" id="2_eoi6q"]
 
 [node name="MainMenu" type="Node2D" unique_id=753076020]
 script = ExtResource("1_uu6ob")
@@ -86,6 +87,9 @@ text = "Settings
 layout_mode = 2
 text = "Quit
 "
+
+[node name="HowToPlay" parent="." unique_id=1180727446 instance=ExtResource("2_eoi6q")]
+visible = false
 
 [node name="FadeTransition" parent="." unique_id=1419722656 instance=ExtResource("2_a1fdk")]
 visible = false
