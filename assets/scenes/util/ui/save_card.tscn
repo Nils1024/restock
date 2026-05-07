@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c51keuke5k5xc"]
 
 [ext_resource type="Script" uid="uid://51pemmcex37n" path="res://assets/scripts/ui/save_card.gd" id="1_k0u2x"]
-[ext_resource type="Texture2D" uid="uid://df75xrj2bie8a" path="res://icon.svg" id="2_gmij2"]
+[ext_resource type="Texture2D" uid="uid://c3iv0c4r0ln36" path="res://assets/images/backgrounds/Save Background.svg" id="2_gmij2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0u2x"]
 bg_color = Color(0.04303915, 0.043039158, 0.043039113, 1)
@@ -16,10 +16,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -127.5
+offset_left = -133.0
 offset_top = -168.0
-offset_right = 127.5
-offset_bottom = 168.0
+offset_right = 37.666992
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k0u2x")
@@ -39,28 +39,22 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1405289479]
 layout_mode = 2
 
-[node name="Control" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1629405087]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=1059475941]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer/Control" unique_id=207997464]
-z_index = 1
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1626265456]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/margin_bottom = 100
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Control" unique_id=1717226255]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/MarginContainer" unique_id=1717226255]
 z_index = 1
 layout_mode = 2
 text = "Test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer2" type="AspectRatioContainer" parent="MarginContainer/VBoxContainer/Control" unique_id=1891685710]
-z_index = 1
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Control" unique_id=1134362654]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1134362654]
 y_sort_enabled = true
 layout_mode = 2
 texture = ExtResource("2_gmij2")

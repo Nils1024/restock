@@ -2,6 +2,8 @@ extends Camera2D
 
 class_name CameraManager
 
+signal clicked(pos: Vector2i)
+
 @export var tilemap: TileMapLayer
 
 var _mouse_press_start: Vector2 = Vector2.ZERO
@@ -19,12 +21,14 @@ func update_bounds() -> void:
 	limit_bottom = int(max_pos.y)
 	
 	_clamp_to_limits()
-	
+
+
 func _clamp_to_limits() -> void:
 	var half_view = get_viewport_rect().size / 2 / zoom
 	position.x = clamp(position.x, limit_left + half_view.x, limit_right - half_view.x)
 	position.y = clamp(position.y, limit_top + half_view.y, limit_bottom - half_view.y)
-	
+
+
 func get_chunk_radius() -> int:
 	var viewport_size = get_viewport_rect().size
 	var tile_size = tilemap.tile_set.tile_size
@@ -36,7 +40,8 @@ func get_chunk_radius() -> int:
 	var chunks_y = visible_world_size.y / chunk_world_size.y
 
 	return int(ceil(max(chunks_x, chunks_y) / 2.0)) + 2
-	
+
+
 # TODO: Look at the DDA/Bresenham algorithm
 func handle_input(event: InputEvent) -> void:
 	# Camera move for trackpad	
@@ -53,10 +58,9 @@ func handle_input(event: InputEvent) -> void:
 			var distance = _mouse_press_start.distance_to(event.position)
 			
 			if distance < Const.Camera.DRAG_THRESHOLD:
-				# Click
-				var mouse_pos = get_global_mouse_position()
-				var cell = tilemap.local_to_map(tilemap.to_local(mouse_pos))
-				print("Clicked:", cell)
+				var mouse_pos: Vector2 = get_global_mouse_position()
+				var cell: Vector2i = tilemap.local_to_map(tilemap.to_local(mouse_pos))
+				clicked.emit(cell)
 			else:
 				_is_dragging = false
 		
@@ -75,7 +79,8 @@ func handle_input(event: InputEvent) -> void:
 		_handle_trackpad_zoom(event)
 	else:
 		_handle_zoom(event)
-		
+
+
 func _handle_trackpad_zoom(event: InputEvent) -> void:
 	if not _is_magnifying:
 		_last_magnify_factor = event.factor
@@ -89,13 +94,15 @@ func _handle_trackpad_zoom(event: InputEvent) -> void:
 	if event.factor == 1.0:
 		_is_magnifying = false
 		_last_magnify_factor = 1.0
-		
+
+
 func _handle_zoom(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom_in"):
 		zoom_camera(1.0 / 1.5)
 	if event.is_action_pressed("zoom_out"):
 		zoom_camera(1.5)
-		
+
+
 func zoom_camera(factor) -> void:
 	var old_zoom = zoom.x
 	var new_zoom = clamp(old_zoom * factor, 2.0/30.0, 0.3375)

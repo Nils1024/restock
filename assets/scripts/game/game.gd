@@ -35,6 +35,7 @@ func _ready() -> void:
 	$UI/Shop.item_clicked.connect($BuildingManager.on_item_clicked)
 	$BuildingManager.income_updated.connect(_update_money_label)
 	_update_money_label()
+	$Camera2D.clicked.connect(_on_mouse_clicked_check_is_building)
 	
 	# Tutorial
 	if not data.tutorial_played:
@@ -88,3 +89,8 @@ func _on_save_timer_timeout() -> void:
 	
 func _update_money_label() -> void:
 	$UI/Money/MarginContainer/MarginContainer/HBoxContainer/Label.text = str(data.money)
+
+func _on_mouse_clicked_check_is_building(pos: Vector2i) -> void:
+	for building in data.building_data:
+		if pos in building["positions"]:
+			$UI/BuildingInfo.show()

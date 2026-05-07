@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://cgj8y8ivq0pcd"]
 
-[ext_resource type="Texture2D" uid="uid://df75xrj2bie8a" path="res://icon.svg" id="1_efkos"]
+[ext_resource type="Texture2D" uid="uid://bf55ksicrg4ur" path="res://assets/images/icons/Factory.svg" id="1_efkos"]
 [ext_resource type="Script" uid="uid://b3cbe3r04ijnp" path="res://assets/scripts/game/shop/ShopItem.gd" id="1_v80ws"]
 
 [resource]
