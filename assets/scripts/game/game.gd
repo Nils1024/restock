@@ -14,13 +14,14 @@ var _save_timer: Timer = Timer.new()
 
 func _enter_tree() -> void:
 	if data == null:
-		push_error("Data is null. Set it before adding this object to the SceneTree")
+		SimpleLogger.error("Data is null. Set it before adding this object to the SceneTree")
 		queue_free()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	building_manager.data = data
+	$UI/BuildingInfo.data = data
 	building_manager.place_saved_buildings()
 	AudioService.stop_audio(SoundEffect.SOUND_EFFECT_TYPE.IDLE_MUSIC_1, true, 3)
 	world_manager.noise.initialize(data.generation_seed)
@@ -36,9 +37,11 @@ func _ready() -> void:
 	$BuildingManager.income_updated.connect(_update_money_label)
 	_update_money_label()
 	$Camera2D.clicked.connect(_on_mouse_clicked_check_is_building)
+	$UI/BuildingInfo.destroy_building.connect($BuildingManager._on_building_destroyed)
 	
 	# Tutorial
 	if not data.tutorial_played:
+		$BuildingManager.shop_item_placed.connect($Tutorial._on_building_placed)
 		$Tutorial.start()
 		$Tutorial.tutorial_completed.connect(func() -> void: 
 			data.tutorial_played = true	
@@ -86,11 +89,17 @@ func _exit_tree() -> void:
 func _on_save_timer_timeout() -> void:
 	SimpleLogger.debug("Game saved")
 	DataService.update(data.id, data)
-	
+
+
 func _update_money_label() -> void:
 	$UI/Money/MarginContainer/MarginContainer/HBoxContainer/Label.text = str(data.money)
 
+
 func _on_mouse_clicked_check_is_building(pos: Vector2i) -> void:
-	for building in data.building_data:
-		if pos in building["positions"]:
+	if not data.tutorial_played:
+		return
+	
+	for i in range(data.building_data.size()):
+		if data.building_data[i]["positions"].has(pos):
+			$UI/BuildingInfo.set_display_building(i)
 			$UI/BuildingInfo.show()

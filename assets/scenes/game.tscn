@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://e3lexmkw5vmk" path="res://assets/images/icons/mouse-right-button.svg" id="13_kc0sw"]
 [ext_resource type="Texture2D" uid="uid://djxtejqicte6l" path="res://assets/images/icons/R Key.svg" id="14_kc0sw"]
 [ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/icons/cross.svg" id="15_fqk1v"]
+[ext_resource type="Script" uid="uid://dyjmb0gm10khe" path="res://assets/scripts/ui/building_info.gd" id="18_au80e"]
+[ext_resource type="Texture2D" uid="uid://bf55ksicrg4ur" path="res://assets/images/icons/Factory.svg" id="19_52jqy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2t1h"]
 bg_color = Color(1, 1, 1, 1)
@@ -352,6 +354,7 @@ text = "Not enough money"
 
 [node name="BuildingInfo" type="CanvasLayer" parent="UI" unique_id=1772418134]
 visible = false
+script = ExtResource("18_au80e")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/BuildingInfo" unique_id=1776760584]
 offset_left = 339.0
@@ -365,12 +368,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fqk1v")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/BuildingInfo/MarginContainer" unique_id=1732999430]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureButton" type="TextureButton" parent="UI/BuildingInfo/MarginContainer/MarginContainer" unique_id=52388102]
+[node name="Close" type="TextureButton" parent="UI/BuildingInfo/MarginContainer/MarginContainer" unique_id=52388102]
 custom_minimum_size = Vector2(23, 23)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -381,6 +385,7 @@ stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer" unique_id=840247872]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=265684766]
 layout_mode = 2
@@ -391,6 +396,27 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=1213279851]
 layout_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=676925128]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1093423103]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+texture = ExtResource("19_52jqy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=931226783]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Factory"
+
+[node name="Label2" type="Label" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=2091195390]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Text"
+
 [node name="Spacer" type="AspectRatioContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=831211609]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -399,7 +425,7 @@ size_flags_vertical = 3
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer" unique_id=510468896]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1423512543]
+[node name="Destroy" type="Button" parent="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1423512543]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_5jdip")
 text = "Destroy"
@@ -416,3 +442,5 @@ tile_set = ExtResource("11_phsto")
 
 [connection signal="pressed" from="UI/TaskButton/MarginContainer/MarginContainer/TaskButton" to="UI/TaskButton" method="_on_task_button_pressed"]
 [connection signal="pressed" from="UI/TaskButton/TaskWindow/MarginContainer/TextureButton" to="UI/TaskButton" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="UI/BuildingInfo/MarginContainer/MarginContainer/Close" to="UI/BuildingInfo" method="_on_close_pressed"]
+[connection signal="pressed" from="UI/BuildingInfo/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2/Destroy" to="UI/BuildingInfo" method="_on_destroy_pressed"]

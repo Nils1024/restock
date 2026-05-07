@@ -74,11 +74,6 @@ custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7uk0b")
 
-[node name="Panel3" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1907123427]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7uk0b")
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=686825107]
 layout_mode = 2
 size_flags_vertical = 3
@@ -115,6 +110,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Test"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="ArrowRight" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=72459970]
 custom_minimum_size = Vector2(32, 32)

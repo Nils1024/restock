@@ -1,9 +1,8 @@
 extends MarginContainer
 
 const content: Array[Dictionary] = [
-	{"text": "Page 1", "image": null},
-	{"text": "Page 2", "image": null},
-	{"text": "Page 3", "image": null}
+	{"text": "You are the manager of a new Company. Your goal is to increase your company's profit.", "image": null},
+	{"text": "Build factories by selecting them in the shop and placing them in the world.", "image": null},
 ]
 
 @onready var textbox = $MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/VBoxContainer/Text
@@ -24,12 +23,12 @@ func _on_close_btn_pressed() -> void:
 
 
 func _on_arrow_left_pressed() -> void:
-	selected_page = wrapi(selected_page - 1, 0, 3)
+	selected_page = wrapi(selected_page - 1, 0, 2)
 	_update_content()
 
 
 func _on_arrow_right_pressed() -> void:
-	selected_page = wrapi(selected_page + 1, 0, 3)
+	selected_page = wrapi(selected_page + 1, 0, 2)
 	_update_content()
 
 

@@ -1,6 +1,7 @@
 ![Restock logo](./.github/icon.png)
 # Restock
-Restock is a game made in Godot where you have to build factories, connect them and complete deliveries to make profit for your company.
+Restock is a game made in Godot where you have to build factories, connect them and complete deliveries to increase your company's profit.
+Complex production chains are WIP
 
 ## Demo
 Play it in your browser on Itch.io: https://nils1024.itch.io/restock

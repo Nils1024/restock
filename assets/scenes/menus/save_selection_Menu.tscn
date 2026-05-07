@@ -133,6 +133,21 @@ layout_mode = 2
 [node name="AvatarHBox" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer/VBoxContainer" unique_id=979373561]
 layout_mode = 2
 
+[node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/GridContainer" unique_id=1148801468]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1420908435]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SkipTutorialLabel" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer2" unique_id=439996421]
+layout_mode = 2
+text = "Skip Tutorial?"
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer2" unique_id=1075852924]
+layout_mode = 2
+
 [node name="Spacer" type="AspectRatioContainer" parent="MarginContainer/MarginContainer/VBoxContainer2" unique_id=1685591348]
 layout_mode = 2
 size_flags_horizontal = 3

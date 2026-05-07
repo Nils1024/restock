@@ -185,3 +185,8 @@ func _rotate_offset(offset: Vector2i) -> Vector2i:
 		result = _rotate_90(result)
 		
 	return result
+
+
+func _on_building_destroyed(positions: Array[Vector2i]) -> void:
+	for pos in positions:
+		buildings_tilemap.erase_cell(pos)

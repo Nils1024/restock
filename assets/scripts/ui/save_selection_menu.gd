@@ -153,6 +153,7 @@ func _on_create_new_game_pressed() -> void:
 	save.generation_seed = int(seedEdit.text)
 	save.name = nameEdit.text
 	save.selected_avatar_index = _selected_avatar_index
+	save.tutorial_played = $MarginContainer/MarginContainer/VBoxContainer2/HBoxContainer2/CheckBox.button_pressed
 	DataService.create(save.id, save)
 	_on_cancel_new_game_pressed()
 	_update_savecards()
