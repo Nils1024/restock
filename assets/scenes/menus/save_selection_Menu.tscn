@@ -53,7 +53,7 @@ offset_bottom = 584.0
 
 [node name="Back" type="Button" parent="HBoxContainer" unique_id=157956183]
 layout_mode = 2
-text = " ← Back"
+text = " << Back"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer" unique_id=1789618262]
 layout_mode = 2
