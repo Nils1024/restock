@@ -17,10 +17,14 @@ class Save:
 class Languages:
 	const ENGLISH: String = "en"
 	const GERMAN: String = "de"
+	const FRENCH: String = "fr"
+	const SPANISH: String = "es"
 	
 	const LANGUAGE_DISPLAY_NAMES = {
 		ENGLISH: "English",
-		GERMAN: "Deutsch"
+		GERMAN: "Deutsch",
+		FRENCH: "French",
+		SPANISH: "Spanish"
 	}
 
 
@@ -48,7 +52,7 @@ class Generation:
 
 
 class Shop:
-	const ShopCard = preload("res://assets/scenes/util/ui/ShopItemCard.tscn")
+	const ShopCard = preload("res://assets/scenes/ui/ShopItemCard.tscn")
 	const SHOP_ITEMS_PATHS = [
 		"res://assets/data/shop_items/HQ.tres",
 		"res://assets/data/shop_items/Factory.tres",

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cfecg4ehkgkbl"]
 
-[ext_resource type="Script" uid="uid://pa46gmrpq6pj" path="res://assets/scripts/ui/main_menu.gd" id="1_uu6ob"]
-[ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="2_a1fdk"]
+[ext_resource type="Script" uid="uid://pa46gmrpq6pj" path="res://assets/scripts/menus/main_menu.gd" id="1_uu6ob"]
+[ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/transitions/fade_transition.tscn" id="2_a1fdk"]
 [ext_resource type="PackedScene" uid="uid://20ksw02c0oo0" path="res://assets/scenes/menus/how_to_play.tscn" id="2_eoi6q"]
 [ext_resource type="Texture2D" uid="uid://s0yu5u32bdtq" path="res://assets/images/backgrounds/Main Background.svg" id="2_hqx7k"]
 [ext_resource type="PackedScene" uid="uid://d8ccrqp64c4f" path="res://assets/scenes/menus/settings_menu.tscn" id="3_hhlo6"]

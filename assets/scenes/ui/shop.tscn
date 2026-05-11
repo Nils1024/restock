@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bcj7gu0f5ydo3"]
+
+[ext_resource type="Script" uid="uid://dobs4djjyb7us" path="res://assets/scripts/game/shop/Shop.gd" id="1_bhf7g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhb2s"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+
+[node name="Shop" type="CanvasLayer" unique_id=1641117209]
+script = ExtResource("1_bhf7g")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1117592552]
+offset_left = 278.0
+offset_top = 545.0
+offset_right = 897.0
+offset_bottom = 649.0
+mouse_force_pass_scroll_events = false
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1843477600]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhb2s")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1317229888]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MarginContainer" unique_id=543593361]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/ScrollContainer" unique_id=661171232]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10

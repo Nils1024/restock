@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ojq0lqeqfbes"]
 
-[ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/util/fade_transition.tscn" id="1_qjqap"]
-[ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/ui/save_selection_menu.gd" id="1_wc18j"]
+[ext_resource type="PackedScene" uid="uid://bp5xe7rsa044r" path="res://assets/scenes/transitions/fade_transition.tscn" id="1_qjqap"]
+[ext_resource type="Script" uid="uid://2vojsmoug1u1" path="res://assets/scripts/menus/save_selection_menu/save_selection_menu.gd" id="1_wc18j"]
 [ext_resource type="Texture2D" uid="uid://s0yu5u32bdtq" path="res://assets/images/backgrounds/Main Background.svg" id="2_mjmsl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjmsl"]

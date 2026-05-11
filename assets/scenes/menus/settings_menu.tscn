@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d8ccrqp64c4f"]
 
 [ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/icons/cross.svg" id="1_0yaug"]
-[ext_resource type="Script" uid="uid://b20umsxvqaxro" path="res://assets/scripts/ui/settings_menu.gd" id="1_uh62s"]
+[ext_resource type="Script" uid="uid://b20umsxvqaxro" path="res://assets/scripts/menus/settings_menu.gd" id="1_uh62s"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_uh62s"]
 color = Color(1, 1, 1, 1)
