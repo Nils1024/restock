@@ -5,7 +5,7 @@ enum ButtonType {
 	BACK
 }
 
-const saveCard = preload("res://assets/scenes/util/ui/save_card.tscn")
+const saveCard = preload("res://assets/scenes/ui/save_card.tscn")
 
 @onready var seedEdit = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/SeedEdit
 @onready var nameEdit = $MarginContainer/MarginContainer/VBoxContainer2/GridContainer/NameEdit

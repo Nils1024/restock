@@ -1,6 +1,5 @@
-extends Node2D
-
 class_name Game
+extends Node2D
 
 @onready var cam: Camera2D = $Camera2D
 @onready var tilemap: TileMapLayer = $Ground
@@ -41,7 +40,7 @@ func _ready() -> void:
 	
 	# Tutorial
 	if not data.tutorial_played:
-		$BuildingManager.shop_item_placed.connect($Tutorial._on_building_placed)
+		$BuildingManager.building_placed.connect($Tutorial._on_building_placed)
 		$Tutorial.start()
 		$Tutorial.tutorial_completed.connect(func() -> void: 
 			data.tutorial_played = true	

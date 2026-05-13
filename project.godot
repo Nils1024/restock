@@ -24,6 +24,7 @@ SimpleLogger="*uid://1uiny3txvaed"
 ThreadService="*uid://bm25ackg5ogun"
 UtilityService="*uid://3gnixk6fca2l"
 DataService="*uid://csl2cl38xdew1"
+BuildingRegistry="*uid://d4jaogka31dg1"
 
 [display]
 

@@ -53,39 +53,3 @@ class Generation:
 
 class Shop:
 	const ShopCard = preload("res://assets/scenes/ui/ShopItemCard.tscn")
-	const SHOP_ITEMS_PATHS = [
-		"res://assets/data/shop_items/HQ.tres",
-		"res://assets/data/shop_items/Factory.tres",
-		"res://assets/data/shop_items/Street.tres"
-	]
-
-
-class Building:
-	const BUILDING_DICT: Dictionary = {
-		"HQ": {
-			"drag": false,
-			"income": 0,
-			"tiles": [
-				{"offset": Vector2i(0, 0), "atlas": Vector2i(0, 0)},
-				{"offset": Vector2i(1, 0), "atlas": Vector2i(1, 0)},
-				{"offset": Vector2i(2, 0), "atlas": Vector2i(2, 0)},
-				{"offset": Vector2i(0, 1), "atlas": Vector2i(0, 1)},
-				{"offset": Vector2i(1, 1), "atlas": Vector2i(1, 1)},
-			]
-		},
-		"Factory": {
-			"drag": false,
-			"income": 5,
-			"tiles": [
-				{"offset": Vector2i(0, 0), "atlas": Vector2i(0, 2)},
-				{"offset": Vector2i(1, 0), "atlas": Vector2i(1, 2)},
-			]
-		},
-		"Street": {
-			"drag": true,
-			"income": 0,
-			"tiles": [
-				{"offset": Vector2i(0, 0), "atlas": Vector2i(0, 3)},
-			]
-		},
-	}

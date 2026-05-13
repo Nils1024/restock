@@ -50,7 +50,7 @@ func _on_text_finished() -> void:
 	if not current_step in [4, 5]:
 		_show_next_step()
 	
-func _on_building_placed(item: ShopItem) -> void:
+func _on_building_placed(item: Building) -> void:
 	match item.label:
 		"HQ":
 			if not HQ_placed:

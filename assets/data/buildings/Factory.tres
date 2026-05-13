@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://cttgetggkc3wb"]
+
+[ext_resource type="Script" uid="uid://7fbhjcq4sykg" path="res://assets/scripts/game/building/behaviors/BuildingBehavior.gd" id="1_d0kjj"]
+[ext_resource type="Script" uid="uid://lyleodp1c6uq" path="res://assets/scripts/game/building/condition/PlacementCondition.gd" id="2_nwnjf"]
+[ext_resource type="Texture2D" uid="uid://bf55ksicrg4ur" path="res://assets/images/icons/Factory.svg" id="3_6ojkw"]
+[ext_resource type="Script" uid="uid://3p01fxh2jk6v" path="res://assets/scripts/game/building/Building.gd" id="3_d0kjj"]
+[ext_resource type="Script" uid="uid://bhfwn5psbb4ee" path="res://assets/scripts/game/building/BuildingTile.gd" id="5_mx2m2"]
+
+[resource]
+script = ExtResource("3_d0kjj")
+label = "Factory"
+image = ExtResource("3_6ojkw")
+metadata/_custom_type_script = "uid://3p01fxh2jk6v"

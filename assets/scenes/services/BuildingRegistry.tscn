@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d4jaogka31dg1"]
+
+[ext_resource type="Script" uid="uid://decabtg8e2rhg" path="res://assets/scripts/game/building/BuildingRegistry.gd" id="1_sohok"]
+[ext_resource type="Script" uid="uid://3p01fxh2jk6v" path="res://assets/scripts/game/building/Building.gd" id="2_fy7qv"]
+[ext_resource type="Resource" uid="uid://ckibbfcr1cliy" path="res://assets/data/buildings/HQ.tres" id="3_t8ucl"]
+[ext_resource type="Resource" uid="uid://cttgetggkc3wb" path="res://assets/data/buildings/Factory.tres" id="4_i2men"]
+
+[node name="BuildingRegistry" type="Node" unique_id=420111401]
+script = ExtResource("1_sohok")
+buildings = Array[ExtResource("2_fy7qv")]([ExtResource("3_t8ucl"), ExtResource("4_i2men")])

@@ -2,9 +2,9 @@ extends CanvasLayer
 
 @onready var h_box = $MarginContainer/MarginContainer/ScrollContainer/HBoxContainer
 
-signal item_clicked(item: ShopItem)
+signal item_clicked(item: Building)
 
-var shop_items: Array[ShopItem] = []
+var shop_items: Array[Building] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,10 +13,8 @@ func _ready() -> void:
 
 
 func _load_items() -> void:
-	for path in Const.Shop.SHOP_ITEMS_PATHS:
-		var item: ShopItem = load(path)
-		if item:
-			shop_items.append(item)
+	for building: Building in BuildingRegistry._map.values():
+		shop_items.append(building)
 
 
 func _fill_shop_with_items() -> void:
@@ -30,6 +28,6 @@ func _fill_shop_with_items() -> void:
 		h_box.add_child(card)
 
 
-func _on_item_clicked(item: ShopItem) -> void:
+func _on_item_clicked(item: Building) -> void:
 	SimpleLogger.trace("ShopItem clicked: %s" % item)
 	item_clicked.emit(item)

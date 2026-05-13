@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://dmjekprsvak67"]
+
+[ext_resource type="Script" uid="uid://3p01fxh2jk6v" path="res://assets/scripts/game/building/Building.gd" id="1_0qlwb"]
+[ext_resource type="Script" uid="uid://7fbhjcq4sykg" path="res://assets/scripts/game/building/behaviors/BuildingBehavior.gd" id="1_hosf2"]
+[ext_resource type="Script" uid="uid://lyleodp1c6uq" path="res://assets/scripts/game/building/condition/PlacementCondition.gd" id="2_1s5xl"]
+[ext_resource type="Texture2D" uid="uid://morndcerse3r" path="res://assets/images/icons/cross.svg" id="3_rvuaa"]
+[ext_resource type="Script" uid="uid://bhfwn5psbb4ee" path="res://assets/scripts/game/building/BuildingTile.gd" id="5_3ayef"]
+
+[resource]
+script = ExtResource("1_0qlwb")
+label = "Street"
+image = ExtResource("3_rvuaa")
+metadata/_custom_type_script = "uid://3p01fxh2jk6v"

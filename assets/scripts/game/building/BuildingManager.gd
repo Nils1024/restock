@@ -8,10 +8,10 @@ class_name BuildingManager
 @export var build_controls_box: HBoxContainer
 @export var not_enough_money_label: Label
 
-signal shop_item_placed(item: ShopItem)
+signal building_placed(building: Building)
 signal income_updated()
 
-var _pending_item: ShopItem = null
+var _pending_item: Building = null
 var _rotation: int = 0
 
 var _drag_start: Vector2i = Vector2i(-1, -1)
@@ -77,7 +77,7 @@ func _update_preview() -> void:
 			var rotated_offset: Vector2i = _rotate_offset(tile["offset"])
 			preview_tilemap.set_cell(tile_pos + rotated_offset, 0, tile["atlas"])
 
-func on_item_clicked(item: ShopItem) -> void:
+func on_item_clicked(item: Building) -> void:
 	_pending_item = item
 	_rotation = 0
 	_is_dragging = false
@@ -123,48 +123,30 @@ func _get_mouse_tile_pos() -> Vector2i:
 	return buildings_tilemap.local_to_map(buildings_tilemap.get_local_mouse_position())
 
 
-func _is_place_free(building_positions: Array[Vector2i]) -> bool:
-	for pos in building_positions:
-		var world_atlas: Vector2i = world_manager._get_tile_atlas(pos.x, pos.y)
-		if world_atlas == Vector2i(0, 2) \
-			or world_atlas == Vector2i(0, 1):
-			SimpleLogger.info("Placing stopped - invalid underground")
-			return false
-		
-		for building in data.building_data:
-			if pos in building["positions"]:
-				SimpleLogger.info("Placing stopped - already occupied")
-				return false
-	
-	return true
-
-
-func _place_building(item: ShopItem) -> void:
+func _place_building(item: Building) -> void:
 	var tile_pos: Vector2i = _get_mouse_tile_pos()
-	var item_data: Dictionary = Const.Building.BUILDING_DICT[item.label]
 	var positions: Array[Vector2i] = []
 	
-	for tile in item_data["tiles"]:
+	for tile in item.tiles:
 		positions.append(tile_pos + _rotate_offset(tile["offset"]))
 		
-	if not _is_place_free(positions):
+	var ctx: PlacementContext = PlacementContext.new(positions, world_manager, data.building_data)
+	if not item.can_place(ctx):
 		return
 	
 	for i in range(positions.size()):
-		var pos: Vector2i = positions[i]
-		var atlas: Vector2i = item_data["tiles"][i]["atlas"]
-		buildings_tilemap.set_cell(pos, 0, atlas)
+		buildings_tilemap.set_cell(positions[i], 0, item.tiles[i].atlas)
 	
-	data.building_data.append({
-		"label": item.label,
-		"positions": positions
-	})
+	var entry: BuildingSaveEntry = BuildingSaveEntry.new()
+	entry.building = item
+	entry.positions = positions
+	data.building_data.append(entry)
 	
 	data.money -= _pending_item.price
 	income_updated.emit()
 	
 	SimpleLogger.info("Placing <%s> at <%s>" % [item.label, positions])
-	shop_item_placed.emit(item)
+	building_placed.emit(item)
 
 
 func _cancel_placement() -> void:

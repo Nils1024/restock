@@ -2,11 +2,11 @@ extends PanelContainer
 
 class_name ShopItemCard
 
-signal item_clicked(item: ShopItem)
+signal item_clicked(item: Building)
 
-var item: ShopItem
+var item: Building
 
-func setup(shopitem: ShopItem) -> void:
+func setup(shopitem: Building) -> void:
 	item = shopitem
 	$VBoxContainer/PriceContainer/Price.text = str(item.price)
 	$NameContainer/Name.text = item.label
