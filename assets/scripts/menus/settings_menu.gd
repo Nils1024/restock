@@ -78,5 +78,5 @@ func _on_language_option_button_item_selected(index: int) -> void:
 	LocalizationService.set_language(selected_language)
 
 
-func _on_resolution_option_button_item_selected(index: int) -> void:
+func _on_resolution_option_button_item_selected(_index: int) -> void:
 		DisplayServer.window_set_size(Vector2i(1920, 1080))

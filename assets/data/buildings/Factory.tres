@@ -6,8 +6,20 @@
 [ext_resource type="Script" uid="uid://3p01fxh2jk6v" path="res://assets/scripts/game/building/Building.gd" id="3_d0kjj"]
 [ext_resource type="Script" uid="uid://bhfwn5psbb4ee" path="res://assets/scripts/game/building/BuildingTile.gd" id="5_mx2m2"]
 
+[sub_resource type="Resource" id="Resource_d0kjj"]
+script = ExtResource("5_mx2m2")
+atlas = Vector2i(0, 2)
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
+
+[sub_resource type="Resource" id="Resource_nwnjf"]
+script = ExtResource("5_mx2m2")
+offset = Vector2i(1, 0)
+atlas = Vector2i(1, 2)
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
+
 [resource]
 script = ExtResource("3_d0kjj")
 label = "Factory"
 image = ExtResource("3_6ojkw")
+tiles = Array[ExtResource("5_mx2m2")]([SubResource("Resource_d0kjj"), SubResource("Resource_nwnjf")])
 metadata/_custom_type_script = "uid://3p01fxh2jk6v"

@@ -12,8 +12,10 @@ func to_dict() -> Dictionary:
 	
 static func from_dict(d: Dictionary) -> BuildingSaveEntry:
 	var entry: BuildingSaveEntry = BuildingSaveEntry.new()
+	
 	entry.building = BuildingRegistry.get_by_label(d["label"])
-	entry.positions = (d["positions"] as Array).map(
-		func(p: Array) -> Vector2i: return Vector2i(p[0], p[1])
-	)
+	
+	for p in d["positions"]:
+		entry.positions.append(Vector2i(p[0], p[1]))
+	
 	return entry

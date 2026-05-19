@@ -98,7 +98,7 @@ func _on_mouse_clicked_check_is_building(pos: Vector2i) -> void:
 	if not data.tutorial_played:
 		return
 	
-	for i in range(data.building_data.size()):
-		if data.building_data[i]["positions"].has(pos):
-			$UI/BuildingInfo.set_display_building(i)
+	for entry: BuildingSaveEntry in data.building_data:
+		if entry.positions.has(pos):
+			$UI/BuildingInfo.set_display_building(entry)
 			$UI/BuildingInfo.show()

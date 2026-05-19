@@ -25,14 +25,14 @@ var data: GameSaveData
 var _timer: Timer = null
 
 func place_saved_buildings() -> void:
-	for building in data.building_data:
-		var building_name: String = building.get("label")
-		var positions: Array = building.get("positions")
-		var item_data: Dictionary = Const.Building.BUILDING_DICT[building_name]
+	for entry in data.building_data:
+		var building = entry.building
+		var building_name: String = building.label
+		var positions: Array = entry.positions
 		
-		for i in range(positions.size()):
-			var pos: Vector2i = positions[i]
-			var atlas: Vector2i = item_data["tiles"][i]["atlas"]
+		for i in range(entry.positions.size()):
+			var pos: Vector2i = entry.positions[i]
+			var atlas: Vector2i = entry.building.tiles[i].atlas
 			buildings_tilemap.set_cell(pos, 0, atlas)
 		
 		SimpleLogger.trace("Restored <%s> at <%s>" % [building_name, positions])
@@ -50,10 +50,9 @@ func _tick_income(delta: float) -> void:
 	_income_timer -= INCOME_INTERVAL
 	
 	var total: int = 0
-	for entry in data.building_data:
-		var label: String = entry["label"]
-		var income: int = Const.Building.BUILDING_DICT[label].get("income", 0)
-		total += income
+	var ctx: BuildingTickContext = BuildingTickContext.new(delta)
+	for entry: BuildingSaveEntry in data.building_data:
+		entry.building.tick(ctx)
 		
 	if total != 0:
 		data.money += total
@@ -66,14 +65,13 @@ func _update_preview() -> void:
 	if _pending_item == null:
 		return
 		
-	var item_data: Dictionary = Const.Building.BUILDING_DICT[_pending_item.label]
 	var tile_pos: Vector2i = _get_mouse_tile_pos()
 	
-	if item_data["drag"]:
+	if _pending_item.drag:
 		# TODO: Drag for streets
 		pass
 	else:
-		for tile in item_data["tiles"]:
+		for tile in _pending_item.tiles:
 			var rotated_offset: Vector2i = _rotate_offset(tile["offset"])
 			preview_tilemap.set_cell(tile_pos + rotated_offset, 0, tile["atlas"])
 
@@ -89,10 +87,7 @@ func handle_input(event: InputEvent) -> void:
 	if _pending_item == null:
 		return
 		
-	var item_data: Dictionary = Const.Building.BUILDING_DICT[_pending_item.label]
-	var is_drag: bool = item_data["drag"]
-		
-	if not is_drag and event.is_action_pressed("rotate"):
+	if not _pending_item.drag and event.is_action_pressed("rotate"):
 		_rotation = (_rotation + 1) % 4
 		return
 		
