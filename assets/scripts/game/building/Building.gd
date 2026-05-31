@@ -20,5 +20,7 @@ func can_place(ctx: PlacementContext) -> bool:
 
 
 func tick(ctx: BuildingTickContext) -> void:
+	ctx.money_delta -= upkeep
+	
 	for behavior in behaviors:
 		behavior.tick(ctx)

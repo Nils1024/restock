@@ -50,9 +50,10 @@ func _tick_income(delta: float) -> void:
 	_income_timer -= INCOME_INTERVAL
 	
 	var total: int = 0
-	var ctx: BuildingTickContext = BuildingTickContext.new(delta)
 	for entry: BuildingSaveEntry in data.building_data:
+		var ctx: BuildingTickContext = BuildingTickContext.new(delta)
 		entry.building.tick(ctx)
+		total += ctx.money_delta
 		
 	if total != 0:
 		data.money += total

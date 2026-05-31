@@ -2,6 +2,7 @@ class_name BuildingTickContext
 extends RefCounted
 
 var delta: float
+var money_delta: int = 0
 
 func _init(p_delta: float) -> void:
 	delta = p_delta

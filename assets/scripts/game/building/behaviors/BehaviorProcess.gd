@@ -1,4 +1,4 @@
-class_name BehaviorProduce
+class_name BehaviorProcess
 extends BuildingBehavior
 
 func tick(ctx: BuildingTickContext) -> void:

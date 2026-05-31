@@ -2,12 +2,53 @@
 
 [ext_resource type="Script" uid="uid://7fbhjcq4sykg" path="res://assets/scripts/game/building/behaviors/BuildingBehavior.gd" id="1_id6lk"]
 [ext_resource type="Script" uid="uid://lyleodp1c6uq" path="res://assets/scripts/game/building/condition/PlacementCondition.gd" id="2_g6oda"]
+[ext_resource type="Script" uid="uid://dd43wsjsgb6yp" path="res://assets/scripts/game/building/condition/ConditionNotOnWater.gd" id="3_g6oda"]
 [ext_resource type="Script" uid="uid://3p01fxh2jk6v" path="res://assets/scripts/game/building/Building.gd" id="3_id6lk"]
 [ext_resource type="Texture2D" uid="uid://cojj6bb3rqd5v" path="res://assets/images/icons/HQ.svg" id="3_qqu6e"]
+[ext_resource type="Script" uid="uid://c1o171q2yyhsg" path="res://assets/scripts/game/building/condition/ConditionNotOnMountain.gd" id="4_qqu6e"]
 [ext_resource type="Script" uid="uid://bhfwn5psbb4ee" path="res://assets/scripts/game/building/BuildingTile.gd" id="5_kobkt"]
+
+[sub_resource type="Resource" id="Resource_6p7v0"]
+script = ExtResource("3_g6oda")
+metadata/_custom_type_script = "uid://dd43wsjsgb6yp"
+
+[sub_resource type="Resource" id="Resource_j4jw3"]
+script = ExtResource("4_qqu6e")
+metadata/_custom_type_script = "uid://c1o171q2yyhsg"
+
+[sub_resource type="Resource" id="Resource_id6lk"]
+script = ExtResource("5_kobkt")
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
+
+[sub_resource type="Resource" id="Resource_g6oda"]
+script = ExtResource("5_kobkt")
+offset = Vector2i(1, 0)
+atlas = Vector2i(1, 0)
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
+
+[sub_resource type="Resource" id="Resource_qqu6e"]
+script = ExtResource("5_kobkt")
+offset = Vector2i(2, 0)
+atlas = Vector2i(2, 0)
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
+
+[sub_resource type="Resource" id="Resource_kobkt"]
+script = ExtResource("5_kobkt")
+offset = Vector2i(0, 1)
+atlas = Vector2i(0, 1)
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
+
+[sub_resource type="Resource" id="Resource_5f81v"]
+script = ExtResource("5_kobkt")
+offset = Vector2i(1, 1)
+atlas = Vector2i(1, 1)
+metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
 
 [resource]
 script = ExtResource("3_id6lk")
 label = "HQ"
 image = ExtResource("3_qqu6e")
+price = 500
+tiles = Array[ExtResource("5_kobkt")]([SubResource("Resource_id6lk"), SubResource("Resource_g6oda"), SubResource("Resource_qqu6e"), SubResource("Resource_kobkt"), SubResource("Resource_5f81v")])
+conditions = Array[ExtResource("2_g6oda")]([SubResource("Resource_6p7v0"), SubResource("Resource_j4jw3")])
 metadata/_custom_type_script = "uid://3p01fxh2jk6v"

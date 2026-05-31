@@ -7,6 +7,7 @@ var selected_avatar_index: int = 0
 var money: int = 1000
 var tutorial_played: bool = false
 var building_data: Array[BuildingSaveEntry] = []
+var inventory: ResourceInventory = ResourceInventory.new()
 
 func to_dict() -> Dictionary:
 	return {
@@ -18,7 +19,8 @@ func to_dict() -> Dictionary:
 		"tutorial_played": tutorial_played,
 		"building_data": building_data.map(
 			func(e: BuildingSaveEntry) -> Dictionary: return e.to_dict()
-		)
+		),
+		"inventory": inventory.to_dict()
 	}
 
 

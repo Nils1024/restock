@@ -4,7 +4,17 @@
 [ext_resource type="Script" uid="uid://lyleodp1c6uq" path="res://assets/scripts/game/building/condition/PlacementCondition.gd" id="2_nwnjf"]
 [ext_resource type="Texture2D" uid="uid://bf55ksicrg4ur" path="res://assets/images/icons/Factory.svg" id="3_6ojkw"]
 [ext_resource type="Script" uid="uid://3p01fxh2jk6v" path="res://assets/scripts/game/building/Building.gd" id="3_d0kjj"]
+[ext_resource type="Script" uid="uid://dd43wsjsgb6yp" path="res://assets/scripts/game/building/condition/ConditionNotOnWater.gd" id="3_nwnjf"]
+[ext_resource type="Script" uid="uid://c1o171q2yyhsg" path="res://assets/scripts/game/building/condition/ConditionNotOnMountain.gd" id="4_6ojkw"]
 [ext_resource type="Script" uid="uid://bhfwn5psbb4ee" path="res://assets/scripts/game/building/BuildingTile.gd" id="5_mx2m2"]
+
+[sub_resource type="Resource" id="Resource_6ojkw"]
+script = ExtResource("3_nwnjf")
+metadata/_custom_type_script = "uid://dd43wsjsgb6yp"
+
+[sub_resource type="Resource" id="Resource_mx2m2"]
+script = ExtResource("4_6ojkw")
+metadata/_custom_type_script = "uid://c1o171q2yyhsg"
 
 [sub_resource type="Resource" id="Resource_d0kjj"]
 script = ExtResource("5_mx2m2")
@@ -21,5 +31,8 @@ metadata/_custom_type_script = "uid://bhfwn5psbb4ee"
 script = ExtResource("3_d0kjj")
 label = "Factory"
 image = ExtResource("3_6ojkw")
+price = 125
+upkeep = 0
 tiles = Array[ExtResource("5_mx2m2")]([SubResource("Resource_d0kjj"), SubResource("Resource_nwnjf")])
+conditions = Array[ExtResource("2_nwnjf")]([SubResource("Resource_6ojkw"), SubResource("Resource_mx2m2")])
 metadata/_custom_type_script = "uid://3p01fxh2jk6v"
